@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali Birthday Bash — Simon & Mike's 30th</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #F5ECD7;
+    --deep: #1A1208;
+    --terracotta: #C4622D;
+    --ocean: #2E6B8A;
+    --palm: #3D6B47;
+    --gold: #D4A843;
+    --blush: #E8C4A0;
+    --night: #0D1B2A;
+    --cream: #FBF6EE;
+    --muted: #8A7D6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--deep);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(26,18,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,168,67,0.2);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,236,215,0.7);
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--night);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(46,107,138,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(196,98,45,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 10%, rgba(212,168,67,0.1) 0%, transparent 60%);
+  }
+
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--sand);
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-style: italic;
+    color: rgba(245,236,215,0.5);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .hero-meta-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,236,215,0.5);
+    text-transform: uppercase;
+  }
+
+  .hero-meta-item strong {
+    color: var(--sand);
+    display: block;
+    font-size: 0.9rem;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(245,236,215,0.3);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── SECTION STRUCTURE ── */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-full {
+    max-width: 100%;
+    padding: 5rem 0;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--terracotta);
+    opacity: 0.3;
+    max-width: 80px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--deep);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  /* ── DIVIDERS ── */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(26,18,8,0.08);
+    margin: 0;
+  }
+
+  .dark-band {
+    background: var(--deep);
+    color: var(--sand);
+    padding: 5rem 2rem;
+  }
+
+  .dark-band .section-title { color: var(--sand); }
+  .dark-band .section-intro { color: rgba(245,236,215,0.6); }
+  .dark-band .section-label { color: var(--gold); }
+
+  /* ── SCHEDULE ── */
+  .schedule-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(26,18,8,0.08);
+    border: 1px solid rgba(26,18,8,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background: var(--cream);
+    transition: background 0.2s;
+  }
+
+  .schedule-row:hover { background: #F0E8D8; }
+
+  .schedule-row.mandatory {
+    background: linear-gradient(135deg, #FFF5EE 0%, #FFF0E8 100%);
+    border-left: 3px solid var(--terracotta);
+  }
+
+  .schedule-row.mandatory:hover { background: #FFE8D8; }
+
+  .schedule-date {
+    padding: 1.2rem 1rem;
+    border-right: 1px solid rgba(26,18,8,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .schedule-day-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--deep);
+  }
+
+  .schedule-row.mandatory .schedule-day-num { color: var(--terracotta); }
+
+  .schedule-month {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .schedule-weekday {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .schedule-content {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .schedule-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-bottom: 0.4rem;
+  }
+
+  .tag-free { background: rgba(61,107,71,0.12); color: var(--palm); }
+  .tag-mandatory { background: rgba(196,98,45,0.12); color: var(--terracotta); }
+  .tag-arrival { background: rgba(46,107,138,0.12); color: var(--ocean); }
+  .tag-depart { background: rgba(138,125,107,0.12); color: var(--muted); }
+
+  .schedule-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin-bottom: 0.3rem;
+  }
+
+  .schedule-details {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .schedule-details strong { color: var(--deep); }
+
+  /* ── ROOMS ── */
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .villa-block {
+    background: var(--cream);
+    border: 1px solid rgba(26,18,8,0.1);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .villa-header {
+    padding: 1.2rem 1.5rem;
+    background: var(--deep);
+    color: var(--sand);
+  }
+
+  .villa-header.nabo { background: var(--ocean); }
+
+  .villa-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .villa-sub {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .villa-rooms { padding: 1rem 0; }
+
+  .room-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.65rem 1.5rem;
+    border-bottom: 1px solid rgba(26,18,8,0.05);
+  }
+
+  .room-row:last-child { border-bottom: none; }
+
+  .room-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    min-width: 80px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .room-names {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--deep);
+  }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--cream);
+    border: 1px solid rgba(26,18,8,0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(26,18,8,0.1);
+  }
+
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--deep);
+  }
+
+  .card-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    color: var(--terracotta);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-body {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin-top: 0.75rem;
+    background: rgba(196,98,45,0.1);
+    color: var(--terracotta);
+  }
+
+  /* ── NIGHTLIFE ── */
+  .night-grid {
+    display: grid;
+    gap: 1px;
+    background: rgba(245,236,215,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(245,236,215,0.1);
+  }
+
+  .night-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    background: rgba(13,27,42,0.8);
+    transition: background 0.2s;
+  }
+
+  .night-row:hover { background: rgba(13,27,42,1); }
+
+  .night-row.highlight { background: rgba(196,98,45,0.2); }
+  .night-row.highlight:hover { background: rgba(196,98,45,0.3); }
+
+  .night-date {
+    padding: 1.2rem 1rem;
+    border-right: 1px solid rgba(245,236,215,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .night-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .night-weekday {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,236,215,0.4);
+    margin-top: 0.2rem;
+  }
+
+  .night-content {
+    padding: 1.2rem 1.5rem;
+  }
+
+  .night-venue {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--sand);
+    margin-bottom: 0.3rem;
+  }
+
+  .night-desc {
+    font-size: 0.82rem;
+    color: rgba(245,236,215,0.5);
+    line-height: 1.5;
+  }
+
+  /* ── TABLES ── */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .info-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid rgba(26,18,8,0.08);
+  }
+
+  .info-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid rgba(26,18,8,0.05);
+    vertical-align: top;
+  }
+
+  .info-table tr:last-child td { border-bottom: none; }
+  .info-table tr:hover td { background: rgba(26,18,8,0.02); }
+
+  .info-table .venue { font-weight: 600; color: var(--deep); }
+  .info-table .note { color: var(--muted); font-size: 0.82rem; }
+
+  /* ── RATING STARS ── */
+  .stars { color: var(--gold); font-size: 0.8rem; }
+
+  /* ── BINGO ── */
+  #bingo { background: var(--deep); }
+
+  .bingo-deck-selector {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .deck-btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 30px;
+    border: 1px solid rgba(245,236,215,0.2);
+    background: transparent;
+    color: rgba(245,236,215,0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .deck-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .deck-btn.active { background: var(--gold); color: var(--deep); border-color: var(--gold); font-weight: 600; }
+
+  .bingo-card {
+    background: rgba(245,236,215,0.04);
+    border: 1px solid rgba(245,236,215,0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    max-width: 520px;
+  }
+
+  .bingo-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .bingo-col-header {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold);
+    padding: 0.5rem;
+  }
+
+  .bingo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+
+  .bingo-cell {
+    aspect-ratio: 1;
+    background: rgba(245,236,215,0.06);
+    border: 1px solid rgba(245,236,215,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.6rem;
+    color: rgba(245,236,215,0.7);
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 0.3rem;
+    line-height: 1.2;
+    user-select: none;
+  }
+
+  .bingo-cell:hover { background: rgba(212,168,67,0.15); border-color: var(--gold); }
+
+  .bingo-cell.marked {
+    background: var(--gold);
+    color: var(--deep);
+    font-weight: 700;
+    border-color: var(--gold);
+  }
+
+  .bingo-cell.free {
+    background: var(--terracotta);
+    color: white;
+    font-weight: 700;
+    font-size: 0.55rem;
+    border-color: var(--terracotta);
+  }
+
+  .bingo-win {
+    text-align: center;
+    margin-top: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    display: none;
+  }
+
+  /* ── CHEAT SHEET ── */
+  .cheat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .cheat-box {
+    background: rgba(245,236,215,0.05);
+    border: 1px solid rgba(245,236,215,0.12);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .cheat-box-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .cheat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(245,236,215,0.06);
+    font-size: 0.82rem;
+  }
+
+  .cheat-row:last-child { border-bottom: none; }
+  .cheat-key { color: rgba(245,236,215,0.5); }
+  .cheat-val { color: var(--sand); font-weight: 500; text-align: right; }
+  .cheat-val a { color: var(--gold); text-decoration: none; }
+
+  /* ── ULUWATU ── */
+  .uluwatu-section {
+    background: linear-gradient(135deg, #0D1B2A 0%, #1A2F3F 100%);
+    padding: 5rem 2rem;
+  }
+
+  /* ── VISA BOX ── */
+  .visa-box {
+    background: linear-gradient(135deg, rgba(196,98,45,0.1) 0%, rgba(212,168,67,0.05) 100%);
+    border: 1px solid rgba(196,98,45,0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .visa-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--terracotta);
+  }
+
+  .visa-steps {
+    counter-reset: steps;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .visa-steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: var(--deep);
+  }
+
+  .visa-steps li::before {
+    content: counter(steps);
+    min-width: 24px;
+    height: 24px;
+    background: var(--terracotta);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+  }
+
+  /* ── PACKING ── */
+  .packing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .pack-category {
+    background: var(--cream);
+    border: 1px solid rgba(26,18,8,0.08);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .pack-cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--deep);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pack-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .pack-items li {
+    font-size: 0.82rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .pack-items li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--terracotta);
+    font-size: 0.7rem;
+  }
+
+  /* ── GOODIE BAG ── */
+  .goodie-box {
+    background: linear-gradient(135deg, var(--terracotta) 0%, #D4622D 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .goodie-cat h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    opacity: 0.9;
+  }
+
+  .goodie-cat ul {
+    list-style: none;
+    font-size: 0.82rem;
+    opacity: 0.8;
+    line-height: 1.8;
+  }
+
+  /* ── COMPETITION ── */
+  .comp-events {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .comp-event {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1rem 1.25rem;
+    background: rgba(245,236,215,0.04);
+    border: 1px solid rgba(245,236,215,0.1);
+    border-radius: 12px;
+  }
+
+  .comp-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    opacity: 0.4;
+  }
+
+  .comp-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sand);
+    margin-bottom: 0.25rem;
+  }
+
+  .comp-desc { font-size: 0.8rem; color: rgba(245,236,215,0.5); }
+  .comp-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    white-space: nowrap;
+    padding-top: 0.2rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    color: rgba(245,236,215,0.4);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 0.82rem;
+  }
+
+  footer .footer-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── MISC ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+    .schedule-row { grid-template-columns: 70px 1fr; }
+    .night-row { grid-template-columns: 80px 1fr; }
+    .comp-event { grid-template-columns: 30px 1fr; }
+    .comp-time { display: none; }
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .pill-ocean { background: rgba(46,107,138,0.12); color: var(--ocean); }
+  .pill-palm { background: rgba(61,107,71,0.12); color: var(--palm); }
+  .pill-gold { background: rgba(212,168,67,0.15); color: #8A6A1A; }
+
+  .tip-box {
+    background: rgba(46,107,138,0.08);
+    border-left: 3px solid var(--ocean);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: var(--ocean);
+    margin: 1.5rem 0;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">🏝️ Bali Bash '26</div>
+  <ul class="nav-links">
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#rooms">Rooms</a></li>
+    <li><a href="#competition">Competition</a></li>
+    <li><a href="#nightlife">Nightlife</a></li>
+    <li><a href="#food">Food</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#uluwatu">Uluwatu</a></li>
+    <li><a href="#bingo">Bingo</a></li>
+    <li><a href="#practical">Practical</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-eyebrow">Simon & Mike's 30th</div>
+  <h1 class="hero-title">Bali<br><em>Birthday</em><br>Bash</h1>
+  <p class="hero-subtitle">Nine days in paradise</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <strong>March 25 – April 7</strong>
+      2026
+    </div>
+    <div class="hero-meta-item">
+      <strong>Villa Ampo</strong>
+      Canggu, Bali
+    </div>
+    <div class="hero-meta-item">
+      <strong>19 Guests</strong>
+      Two villas
+    </div>
+    <div class="hero-meta-item">
+      <strong>2 Mandatory Days</strong>
+      Mar 30 + 31
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<section id="schedule" class="fade-in">
+  <div class="section-label">Full Programme</div>
+  <h2 class="section-title">The <em>Schedule</em></h2>
+  <p class="section-intro">Nine days, two mandatory birthday celebrations. Everything else is yours to shape. Transport is arranged March 28–April 1.</p>
+
+  <div class="schedule-grid">
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">25</div>
+        <div class="schedule-month">Mar</div>
+        <div class="schedule-weekday">Wed</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-arrival">Early Birds</span>
+        <div class="schedule-headline">Arrival & Settle In</div>
+        <div class="schedule-details">Max + Nikolaj already in Bali. Villa prep, first feel of Canggu. Easy evening.</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">26</div>
+        <div class="schedule-month">Mar</div>
+        <div class="schedule-weekday">Thu</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-arrival">Arrival Day 1</span>
+        <div class="schedule-headline">Check-in & Welcome Drinks</div>
+        <div class="schedule-details">Most of the crew lands. Check-in, drop bags, welcome drinks at the villa. <strong>Evening: Old Man's</strong> — easy first night, cold Bintangs.</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">27</div>
+        <div class="schedule-month">Mar</div>
+        <div class="schedule-weekday">Fri</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-arrival">Arrival Day 2</span>
+        <div class="schedule-headline">Last Arrivals</div>
+        <div class="schedule-details">Final guests arrive. Settle in, explore Canggu. <strong>Evening: Desa Kitsune</strong> — dinner + club.</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">28</div>
+        <div class="schedule-month">Mar</div>
+        <div class="schedule-weekday">Sat</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-free">Free Day</span>
+        <div class="schedule-headline">Padel + Free Day</div>
+        <div class="schedule-details">Free morning — vote optional activities in WA group. <strong>15:00–17:00 Padel @ Bali Padel Academy</strong>. <strong>Evening: Penny Lane dinner</strong> or explore Canggu.</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">29</div>
+        <div class="schedule-month">Mar</div>
+        <div class="schedule-weekday">Sun</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-free">🛡️ Protected</span>
+        <div class="schedule-headline">Chill Sunday — Mandatory Early Night</div>
+        <div class="schedule-details">Padel or beach in the AM. <strong>Far's special activity at villa</strong> in the afternoon. Evening at <strong>Nuana</strong> — their amenities + Beer Garden (great steaks). Early to bed — big days ahead.</div>
+      </div>
+    </div>
+
+    <div class="schedule-row mandatory">
+      <div class="schedule-date">
+        <div class="schedule-day-num">30</div>
+        <div class="schedule-month">Mar</div>
+        <div class="schedule-weekday">Mon</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-mandatory">🎂 Birthday Day 1</span>
+        <div class="schedule-headline">Competition Day</div>
+        <div class="schedule-details">
+          <strong>AM:</strong> Villa games · <strong>12:30</strong> Lunch<br>
+          <strong>13:00+</strong> Beach games @ Times Beach Warung · <strong>16:30</strong> Relax at villa<br>
+          <strong>19:30</strong> Luigi's Hot Pizza (hosts cover) · <strong>23:00→</strong> Mexicola til sunrise
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-row mandatory">
+      <div class="schedule-date">
+        <div class="schedule-day-num">31</div>
+        <div class="schedule-month">Mar</div>
+        <div class="schedule-weekday">Tue</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-mandatory">🎂 Birthday Day 2</span>
+        <div class="schedule-headline">Finn's Beach Club</div>
+        <div class="schedule-details">
+          Sleep in. <strong>10:30</strong> Copenhagen Bakery brunch.<br>
+          <strong>15:00 → late:</strong> Finn's Beach Club — daybeds + evening section. Free evening after.
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">1</div>
+        <div class="schedule-month">Apr</div>
+        <div class="schedule-weekday">Wed</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-free">Recovery</span>
+        <div class="schedule-headline">Free Day</div>
+        <div class="schedule-details">Free day — coordinate in the WA group. Spa &amp; massage recommended. Dinner TBD.</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">2</div>
+        <div class="schedule-month">Apr</div>
+        <div class="schedule-weekday">Thu</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-free">Last Full Day</span>
+        <div class="schedule-headline">Final Group Dinner + Desa Kitsune</div>
+        <div class="schedule-details">Final group breakfast. Free afternoon. <strong>Desa Kitsune</strong> for dinner + Thursday party — their best night of the week. Don't miss it.</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="schedule-date">
+        <div class="schedule-day-num">3</div>
+        <div class="schedule-month">Apr</div>
+        <div class="schedule-weekday">Fri</div>
+      </div>
+      <div class="schedule-content">
+        <span class="schedule-tag tag-depart">Departures</span>
+        <div class="schedule-headline">First Flights Out + Uluwatu Day</div>
+        <div class="schedule-details">First departures. Remaining guests — see the <a href="#uluwatu" style="color:var(--terracotta);">Uluwatu recommendation</a> below.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ROOMS -->
+<section id="rooms" class="fade-in">
+  <div class="section-label">Where You Sleep</div>
+  <h2 class="section-title">Room <em>Assignments</em></h2>
+  <p class="section-intro">Two villas side by side. Villa Ampo is the main house — couples and the birthday boys. Nabo Villa is next door, literally a 10-second walk.</p>
+
+  <div class="rooms-grid">
+    <div class="villa-block">
+      <div class="villa-header">
+        <div class="villa-name">Villa Ampo</div>
+        <div class="villa-sub">Main Villa · Jl. Pantai Nyanyi, Beraban</div>
+      </div>
+      <div class="villa-rooms">
+        <div class="room-row">
+          <div class="room-label">Værelse 1</div>
+          <div class="room-names">Simon + Far (Senior)</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Værelse 2</div>
+          <div class="room-names">Jacob Zacho + Marcus</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Værelse 3</div>
+          <div class="room-names">Rasmus K. + Liam</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Værelse 4</div>
+          <div class="room-names">Daniel + Oliver</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Gazebo</div>
+          <div class="room-names">Mike + Jogge</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="villa-block">
+      <div class="villa-header nabo">
+        <div class="villa-name">Nabo Villa</div>
+        <div class="villa-sub">Next Door · 10 seconds away</div>
+      </div>
+      <div class="villa-rooms">
+        <div class="room-row">
+          <div class="room-label">Room 1</div>
+          <div class="room-names">Nikolaj + Maiken</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Room 2</div>
+          <div class="room-names">Max + Rasmus Overmark</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Room 3</div>
+          <div class="room-names">Andreas + Frederik Skafte</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Room 4</div>
+          <div class="room-names">Kristian Tinho + Jonas</div>
+        </div>
+        <div class="room-row">
+          <div class="room-label">Room 5</div>
+          <div class="room-names">TJ — solo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMPETITION DAY -->
+<div class="dark-band section-full" id="competition">
+  <div class="section-inner fade-in">
+    <div class="section-label">Monday March 30</div>
+    <h2 class="section-title">Competition <em>Day</em></h2>
+    <p class="section-intro">The main event. Teams, points, a live leaderboard, and a dedicated MC. Venue: Times Beach Warung, Canggu.</p>
+
+    <div class="tip-box" style="background:rgba(212,168,67,0.1);border-color:var(--gold);color:var(--gold);">
+      ⚠️ Full event rules, scoring system and team assignments will be published here before departure.
+    </div>
+
+    <div class="comp-events">
+      <div class="comp-event">
+        <div class="comp-num">01</div>
+        <div>
+          <div class="comp-name">Villa Games</div>
+          <div class="comp-desc">Morning warm-up at the villa before heading out. Opening ceremony vibes.</div>
+        </div>
+        <div class="comp-time">AM</div>
+      </div>
+
+      <div class="comp-event">
+        <div class="comp-num">03</div>
+        <div>
+          <div class="comp-name">Beach Volleyball</div>
+          <div class="comp-desc">Team vs team. Net provided at Times Beach.</div>
+        </div>
+        <div class="comp-time">13:00–13:45</div>
+      </div>
+      <div class="comp-event">
+        <div class="comp-num">04</div>
+        <div>
+          <div class="comp-name">5L Water Bucket Race</div>
+          <div class="comp-desc">Fill the bucket using only tiny holed bottles. Pure chaos.</div>
+        </div>
+        <div class="comp-time">13:45–14:15</div>
+      </div>
+      <div class="comp-event">
+        <div class="comp-num">05</div>
+        <div>
+          <div class="comp-name">Corn Hole / Coconut Bowling</div>
+          <div class="comp-desc">Classic beach accuracy games. Local twist with coconuts.</div>
+        </div>
+        <div class="comp-time">14:15–14:45</div>
+      </div>
+      <div class="comp-event">
+        <div class="comp-num">06</div>
+        <div>
+          <div class="comp-name">Beach Pong</div>
+          <div class="comp-desc">Big bucket edition. Enough said.</div>
+        </div>
+        <div class="comp-time">14:45–15:15</div>
+      </div>
+      <div class="comp-event">
+        <div class="comp-num">07</div>
+        <div>
+          <div class="comp-name">Bali Brain Battle</div>
+          <div class="comp-desc">Trivia round in the shade. Recovery + points.</div>
+        </div>
+        <div class="comp-time">15:15–15:45</div>
+      </div>
+      <div class="comp-event">
+        <div class="comp-num">08</div>
+        <div>
+          <div class="comp-name">SoMe Challenge</div>
+          <div class="comp-desc">Best photo or video of the day. Group vote at the end. Points up for grabs all day.</div>
+        </div>
+        <div class="comp-time">All Day</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NIGHTLIFE -->
+<div class="dark-band section-full" id="nightlife" style="background:#0D1B2A;">
+  <div class="section-inner fade-in">
+    <div class="section-label">After Dark</div>
+    <h2 class="section-title" style="color:var(--sand);">Nightlife <em>Guide</em></h2>
+    <p class="section-intro">Canggu's best nights are Monday (Mexicola) and Thursday (Desa Kitsune). We've planned around this. Friday and Saturday are tourist peak — more crowds, less soul.</p>
+
+    <div class="night-grid">
+      <div class="night-row">
+        <div class="night-date">
+          <div class="night-day">26</div>
+          <div class="night-weekday">Thu · Mar</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">Old Man's</div>
+          <div class="night-desc">Easy arrivals night. Cold Bintangs, pool tables, no pressure. Classic Canggu bar.</div>
+        </div>
+      </div>
+      <div class="night-row">
+        <div class="night-date">
+          <div class="night-day">27</div>
+          <div class="night-weekday">Fri · Mar</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">Desa Kitsune</div>
+          <div class="night-desc">Dinner + club. Rice terrace setting, quality sound. Good Friday night crowd.</div>
+        </div>
+      </div>
+      <div class="night-row">
+        <div class="night-date">
+          <div class="night-day">28</div>
+          <div class="night-weekday">Sat · Mar</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">Padel → Penny Lane</div>
+          <div class="night-desc">Padel in the morning. Evening dinner at Penny Lane or wherever the group lands in Canggu.</div>
+        </div>
+      </div>
+      <div class="night-row">
+        <div class="night-date">
+          <div class="night-day">29</div>
+          <div class="night-weekday">Sun · Mar</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">Nuana Beer Garden</div>
+          <div class="night-desc">Full Nuana experience — amenities + Beer Garden with great steaks. Protected night — early bed. No heroics.</div>
+        </div>
+      </div>
+      <div class="night-row highlight">
+        <div class="night-date">
+          <div class="night-day">30</div>
+          <div class="night-weekday">Mon · Mar</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">🎂 Luigi's → Mexicola</div>
+          <div class="night-desc">Dinner covered by hosts. Then Mexicola — Monday is their night. Open til 4–6AM. This is the one.</div>
+        </div>
+      </div>
+      <div class="night-row highlight">
+        <div class="night-date">
+          <div class="night-day">31</div>
+          <div class="night-weekday">Tue · Mar</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">🎂 Finn's Beach Club</div>
+          <div class="night-desc">All day and into the evening. Daybeds booked. Best beach club in Canggu — end of.</div>
+        </div>
+      </div>
+      <div class="night-row">
+        <div class="night-date">
+          <div class="night-day">1</div>
+          <div class="night-weekday">Wed · Apr</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">Free Evening — TBD in WA</div>
+          <div class="night-desc">Recovery day. Spa in the morning. Evening plans open — coordinate in the WA group.</div>
+        </div>
+      </div>
+      <div class="night-row highlight">
+        <div class="night-date">
+          <div class="night-day">2</div>
+          <div class="night-weekday">Thu · Apr</div>
+        </div>
+        <div class="night-content">
+          <div class="night-venue">Desa Kitsune — Thursday Edition</div>
+          <div class="night-desc">Thursday is their best night — better lineup, better crowd than Friday. Last big night for the group.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOD -->
+<section id="food" class="fade-in">
+  <div class="section-label">Eat Well</div>
+  <h2 class="section-title">Food & <em>Restaurants</em></h2>
+  <p class="section-intro">From post-surf pastries to birthday dinners. Canggu punches well above its weight for food.</p>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;">🍳 Breakfast</h3>
+      <table class="info-table">
+        <thead><tr><th>Venue</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="venue">Copenhagen Bakery</td><td class="note">Post-surf Mar 30 · Brunch Mar 31. Danish-Bali fusion, excellent pastries.</td></tr>
+          <tr><td class="venue">Villa breakfast</td><td class="note">Most mornings — pool, coffee, ease into the day.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin:2rem 0 1rem;">🍽️ Dinner</h3>
+      <table class="info-table">
+        <thead><tr><th>Venue</th><th>Night</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="venue">Luigi's Hot Pizza</td><td class="note">Mar 30</td><td class="note">Birthday dinner. Hosts cover. Reservation confirmed.</td></tr>
+          <tr><td class="venue">Desa Kitsune</td><td class="note">Mar 27 + Apr 2</td><td class="note">Dinner + club. Rice terrace setting.</td></tr>
+          <tr><td class="venue">Penny Lane</td><td class="note">Mar 28</td><td class="note">Dinner option for Saturday — or wherever the group decides in Canggu.</td></tr>
+          <tr><td class="venue">Nuana Beer Garden</td><td class="note">Mar 29</td><td class="note">Sunday evening — full amenities + excellent steaks. Behind-the-scenes access.</td></tr>
+          <tr><td class="venue">Motel Mexicola</td><td class="note">Mar 30 late</td><td class="note">After Luigi's — birthday night centrepiece.</td></tr>
+          <tr><td class="venue">Luna Beer Garden</td><td class="note">Apr 1</td><td class="note">Behind-the-scenes access via Simon's contact at Nuanu.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;">💡 Local Tips</h3>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div class="tip-box">
+          <strong>Best nights to go out:</strong> Monday (Mexicola & Old Man's), Thursday (Desa Kitsune), Wednesday (Old Man's beer pong night). Avoid Saturday for big group bookings — peak tourist crowds.
+        </div>
+        <div class="tip-box">
+          <strong>Ordering tip:</strong> Many venues require minimum spend per person for group bookings. Always check before ordering rounds separately — group tabs are usually smoother.
+        </div>
+        <div class="tip-box">
+          <strong>Warungs:</strong> For casual lunches, the local warungs around Canggu are exceptional value. Nasi goreng and mie goreng for under 50,000 IDR (~30 DKK). Don't skip them.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ACTIVITIES -->
+<section id="activities" class="fade-in">
+  <div class="section-label">Get Moving</div>
+  <h2 class="section-title">Activities & <em>Sports</em></h2>
+  <p class="section-intro">Vote in the WA group for what you want to do on free days. Simon and Mike will book based on interest. Some need early confirmation.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🎾</span>
+      <div class="card-meta">⭐ 4.8 · Best on the island</div>
+      <div class="card-title">Padel</div>
+      <div class="card-body">Bali Padel Academy — book via Playtomic app. 5 min from villa. Scheduled for March 27 AM.</div>
+      <span class="card-tag">Book via Playtomic</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">🛥️</span>
+      <div class="card-meta">⭐ 4.9 · Bluuu Tours</div>
+      <div class="card-title">Nusa Penida Yacht Tour</div>
+      <div class="card-body">Full day on the water. Crystal Bay, Kelingking cliff, manta rays. Needs early vote — fills up fast.</div>
+      <span class="card-tag">Vote in WA first</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎣</span>
+      <div class="card-meta">⭐ 4.9 · Bali Fishing Boat Charters</div>
+      <div class="card-title">Deep Sea Fishing</div>
+      <div class="card-body">Early morning start, full morning on the water. Serious option for the fishing enthusiasts.</div>
+      <span class="card-tag">Vote in WA first</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">🥊</span>
+      <div class="card-meta">⭐ 4.9 · Canggu Muay Thai</div>
+      <div class="card-title">Muay Thai Class</div>
+      <div class="card-body">Drop-in class, great morning activity. Good for the competitive energy post-competition day.</div>
+      <span class="card-tag">Vote in WA first</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏋️</span>
+      <div class="card-meta">⭐ 5.0 · 5 min from villa</div>
+      <div class="card-title">CrossFit Drop-in</div>
+      <div class="card-body">CrossFit Canggu — literally 5 minutes from the villa. Best option if you want to train without much planning.</div>
+      <span class="card-tag">Just show up</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">⛳</span>
+      <div class="card-meta">⭐ 4.6 · Bukit Pandawa Par 3</div>
+      <div class="card-title">Golf</div>
+      <div class="card-body">Bukit Pandawa Par 3 — scenic and accessible. Note: NOT New Kuta, which is under heavy renovation.</div>
+      <span class="card-tag">Vote in WA first</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">🌊</span>
+      <div class="card-meta">⭐ 5.0 · Half day</div>
+      <div class="card-title">Ubud Waterfall Tour</div>
+      <div class="card-body">Tegenungan, Tibumana and others — lush jungle, stunning drops. Half day trip from Canggu.</div>
+      <span class="card-tag">Vote in WA first</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">💆</span>
+      <div class="card-meta">Multiple venues · Canggu</div>
+      <div class="card-title">Spa & Massage</div>
+      <div class="card-body">Highly recommended for April 1 recovery day. 90-min full body Balinese massage for ~200,000 IDR (~120 DKK). Bodyworks Bali is a reliable choice.</div>
+      <span class="card-tag">Walk-in or book ahead</span>
+    </div>
+    <div class="card">
+      <span class="card-icon">🧘</span>
+      <div class="card-meta">Booked · March 30</div>
+      <div class="card-title">Reformer Pilates</div>
+      <div class="card-body">The Pilates Project — booked for March 30. Come prepared. Grip socks are in your goodie bag. 😉</div>
+      <span class="card-tag">Confirmed ✓</span>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:2rem;">
+    <strong>Ijen Blue Volcano:</strong> Only for trip extenders staying beyond April 3. Requires an overnight trip to East Java — not a day trip. If you're interested, talk to Simon before the trip.
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ULUWATU -->
+<div class="uluwatu-section" id="uluwatu">
+  <div class="section-inner fade-in">
+    <div class="section-label" style="color:var(--gold);">April 3 — For Those Staying On</div>
+    <h2 class="section-title" style="color:var(--sand);">Day Trip to <em>Uluwatu</em></h2>
+    <p class="section-intro">Simon is heading to Uluwatu on April 3 with whoever's still around. TJ knows the area well — his villa is there. Consider this a strong recommendation.</p>
+
+    <div class="cards-grid">
+      <div class="card" style="background:rgba(245,236,215,0.05);border-color:rgba(245,236,215,0.1);">
+        <span class="card-icon">🏄</span>
+        <div class="card-meta" style="color:var(--gold);">World Class</div>
+        <div class="card-title" style="color:var(--sand);">Uluwatu Surf</div>
+        <div class="card-body" style="color:rgba(245,236,215,0.6);">One of the most famous left-handers in the world. Not for absolute beginners — but incredible to watch from the clifftop warung even if you don't paddle out.</div>
+      </div>
+      <div class="card" style="background:rgba(245,236,215,0.05);border-color:rgba(245,236,215,0.1);">
+        <span class="card-icon">🛕</span>
+        <div class="card-meta" style="color:var(--gold);">Sunset Must-Do</div>
+        <div class="card-title" style="color:var(--sand);">Uluwatu Temple</div>
+        <div class="card-body" style="color:rgba(245,236,215,0.6);">Clifftop temple at 70m above the Indian Ocean. Kecak fire dance at sunset is genuinely spectacular. Go early — it fills up fast.</div>
+      </div>
+      <div class="card" style="background:rgba(245,236,215,0.05);border-color:rgba(245,236,215,0.1);">
+        <span class="card-icon">🍽️</span>
+        <div class="card-meta" style="color:var(--gold);">Clifftop Dining</div>
+        <div class="card-title" style="color:var(--sand);">Single Fin + Sundays</div>
+        <div class="card-body" style="color:rgba(245,236,215,0.6);">Single Fin is the legendary clifftop bar — cold Bintangs, live music, direct view of the break. Sundays Beach Club is the most beautiful beach in the area.</div>
+      </div>
+      <div class="card" style="background:rgba(245,236,215,0.05);border-color:rgba(245,236,215,0.1);">
+        <span class="card-icon">🚗</span>
+        <div class="card-meta" style="color:var(--gold);">Logistics</div>
+        <div class="card-title" style="color:var(--sand);">Getting There</div>
+        <div class="card-body" style="color:rgba(245,236,215,0.6);">45–60 min from Canggu by private driver. ~300,000–400,000 IDR each way. Split between the group it's very affordable. TJ can help coordinate from his end.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BINGO -->
+<div class="dark-band section-full" id="bingo" style="background:#0A1520;">
+  <div class="section-inner fade-in">
+    <div class="section-label">Your Card Awaits</div>
+    <h2 class="section-title" style="color:var(--sand);">Bali <em>Bingo</em></h2>
+    <p class="section-intro">Three decks. Pick your danger level. Physical cards in your goodie bag on arrival — this is a digital preview.</p>
+
+    <div class="bingo-deck-selector">
+      <button class="deck-btn active" onclick="loadDeck('classic')">🌴 Classic</button>
+      <button class="deck-btn" onclick="loadDeck('rowdy')">🔥 Rowdy</button>
+      <button class="deck-btn" onclick="loadDeck('filthy')">☠️ Filthy</button>
+    </div>
+
+    <div class="bingo-card">
+      <div class="bingo-header">
+        <div class="bingo-col-header">B</div>
+        <div class="bingo-col-header">A</div>
+        <div class="bingo-col-header">L</div>
+        <div class="bingo-col-header">I</div>
+        <div class="bingo-col-header">!</div>
+      </div>
+      <div class="bingo-grid" id="bingo-grid"></div>
+      <div class="bingo-win" id="bingo-win">🎉 BALI! 🎉</div>
+    </div>
+
+    <p style="font-size:0.75rem;color:rgba(245,236,215,0.3);margin-top:1rem;">Tap cells to mark them. Get a line in any direction.</p>
+  </div>
+</div>
+
+<!-- PRACTICAL -->
+<section id="practical" class="fade-in">
+  <div class="section-label">Everything Else</div>
+  <h2 class="section-title">Practical <em>Info</em></h2>
+
+  <!-- VISA -->
+  <div class="visa-box">
+    <h3>🛂 Visa — Do This Before You Fly</h3>
+    <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1rem;">Indonesia requires a Visa on Arrival (VOA) for most nationalities. You can get it at the airport OR apply online in advance. Online is strongly recommended — skips a long queue.</p>
+    <ol class="visa-steps">
+      <li>Go to <strong>molina.imigrasi.go.id</strong> — Indonesia's official e-VOA site</li>
+      <li>Apply at least 3 days before travel. Cost: ~USD 35</li>
+      <li>Upload passport photo page + recent headshot</li>
+      <li>Pay by card. You'll receive an approval email — print it or screenshot it</li>
+      <li>At Ngurah Rai airport, go to the e-VOA lane (faster than the VOA counter)</li>
+      <li>The visa is valid 30 days, extendable once for another 30 days at an immigration office</li>
+    </ol>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:1rem;">⚠️ Double-check requirements for your specific passport — Danish, Singaporean and Hong Kong passport holders all qualify but always verify at <strong>imigrasi.go.id</strong></p>
+  </div>
+
+  <div class="dark-band" style="border-radius:16px;padding:2rem;margin-bottom:2rem;">
+    <div class="section-label">Quick Reference</div>
+    <div class="cheat-grid">
+      <div class="cheat-box">
+        <div class="cheat-box-title">📍 Addresses</div>
+        <div class="cheat-row"><span class="cheat-key">Villa Ampo</span><span class="cheat-val">Jl. Pantai Nyanyi, Beraban, Kec. Kediri, Kab. Tabanan</span></div>
+        <div class="cheat-row"><span class="cheat-key">Google Maps</span><span class="cheat-val">Search "Villa Ampo Canggu"</span></div>
+      </div>
+      <div class="cheat-box">
+        <div class="cheat-box-title">📞 Contacts</div>
+        <div class="cheat-row"><span class="cheat-key">Simon</span><span class="cheat-val">+45 2551 4030</span></div>
+        <div class="cheat-row"><span class="cheat-key">Mike</span><span class="cheat-val">+45 2226 5707</span></div>
+        <div class="cheat-row"><span class="cheat-key">Siloam Hospital</span><span class="cheat-val">+62 361 779 900</span></div>
+        <div class="cheat-row"><span class="cheat-key">Emergency (ID)</span><span class="cheat-val">112</span></div>
+      </div>
+      <div class="cheat-box">
+        <div class="cheat-box-title">💰 Money</div>
+        <div class="cheat-row"><span class="cheat-key">1 DKK</span><span class="cheat-val">≈ 2,100 IDR</span></div>
+        <div class="cheat-row"><span class="cheat-key">1 USD</span><span class="cheat-val">≈ 16,000 IDR</span></div>
+        <div class="cheat-row"><span class="cheat-key">Best ATMs</span><span class="cheat-val">BCA or Mandiri</span></div>
+        <div class="cheat-row"><span class="cheat-key">Starter cash</span><span class="cheat-val">50,000 IDR in goodie bag</span></div>
+      </div>
+      <div class="cheat-box">
+        <div class="cheat-box-title">📱 Apps</div>
+        <div class="cheat-row"><span class="cheat-key">Rides</span><span class="cheat-val">Grab + Gojek</span></div>
+        <div class="cheat-row"><span class="cheat-key">Maps</span><span class="cheat-val">Google Maps (download offline)</span></div>
+        <div class="cheat-row"><span class="cheat-key">Padel booking</span><span class="cheat-val">Playtomic</span></div>
+      </div>
+      <div class="cheat-box">
+        <div class="cheat-box-title">🗣️ Bahasa</div>
+        <div class="cheat-row"><span class="cheat-key">Thank you</span><span class="cheat-val">Terima kasih</span></div>
+        <div class="cheat-row"><span class="cheat-key">Please</span><span class="cheat-val">Tolong</span></div>
+        <div class="cheat-row"><span class="cheat-key">How much?</span><span class="cheat-val">Berapa harganya?</span></div>
+        <div class="cheat-row"><span class="cheat-key">Too expensive</span><span class="cheat-val">Terlalu mahal</span></div>
+        <div class="cheat-row"><span class="cheat-key">One Bintang please</span><span class="cheat-val">Satu Bintang, tolong</span></div>
+        <div class="cheat-row"><span class="cheat-key">Where's the toilet?</span><span class="cheat-val">Mana toilet?</span></div>
+      </div>
+      <div class="cheat-box">
+        <div class="cheat-box-title">🚗 Transport</div>
+        <div class="cheat-row"><span class="cheat-key">Private cars</span><span class="cheat-val">Mar 28 – Apr 1</span></div>
+        <div class="cheat-row"><span class="cheat-key">Car rate</span><span class="cheat-val">1,000,000 IDR / 12hrs</span></div>
+        <div class="cheat-row"><span class="cheat-key">Free days</span><span class="cheat-val">Grab or Gojek</span></div>
+        <div class="cheat-row"><span class="cheat-key">Uluwatu</span><span class="cheat-val">45–60 min, private driver</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PACKING -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:1.5rem;">🎒 Packing List</h3>
+  <div class="packing-grid">
+    <div class="pack-category">
+      <div class="pack-cat-title">🏖️ Beach Essentials</div>
+      <ul class="pack-items">
+        <li>Reef-safe sunscreen (50+ SPF)</li>
+        <li>Rash vest for surf days</li>
+        <li>Board shorts × 2–3</li>
+        <li>Flip flops + sandals</li>
+        <li>Waterproof phone case / pouch</li>
+        <li>Dry bag for beach days</li>
+      </ul>
+    </div>
+    <div class="pack-category">
+      <div class="pack-cat-title">👕 Clothing</div>
+      <ul class="pack-items">
+        <li>Light linen shirts for evenings</li>
+        <li>Smart casual for Desa Kitsune / Finn's</li>
+        <li>Workout gear for Pilates + gym</li>
+        <li>1 pair long trousers (temple visits)</li>
+        <li>Light layer for AC / overnight flights</li>
+      </ul>
+    </div>
+    <div class="pack-category">
+      <div class="pack-cat-title">💊 Health & Hygiene</div>
+      <ul class="pack-items">
+        <li>Diarrhoea tablets (Imodium)</li>
+        <li>Rehydration sachets (in goodie bag)</li>
+        <li>Mosquito repellent (DEET-based)</li>
+        <li>Antihistamines</li>
+        <li>Basic first aid — plasters, antiseptic</li>
+        <li>Nasal strips (in goodie bag)</li>
+      </ul>
+    </div>
+    <div class="pack-category">
+      <div class="pack-cat-title">📄 Documents</div>
+      <ul class="pack-items">
+        <li>Passport (valid 6+ months)</li>
+        <li>e-VOA approval printout / screenshot</li>
+        <li>Travel insurance docs</li>
+        <li>Return flight confirmation</li>
+        <li>Emergency contacts saved offline</li>
+      </ul>
+    </div>
+    <div class="pack-category">
+      <div class="pack-cat-title">🔌 Tech</div>
+      <ul class="pack-items">
+        <li>Universal adapter (Type C in Bali)</li>
+        <li>Portable power bank</li>
+        <li>GoPro or action cam</li>
+        <li>Download Bali offline on Google Maps</li>
+        <li>Download Grab + Gojek before landing</li>
+      </ul>
+    </div>
+    <div class="pack-category">
+      <div class="pack-cat-title">🎁 In Your Goodie Bag</div>
+      <ul class="pack-items">
+        <li>Reef-safe mini sunscreen</li>
+        <li>Rehydration sachets</li>
+        <li>Nasal strips</li>
+        <li>Pilates grip socks</li>
+        <li>50,000 IDR starter cash</li>
+        <li>Custom greeting card</li>
+        <li>Bingo card (3 decks)</li>
+        <li>Matching sunglasses + swag</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">Bali Birthday Bash '26</div>
+  <p>Simon & Mike Søndergaard — Turning 30 in Style</p>
+  <p style="margin-top:0.5rem;">Villa Ampo · Canggu · March 25 – April 7, 2026</p>
+  <p style="margin-top:1.5rem;font-size:0.72rem;opacity:0.4;">Questions? Simon: +45 2551 4030 · Mike: +45 2226 5707</p>
+</footer>
+
+<script>
+// ── FADE IN ON SCROLL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ── BINGO ──
+const decks = {
+  classic: [
+    "Someone orders a Bintang before noon","Group photo at sunset","Someone falls asleep at the villa pool","Scooter incident (minor)","Someone gets a massage","Nasi Goreng ordered","Padel game arranged","Someone goes for an early morning run","Two-hour beach nap","Someone buys a fake designer item",
+    "Smoothie bowl selfie","Rain shower then sunshine","Lost flip flop","Haggling at market","Someone misses the group departure","Villa karaoke session","Frangipani behind the ear","Someone tries surfing for first time","Group selfie at temple","Someone extends their trip",
+    "FREE","Matching group outfit moment","Someone orders the wrong thing","Sunburn check-in","Group WhatsApp photo dump",
+    "Someone finds a gecko in their room","Rice field Instagram moment","First round bought by the birthday boys","Cold shower because AC broke","Someone wears the matching sunglasses",
+    "Someone stays up to watch sunrise","Group swim in the villa pool","Someone tries a new food","Last one standing at Mexicola","Friendship speech at dinner"
+  ],
+  rowdy: [
+    "Someone disappears for 2+ hours","Mystery injury spotted","'I'm never drinking again' statement","Someone orders shots at lunch","Phone battery death in the field","Someone wears the same outfit two days running","Group photos taken 10+ times to get it right","Someone falls in the pool clothed","Unsolicited life advice given","First one asleep at the club",
+    "Someone argues the bill is wrong","Dramatic story told at dinner","Someone's already on Hinge","A round bought that no one asked for","Someone cries happy tears","The group splits — half go home, half don't","Someone declares themselves 'fine' and clearly isn't","Midnight food delivery to the villa","Someone borrows money and forgets","New best friend made at the bar",
+    "FREE","Someone climbs something they shouldn't","The DJ gets a request rejected","Someone loses their key card","A group chant breaks out",
+    "Someone pulls a hero move on the dancefloor","Someone films a 'hilarious' video that isn't","Unexpected karaoke talent revealed","Someone skips the activity they voted for","First person to complain about the heat",
+    "The group chat goes silent for 3+ hours","Someone's bag goes missing temporarily","Motorbike taxi taken despite the rules","Someone gives a birthday speech mid-dinner","Last to bed, first to breakfast"
+  ],
+  filthy: [
+    "Someone is still going at 7am","A name is forgotten within 24hrs of meeting","Someone hooks up with a stranger","The quiet one surprises everyone","Someone vomits and recovers","An argument breaks out and resolves by morning","Someone loses their passport (temporarily)","A dare is accepted without hesitation","Someone is found asleep somewhere unexpected","The group splits over a club choice",
+    "Someone makes a regrettable purchase","A very bad idea is executed flawlessly","Someone texts their ex from Bali","Someone joins a random stranger's party","A friendship is genuinely tested","Someone skinny dips","An outfit gets ruined beyond saving","Someone claims to be 'basically sober'","Two people disappear at the same time","The birthday boys cry",
+    "FREE","Something is broken at the villa","Someone takes a motorbike they can't ride","A significant sum is lost at cards/games","Someone eats street food at 4am and survives",
+    "Someone falls for a scam and laughs about it","A very long toilet queue is abandoned","Someone challenges a local to their own game","An elaborate lie is constructed and believed","Someone misses their flight home",
+    "A new group tradition is born from pure chaos","Someone gives a phone number they shouldn't","A swimming pool is entered fully clothed","Someone is publicly serenaded","Someone makes a decision that defines the trip legend"
+  ]
+};
+
+let currentDeck = 'classic';
+let marked = new Set([12]); // centre free square
+
+function loadDeck(deck) {
+  currentDeck = deck;
+  marked = new Set([12]);
+  document.querySelectorAll('.deck-btn').forEach(b => {
+    b.classList.toggle('active', b.onclick.toString().includes(deck));
+  });
+  renderBingo();
+}
+
+function renderBingo() {
+  const grid = document.getElementById('bingo-grid');
+  const items = decks[currentDeck];
+  grid.innerHTML = '';
+  for (let i = 0; i < 25; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'bingo-cell' + (i === 12 ? ' free' : '') + (marked.has(i) ? ' marked' : '');
+    cell.textContent = i === 12 ? '🌴 FREE' : items[i];
+    if (i !== 12) cell.onclick = () => toggleCell(i);
+    grid.appendChild(cell);
+  }
+  checkWin();
+}
+
+function toggleCell(i) {
+  marked.has(i) ? marked.delete(i) : marked.add(i);
+  renderBingo();
+}
+
+function checkWin() {
+  const lines = [
+    [0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24],
+    [0,5,10,15,20],[1,6,11,16,21],[2,7,12,17,22],[3,8,13,18,23],[4,9,14,19,24],
+    [0,6,12,18,24],[4,8,12,16,20]
+  ];
+  const win = lines.some(l => l.every(i => marked.has(i)));
+  document.getElementById('bingo-win').style.display = win ? 'block' : 'none';
+}
+
+renderBingo();
+
+// ── ACTIVE NAV ──
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id], div[id]');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current
+      ? 'var(--gold)'
+      : 'rgba(245,236,215,0.7)';
+  });
+});
+</script>
+</body>
+</html>
