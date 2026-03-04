@@ -600,7 +600,7 @@ function renderActivities() {
     var cardClass = 'act-card' + (act.confirmed ? ' confirmed' : '') + (act.userAdded ? ' user-added' : '');
     var btnStyle = act.confirmed ? ' style="cursor:default;border-color:var(--palm);background:rgba(61,107,71,.1);color:var(--palm);"' : '';
     var btnClass = 'act-vote-btn' + (voted ? ' voted' : '');
-    var btnClick = act.confirmed ? '' : ' onclick="toggleVote(' + act.id + ')"';
+    var btnClick = act.confirmed ? '' : ' onclick="toggleVote(\'' + act.id + '\')"';
     var btnIcon = act.confirmed ? '✓' : (voted ? '▲' : '△');
     var btnTitle = act.confirmed ? 'Confirmed' : (voted ? 'Remove vote' : 'Vote for this');
     var countColor = act.confirmed ? 'var(--palm)' : (voted ? 'var(--terra)' : 'var(--deep)');
