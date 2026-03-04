@@ -470,19 +470,194 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
 <section id="activities">
   <div class="lbl">Get Moving</div>
   <h2 class="ttl">Activities &amp; <em>Sports</em></h2>
-  <p class="intro">Vote in the WA group for what you want on free days. Simon and Mike will book based on interest.</p>
-  <div class="cgrid">
-    <div class="card"><span class="ci">&#127934;</span><div class="cm">&#11088; 4.8 &middot; Best courts on the island</div><div class="ct"><a class="vl" href="https://playtomic.io" target="_blank">Padel @ Bali Padel Academy</a></div><div class="cb">Booked Saturday 15:00&ndash;17:00. Book via Playtomic app.</div><span class="ctag">Confirmed Sat 28 Mar &#10003;</span></div>
-    <div class="card"><span class="ci">&#128677;</span><div class="cm">&#11088; 4.9 &middot; <a class="vl" href="https://www.bluuutours.com" target="_blank">Bluuu Tours</a></div><div class="ct">Nusa Penida Yacht Tour</div><div class="cb">Full day on the water. Crystal Bay, Kelingking cliff, manta rays. Needs early vote.</div><span class="ctag">Vote in WA first</span></div>
-    <div class="card"><span class="ci">&#127907;</span><div class="cm">&#11088; 4.9 &middot; <a class="vl" href="https://www.balifishingboatcharters.com" target="_blank">Bali Fishing Boat Charters</a></div><div class="ct">Deep Sea Fishing</div><div class="cb">Early morning start, full morning on the water. For the fishing enthusiasts.</div><span class="ctag">Vote in WA first</span></div>
-    <div class="card"><span class="ci">&#129354;</span><div class="cm">&#11088; 4.9 &middot; <a class="vl" href="https://www.instagram.com/canggumayuthai" target="_blank">Canggu Muay Thai</a></div><div class="ct">Muay Thai Class</div><div class="cb">Drop-in class, great morning activity. Good for burning off competitive energy.</div><span class="ctag">Vote in WA first</span></div>
-    <div class="card"><span class="ci">&#127947;</span><div class="cm">&#11088; 5.0 &middot; 5 min from villa</div><div class="ct"><a class="vl" href="https://www.instagram.com/crossfitcanggu" target="_blank">CrossFit Canggu</a></div><div class="cb">Drop-in anytime. Literally 5 minutes from the villa &mdash; easiest option if you want to train.</div><span class="ctag">Just show up</span></div>
-    <div class="card"><span class="ci">&#9971;&#65039;</span><div class="cm">&#11088; 4.6 &middot; <a class="vl" href="https://www.instagram.com/bukitpandawagolfpark" target="_blank">Bukit Pandawa Par 3</a></div><div class="ct">Golf</div><div class="cb">Scenic and accessible. Note: NOT New Kuta &mdash; that's under heavy renovation.</div><span class="ctag">Vote in WA first</span></div>
-    <div class="card"><span class="ci">&#127754;</span><div class="cm">&#11088; 5.0 &middot; Half day</div><div class="ct">Ubud Waterfall Tour</div><div class="cb">Tegenungan, Tibumana and others &mdash; lush jungle, stunning drops. Book via GetYourGuide.</div><span class="ctag">Vote in WA first</span></div>
-    <div class="card"><span class="ci">&#128134;</span><div class="cm">Recommended: <a class="vl" href="https://www.bodyworksbali.com" target="_blank">Bodyworks Bali</a></div><div class="ct">Spa &amp; Massage</div><div class="cb">Highly recommended for April 1 recovery day. 90-min Balinese massage ~200,000 IDR (~120 DKK).</div><span class="ctag">Walk-in or book ahead</span></div>
+  <p class="intro">Vote for what you want on free days &mdash; Simon and Mike will book based on demand. Got a suggestion? Add it below. Votes are live and shared with the whole group.</p>
+
+  <style>
+    .act-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; margin-bottom:2rem; }
+    .act-card { background:var(--cream); border:1px solid rgba(26,18,8,.08); border-radius:16px; padding:1.25rem; display:flex; gap:1rem; align-items:flex-start; transition:box-shadow .2s; }
+    .act-card:hover { box-shadow:0 6px 24px rgba(26,18,8,.08); }
+    .act-card.confirmed { border-color:rgba(61,107,71,.3); background:rgba(61,107,71,.04); }
+    .act-card.user-added { border-color:rgba(46,107,138,.25); background:rgba(46,107,138,.03); }
+    .act-vote { display:flex; flex-direction:column; align-items:center; gap:.3rem; flex-shrink:0; }
+    .act-vote-btn { width:44px; height:44px; border-radius:50%; border:2px solid rgba(26,18,8,.12); background:white; cursor:pointer; font-size:1.1rem; transition:all .15s; display:flex; align-items:center; justify-content:center; }
+    .act-vote-btn:hover { border-color:var(--terra); background:rgba(196,98,45,.08); transform:scale(1.08); }
+    .act-vote-btn.voted { background:var(--terra); border-color:var(--terra); color:white; }
+    .act-vote-count { font-family:'DM Mono',monospace; font-size:.8rem; font-weight:600; color:var(--deep); min-width:20px; text-align:center; }
+    .act-body { flex:1; min-width:0; }
+    .act-emoji { font-size:1.4rem; margin-bottom:.3rem; display:block; }
+    .act-name { font-family:'Playfair Display',Georgia,serif; font-size:1rem; font-weight:700; color:var(--deep); margin-bottom:.2rem; }
+    .act-meta { font-family:'DM Mono',monospace; font-size:.6rem; letter-spacing:.05em; color:var(--terra); margin-bottom:.35rem; }
+    .act-desc { font-size:.82rem; color:var(--muted); line-height:1.5; }
+    .act-tag { display:inline-block; font-size:.6rem; font-family:'DM Mono',monospace; padding:.15rem .5rem; border-radius:20px; margin-top:.5rem; background:rgba(196,98,45,.1); color:var(--terra); }
+    .act-tag.act-tag-green { background:rgba(61,107,71,.12); color:var(--palm); }
+    .act-tag.act-tag-blue { background:rgba(46,107,138,.12); color:var(--ocean); }
+    .act-loading { text-align:center; padding:3rem; color:var(--muted); font-size:.9rem; }
+    .act-bar { height:3px; border-radius:2px; background:rgba(26,18,8,.06); margin-top:.6rem; overflow:hidden; }
+    .act-bar-fill { height:100%; background:var(--terra); border-radius:2px; transition:width .4s ease; }
+
+    /* Suggest box */
+    .suggest-box { background:white; border:2px dashed rgba(26,18,8,.12); border-radius:16px; padding:1.5rem; transition:border-color .2s; }
+    .suggest-box:focus-within { border-color:var(--terra); border-style:solid; }
+    .suggest-title { font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:700; margin-bottom:1rem; color:var(--deep); }
+    .suggest-row { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-bottom:.75rem; }
+    .suggest-input { width:100%; padding:.65rem .9rem; border:1px solid rgba(26,18,8,.12); border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.88rem; color:var(--deep); background:var(--cream); outline:none; transition:border-color .2s; }
+    .suggest-input:focus { border-color:var(--terra); }
+    .suggest-input::placeholder { color:var(--muted); }
+    .suggest-btn { padding:.65rem 1.5rem; background:var(--terra); color:white; border:none; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.88rem; font-weight:600; cursor:pointer; transition:background .2s; white-space:nowrap; }
+    .suggest-btn:hover { background:#b5561f; }
+    .suggest-btn:disabled { background:rgba(26,18,8,.15); cursor:not-allowed; }
+    @media(max-width:600px){ .suggest-row{grid-template-columns:1fr;} }
+  </style>
+
+  <div id="act-list" class="act-grid"><div class="act-loading">Loading activities&#8230;</div></div>
+
+  <div class="tip" style="margin-top:0;margin-bottom:2rem"><strong>Ijen Blue Volcano:</strong> Only for trip extenders beyond April 3. Requires overnight trip to East Java &mdash; not a day trip. Talk to Simon if interested.</div>
+
+  <div class="suggest-box">
+    <div class="suggest-title">&#128161; Suggest an Activity</div>
+    <div class="suggest-row">
+      <input class="suggest-input" id="sug-name" placeholder="Activity name" maxlength="60">
+      <input class="suggest-input" id="sug-emoji" placeholder="Emoji (optional)" maxlength="4">
+    </div>
+    <div style="display:flex;gap:.75rem;align-items:flex-start">
+      <input class="suggest-input" id="sug-desc" placeholder="Short description &mdash; what is it, why should we do it?" maxlength="140" style="flex:1">
+      <button class="suggest-btn" id="sug-submit" onclick="submitSuggestion()">Add &#8594;</button>
+    </div>
+    <div id="sug-msg" style="font-size:.8rem;color:var(--palm);margin-top:.6rem;display:none">&#10003; Added! Your suggestion is now live for the group to vote on.</div>
   </div>
-  <div class="tip" style="margin-top:2rem"><strong>Ijen Blue Volcano:</strong> Only for trip extenders beyond April 3. Requires overnight trip to East Java &mdash; not a day trip. Talk to Simon if interested.</div>
 </section>
+
+<script>
+// ── ACTIVITY VOTING ──
+const STORAGE_KEY = 'bali-activities-v2';
+const VOTED_KEY = 'bali-voted-v2';
+
+const BASE_ACTIVITIES = [
+  { id:'padel',    emoji:'🎾', name:'Padel @ Bali Padel Academy', meta:'⭐ 4.8 · Playtomic app',              desc:'Booked Saturday 15:00–17:00. Best courts on the island.', tag:'Confirmed ✓', tagClass:'act-tag-green', confirmed:true },
+  { id:'penida',   emoji:'🛥️', name:'Nusa Penida Yacht Tour',     meta:'⭐ 4.9 · Bluuu Tours',                desc:'Full day on the water. Crystal Bay, Kelingking cliff, manta rays.', tag:'Needs votes to book', tagClass:'' },
+  { id:'fishing',  emoji:'🎣', name:'Deep Sea Fishing',           meta:'⭐ 4.9 · Bali Fishing Boat Charters', desc:'Early morning start, full morning on the water.', tag:'Needs votes to book', tagClass:'' },
+  { id:'muaythai', emoji:'🥊', name:'Muay Thai Class',            meta:'⭐ 4.9 · Canggu Muay Thai',           desc:'Drop-in class. Great morning activity — burns off competitive energy.', tag:'Needs votes to book', tagClass:'' },
+  { id:'crossfit', emoji:'🏋️', name:'CrossFit Canggu',            meta:'⭐ 5.0 · 5 min from villa',           desc:'Drop-in anytime. Easiest option if you want to train without much planning.', tag:'Just show up', tagClass:'' },
+  { id:'golf',     emoji:'⛳', name:'Golf — Bukit Pandawa Par 3', meta:'⭐ 4.6 · Scenic par-3 course',        desc:'Accessible and scenic. NOT New Kuta — that is under heavy renovation.', tag:'Needs votes to book', tagClass:'' },
+  { id:'ubud',     emoji:'🌊', name:'Ubud Waterfall Tour',        meta:'⭐ 5.0 · Half day trip',              desc:'Tegenungan, Tibumana and others — lush jungle, stunning drops.', tag:'Needs votes to book', tagClass:'' },
+  { id:'spa',      emoji:'💆', name:'Spa & Massage',              meta:'Bodyworks Bali recommended',          desc:'90-min Balinese massage ~200,000 IDR (~120 DKK). Best on recovery day.', tag:'Walk-in or book ahead', tagClass:'' },
+];
+
+var activities = [];
+var votedIds = new Set(JSON.parse(localStorage.getItem(VOTED_KEY) || '[]'));
+
+function saveActivities() {
+  window.storage.set(STORAGE_KEY, JSON.stringify(activities), true).catch(function(){});
+}
+
+function toggleVote(id) {
+  var act = activities.find(function(a){ return a.id === id; });
+  if (!act || act.confirmed) return;
+  if (votedIds.has(id)) {
+    act.votes = Math.max(0, act.votes - 1);
+    votedIds.delete(id);
+  } else {
+    act.votes += 1;
+    votedIds.add(id);
+  }
+  localStorage.setItem(VOTED_KEY, JSON.stringify(Array.from(votedIds)));
+  saveActivities();
+  renderActivities();
+}
+
+function renderActivities() {
+  var sorted = activities.slice().sort(function(a, b) {
+    if (a.confirmed && !b.confirmed) return -1;
+    if (!a.confirmed && b.confirmed) return 1;
+    return b.votes - a.votes;
+  });
+  var maxVotes = Math.max(1, sorted.filter(function(a){ return !a.confirmed; }).reduce(function(m,a){ return Math.max(m, a.votes); }, 0));
+
+  var html = sorted.map(function(act) {
+    var voted = votedIds.has(act.id);
+    var pct = act.confirmed ? 100 : (act.votes / maxVotes) * 100;
+    var cardClass = 'act-card' + (act.confirmed ? ' confirmed' : '') + (act.userAdded ? ' user-added' : '');
+    var btnClass = 'act-vote-btn' + (voted ? ' voted' : '');
+    var btnStyle = act.confirmed ? ' style="cursor:default;border-color:var(--palm);background:rgba(61,107,71,.1);color:var(--palm);"' : '';
+    var btnIcon = act.confirmed ? '✓' : (voted ? '▲' : '△');
+    var btnClick = act.confirmed ? '' : ' onclick="toggleVote('' + act.id + '')"';
+    var btnTitle = act.confirmed ? 'Confirmed' : (voted ? 'Remove vote' : 'Vote for this');
+    var countColor = act.confirmed ? 'var(--palm)' : (voted ? 'var(--terra)' : 'var(--deep)');
+    var countVal = act.confirmed ? '👏' : act.votes;
+    var tagHtml = act.tag ? '<span class="act-tag ' + (act.tagClass || '') + '">' + act.tag + '</span>' : '';
+    var barHtml = (!act.confirmed && act.votes > 0) ? '<div class="act-bar"><div class="act-bar-fill" style="width:' + pct + '%"></div></div>' : '';
+
+    return '<div class="' + cardClass + '">'
+      + '<div class="act-vote">'
+      + '<button class="' + btnClass + '"' + btnStyle + btnClick + ' title="' + btnTitle + '">' + btnIcon + '</button>'
+      + '<div class="act-vote-count" style="color:' + countColor + '">' + countVal + '</div>'
+      + '</div>'
+      + '<div class="act-body">'
+      + '<span class="act-emoji">' + act.emoji + '</span>'
+      + '<div class="act-name">' + act.name + '</div>'
+      + '<div class="act-meta">' + (act.meta || '') + '</div>'
+      + '<div class="act-desc">' + act.desc + '</div>'
+      + tagHtml
+      + barHtml
+      + '</div>'
+      + '</div>';
+  }).join('');
+
+  document.getElementById('act-list').innerHTML = html;
+}
+
+function loadActivities() {
+  window.storage.get(STORAGE_KEY, true).then(function(result) {
+    if (result && result.value) {
+      var stored = JSON.parse(result.value);
+      var storedMap = {};
+      stored.forEach(function(a){ storedMap[a.id] = a; });
+      activities = BASE_ACTIVITIES.map(function(a){ return Object.assign({}, a, { votes: storedMap[a.id] ? storedMap[a.id].votes : 0 }); });
+      stored.forEach(function(a) {
+        if (!BASE_ACTIVITIES.find(function(b){ return b.id === a.id; })) {
+          activities.push(a);
+        }
+      });
+    }
+    renderActivities();
+  }).catch(function() {
+    renderActivities();
+  });
+}
+
+function submitSuggestion() {
+  var name = document.getElementById('sug-name').value.trim();
+  var desc = document.getElementById('sug-desc').value.trim();
+  var emoji = document.getElementById('sug-emoji').value.trim() || '🌍';
+  if (!name) { document.getElementById('sug-name').focus(); return; }
+  var btn = document.getElementById('sug-submit');
+  btn.disabled = true;
+  btn.textContent = 'Adding…';
+  var id = 'user-' + Date.now();
+  var newAct = { id:id, emoji:emoji, name:name, meta:'Suggested by the group', desc: desc || 'No description added.', tag:'Needs votes', tagClass:'act-tag-blue', votes:1, userAdded:true };
+  activities.push(newAct);
+  votedIds.add(id);
+  localStorage.setItem(VOTED_KEY, JSON.stringify(Array.from(votedIds)));
+  saveActivities().then(function(){}).catch(function(){});
+  document.getElementById('sug-name').value = '';
+  document.getElementById('sug-desc').value = '';
+  document.getElementById('sug-emoji').value = '';
+  btn.disabled = false;
+  btn.innerHTML = 'Add →';
+  var msg = document.getElementById('sug-msg');
+  msg.style.display = 'block';
+  setTimeout(function(){ msg.style.display = 'none'; }, 4000);
+  renderActivities();
+}
+
+// Render immediately with base data
+activities = BASE_ACTIVITIES.map(function(a){ return Object.assign({}, a, { votes:0 }); });
+renderActivities();
+// Then layer in live votes from shared storage
+loadActivities();
+// Refresh every 30s
+setInterval(loadActivities, 30000);
+</script>
 
 <hr class="divider">
 
