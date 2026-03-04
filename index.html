@@ -530,16 +530,11 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
 <script>
 // ── ACTIVITY VOTING ──
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// JSONBIN CONFIG — fill these in before pushing to GitHub
-// 1. Sign up free at jsonbin.io
-// 2. Create a new bin with content: {}
-// 3. Paste your Bin ID and Master Key below
 var JSONBIN_ID  = '69a85f71d0ea881f40eea5de';
 var JSONBIN_KEY = '$2a$10$Kn8Yq9KE4/yoJ0Km9LH0..IZsVVLbjUpNWRDRx/3LDCqLeoB5J4XO';
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-var VOTER_KEY = 'bali-voter-name';
+var JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_ID;
+var VOTER_KEY   = 'bali-voter-name';
+var LS_CACHE    = 'bali-activities-cache';
 
 var BASE_ACTIVITIES = [
   { id:'padel',    emoji:'🎾', name:'Padel @ Bali Padel Academy', meta:'⭐ 4.8 · Playtomic app',               desc:'Booked Saturday 15:00–17:00. Best courts on the island.',              tag:'Confirmed ✓',        tagClass:'act-tag-green', confirmed:true },
@@ -554,51 +549,92 @@ var BASE_ACTIVITIES = [
 
 var activities = [];
 var voterName = localStorage.getItem(VOTER_KEY) || '';
-var isSaving = false;
 
-// ── Storage layer ──
-// Uses JSONBin when configured, falls back to localStorage for local dev
-var configured = JSONBIN_ID !== 'YOUR_BIN_ID_HERE' && JSONBIN_KEY !== 'YOUR_MASTER_KEY_HERE';
+function setStatus(msg, color) {
+  var el = document.getElementById('act-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = color || 'var(--muted)';
+  el.style.opacity = '1';
+  clearTimeout(el._t);
+  el._t = setTimeout(function(){ el.style.opacity = '0'; }, 3000);
+}
 
-var sharedStorage = {
-  get: function() {
-    if (!configured) {
-      var val = localStorage.getItem('bali-activities-local');
-      return Promise.resolve(val ? JSON.parse(val) : null);
+function applyStoredData(data) {
+  if (!data || !data.activities) return false;
+  var storedMap = {};
+  data.activities.forEach(function(a){ storedMap[a.id] = a; });
+  activities = BASE_ACTIVITIES.map(function(a){
+    var s = storedMap[a.id];
+    return Object.assign({}, a, {
+      votes:   s ? (s.votes   || 0)  : 0,
+      voters:  s ? (s.voters  || []) : []
+    });
+  });
+  // append user-added suggestions
+  data.activities.forEach(function(a) {
+    if (!BASE_ACTIVITIES.find(function(b){ return b.id === a.id; })) {
+      activities.push(a);
     }
-    return fetch('https://api.jsonbin.io/v3/b/' + JSONBIN_ID + '/latest', {
-      headers: { 'X-Master-Key': JSONBIN_KEY }
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(d){ return d.record || null; })
-    .catch(function(){ return null; });
-  },
-  set: function(data) {
-    if (!configured) {
-      localStorage.setItem('bali-activities-local', JSON.stringify(data));
-      return Promise.resolve();
-    }
-    return fetch('https://api.jsonbin.io/v3/b/' + JSONBIN_ID, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
-      body: JSON.stringify(data)
-    })
-    .then(function(r){ return r.json(); })
-    .catch(function(){});
-  }
-};
+  });
+  return true;
+}
+
+function loadFromCache() {
+  try {
+    var raw = localStorage.getItem(LS_CACHE);
+    if (raw) { applyStoredData(JSON.parse(raw)); renderActivities(); }
+  } catch(e) {}
+}
 
 function saveActivities() {
-  if (isSaving) return;
-  isSaving = true;
-  sharedStorage.set({ activities: activities })
-    .then(function(){ isSaving = false; })
-    .catch(function(){ isSaving = false; });
+  var payload = { activities: activities };
+  // Always write to local cache immediately so reload works even if JSONBin is slow
+  try { localStorage.setItem(LS_CACHE, JSON.stringify(payload)); } catch(e) {}
+
+  setStatus('Saving…', 'var(--muted)');
+  return fetch(JSONBIN_URL, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Master-Key': JSONBIN_KEY,
+      'X-Bin-Versioning': 'false'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    setStatus('✓ Saved', 'var(--palm)');
+    return r.json();
+  })
+  .catch(function(err) {
+    console.error('JSONBin save failed:', err);
+    setStatus('Saved locally (offline)', 'var(--muted)');
+  });
+}
+
+function loadActivities() {
+  return fetch(JSONBIN_URL + '/latest', {
+    headers: { 'X-Master-Key': JSONBIN_KEY }
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(function(d) {
+    if (applyStoredData(d.record)) {
+      try { localStorage.setItem(LS_CACHE, JSON.stringify(d.record)); } catch(e) {}
+      renderActivities();
+    }
+  })
+  .catch(function(err) {
+    console.error('JSONBin load failed:', err);
+    setStatus('Could not reach server — showing cached data', 'var(--terra)');
+  });
 }
 
 function hasVoted(act) {
-  if (!voterName) return false;
-  return act.voters && act.voters.indexOf(voterName) !== -1;
+  return voterName && act.voters && act.voters.indexOf(voterName) !== -1;
 }
 
 function askName(callback) {
@@ -689,8 +725,8 @@ function renderActivities() {
       + '</div></div>';
   }
   var nameTag = voterName
-    ? '<div style="text-align:right;margin-bottom:1rem;font-size:.78rem;color:var(--muted);">Voting as <strong style="color:var(--deep);">' + voterName + '</strong> &nbsp;<span style="cursor:pointer;color:var(--terra);text-decoration:underline;text-decoration-style:dotted;" onclick="changeName()">change</span></div>'
-    : '<div style="text-align:right;margin-bottom:1rem;font-size:.78rem;color:var(--muted);">Click any activity to cast your vote &nbsp;&#8593;</div>';
+    ? '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;"><span id="act-status" style="font-size:.72rem;transition:opacity .5s;opacity:0;"></span><span style="font-size:.78rem;color:var(--muted);">Voting as <strong style="color:var(--deep);">' + voterName + '</strong> &nbsp;<span style="cursor:pointer;color:var(--terra);text-decoration:underline;text-decoration-style:dotted;" onclick="changeName()">change</span></span></div>'
+    : '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;"><span id="act-status" style="font-size:.72rem;transition:opacity .5s;opacity:0;"></span><span style="font-size:.78rem;color:var(--muted);">Click any activity to cast your vote &#8593;</span></div>';
   el.innerHTML = nameTag + html;
 }
 
@@ -698,25 +734,6 @@ function changeName() {
   voterName = '';
   localStorage.removeItem(VOTER_KEY);
   askName(function(){ renderActivities(); });
-}
-
-function loadActivities() {
-  sharedStorage.get().then(function(data) {
-    if (data && data.activities && data.activities.length) {
-      var storedMap = {};
-      data.activities.forEach(function(a){ storedMap[a.id] = a; });
-      activities = BASE_ACTIVITIES.map(function(a){
-        var s = storedMap[a.id];
-        return Object.assign({}, a, { votes: s ? (s.votes || 0) : 0, voters: s ? (s.voters || []) : [] });
-      });
-      data.activities.forEach(function(a) {
-        if (!BASE_ACTIVITIES.find(function(b){ return b.id === a.id; })) {
-          activities.push(a);
-        }
-      });
-      renderActivities();
-    }
-  }).catch(function(){});
 }
 
 function submitSuggestion() {
@@ -744,10 +761,14 @@ function submitSuggestion() {
   if (!voterName) { askName(doSubmit); } else { doSubmit(); }
 }
 
-// Render base list immediately, then load live votes on top
+// 1. Render base immediately
 activities = BASE_ACTIVITIES.map(function(a){ return Object.assign({}, a, { votes:0, voters:[] }); });
 renderActivities();
+// 2. Load from localStorage cache (instant, works offline)
+loadFromCache();
+// 3. Fetch latest from JSONBin on top
 loadActivities();
+// 4. Poll every 30s for other people's votes
 setInterval(loadActivities, 30000);
 </script>
 
