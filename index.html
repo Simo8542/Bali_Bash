@@ -278,12 +278,6 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
     <li><a href="#schedule">Schedule</a></li>
     <li><a href="#rooms">Rooms</a></li>
     <li><a href="#attendance">Attendance</a></li>
-    <li><a href="#games">Games</a></li>
-    <li><a href="#attendance">Attendance</a></li>
-    <li><a href="#games">Games</a></li>
-    <li><a href="#competition">Competition</a></li>
-    <li><a href="#nightlife">Nightlife</a></li>
-    <li><a href="#food">Food</a></li>
     <li><a href="#activities">Activities</a></li>
     <li><a href="#food">Food</a></li>
     <li><a href="#uluwatu">Uluwatu</a></li>
@@ -405,6 +399,160 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
 
   </div>
 </section>
+
+<hr class="divider">
+
+<!-- ROOMS -->
+<section id="rooms">
+  <div class="lbl">Where You Sleep</div>
+  <h2 class="ttl">Room <em>Assignments</em></h2>
+  <p class="intro">Two villas side by side. Villa Ampo is the main house. Nabo Villa is next door - literally a 10-second walk.</p>
+  <div class="rgrid">
+    <div class="vblock">
+      <div class="vhead"><div class="vname">Villa Ampo &#127968;</div><div class="vsub">Main Villa &middot; Jl. Pantai Nyanyi, Beraban</div></div>
+      <div class="vrooms">
+        <div class="rrow"><div class="rlbl">Gazebo</div><div class="rnames">Senior <span class="rtag solo">Solo</span></div></div>
+        <div class="rrow"><div class="rlbl">Room A1</div><div class="rnames">Zacho + Kusse</div></div>
+        <div class="rrow"><div class="rlbl">Room A2</div><div class="rnames">Razz + Nissen <span class="rnote">Razz touches down Thu 26 Mar</span></div></div>
+        <div class="rrow"><div class="rlbl">Room A3</div><div class="rnames">Jogge + Jonas</div></div>
+        <div class="rrow"><div class="rlbl">Room A4</div><div class="rnames">Mike + Tinho</div></div>
+      </div>
+    </div>
+    <div class="vblock">
+      <div class="vhead nb"><div class="vname">Nabo Villa &#127940;</div><div class="vsub">Next Door &middot; 10 seconds away</div></div>
+      <div class="vrooms">
+        <div class="rrow"><div class="rlbl">Room N1</div><div class="rnames">Olli + Ralle</div></div>
+        <div class="rrow"><div class="rlbl">Room N2</div><div class="rnames">Max <span class="rnote">+ Liam Fri 27-Sun 29 if not sorting own spot</span></div></div>
+        <div class="rrow"><div class="rlbl">Room N3</div><div class="rnames">Skafte <span class="rnote">Simon rolls in from Sun 29 Mar</span></div></div>
+        <div class="rrow"><div class="rlbl">Room N4</div><div class="rnames">Simon + Moltke <span class="rarrow">&#8594;</span> TJ <span class="rnote">Simon &amp; Moltke 25 Mar - Simon moves out 29 Mar, TJ in 29 Mar, departs Wed 1 Apr</span></div></div>
+        <div class="rrow"><div class="rlbl">Room N5 <span class="rtag reserve">Reserve</span></div><div class="rnames">Niko, if needed <span class="rnote">May stay 30-31 Mar</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ATTENDANCE CALENDAR -->
+<section id="attendance">
+  <div class="lbl">Who's There When</div>
+  <h2 class="ttl">Arrival <em>Schedule</em></h2>
+  <div class="cal-wrap">
+    <table class="cal-table">
+      <thead>
+        <tr>
+          <th class="sticky-col">Guest</th>
+          <th>25<br><span style="font-size:.55rem;opacity:.6">Wed</span></th>
+          <th>26<br><span style="font-size:.55rem;opacity:.6">Thu</span></th>
+          <th>27<br><span style="font-size:.55rem;opacity:.6">Fri</span></th>
+          <th>28<br><span style="font-size:.55rem;opacity:.6">Sat</span></th>
+          <th>29<br><span style="font-size:.55rem;opacity:.6">Sun</span></th>
+          <th class="bday">30<br><span style="font-size:.55rem;opacity:.8">Mon&#127873;</span></th>
+          <th class="bday">31<br><span style="font-size:.55rem;opacity:.8">Tue&#127873;</span></th>
+          <th>1<br><span style="font-size:.55rem;opacity:.6">Wed</span></th>
+          <th>2<br><span style="font-size:.55rem;opacity:.6">Thu</span></th>
+          <th>3<br><span style="font-size:.55rem;opacity:.6">Fri</span></th>
+          <th>4<br><span style="font-size:.55rem;opacity:.6">Sat</span></th>
+          <th>5<br><span style="font-size:.55rem;opacity:.6">Sun</span></th>
+          <th>6<br><span style="font-size:.55rem;opacity:.6">Mon</span></th>
+          <th>7<br><span style="font-size:.55rem;opacity:.6">Tue</span></th>
+        </tr>
+      </thead>
+      <tbody id="cal-body">
+      </tbody>
+    </table>
+  </div>
+  <div class="cal-legend">
+    <div class="cal-leg-item"><span class="cal-dot present" style="display:inline-block;width:12px;height:12px;"></span> Present</div>
+    <div class="cal-leg-item"><span class="cal-dot tbd" style="display:inline-block;width:12px;height:12px;"></span> TBD</div>
+    <div class="cal-leg-item"><span class="cal-dot absent" style="display:inline-block;width:12px;height:12px;"></span> Not present</div>
+    <div class="cal-leg-item"><span class="cal-dot bday-present" style="display:inline-block;width:12px;height:12px;"></span> Birthday days</div>
+  </div>
+</section>
+
+<script>
+// Columns: idx 0=25Mar 1=26Mar 2=27Mar 3=28Mar 4=29Mar 5=30Mar 6=31Mar 7=1Apr 8=2Apr 9=3Apr 10=4Apr 11=5Apr 12=6Apr 13=7Apr
+// Status: 0=absent, 1=present, 2=tbd
+const calGuests = [
+  { name:'Simon',        villa:'Ampo',     days:[1,1,1,1,1,1,1,1,1,1,0,0,0,0], arrive:0, depart:9 },
+  { name:'Mike',         villa:'Ampo',     days:[0,1,1,1,1,1,1,1,1,0,0,0,0,0], arrive:1, depart:8 },
+  { name:'Far (Senior)', villa:'Ampo',     days:[1,1,1,1,1,1,1,1,1,1,1,1,1,1], arrive:0, depart:-1 },
+  { name:'Razz',         villa:'Ampo',     days:[0,1,1,1,1,1,1,1,0,0,0,0,0,0], arrive:1, depart:7 },
+  { name:'Nissen',       villa:'Ampo',     days:[0,1,1,1,1,1,1,1,1,1,0,0,0,0], arrive:1, depart:9 },
+  { name:'Zacho',        villa:'Ampo',     days:[0,0,1,1,1,1,1,1,1,1,1,0,0,0], arrive:2, depart:10 },
+  { name:'Kusse',        villa:'Ampo',     days:[0,0,0,1,1,1,1,1,1,1,0,0,0,0], arrive:3, depart:9 },
+  { name:'Jogge',        villa:'Ampo',     days:[0,0,1,1,1,1,1,1,0,0,0,0,0,0], arrive:2, depart:7 },
+  { name:'Olli',         villa:'Nabo',     days:[0,1,1,1,1,1,1,1,1,1,0,0,0,0], arrive:1, depart:9 },
+  { name:'Ralle',        villa:'Nabo',     days:[0,1,1,1,1,1,1,1,1,1,0,0,0,0], arrive:1, depart:9 },
+  { name:'Niko',         villa:'Nabo',     days:[1,1,1,1,1,1,1,1,1,1,1,1,1,1], arrive:0, depart:-1 },
+  { name:'Jonas',        villa:'Ampo',     days:[1,1,1,1,1,1,1,1,1,0,0,0,0,0], arrive:0, depart:8 },
+  { name:'Skafte',       villa:'Nabo',     days:[1,1,1,1,1,1,1,1,0,0,0,0,0,0], arrive:0, depart:7 },
+  { name:'Max',          villa:'Nabo',     days:[1,1,1,1,1,1,1,1,1,1,0,0,0,0], arrive:0, depart:9 },
+  { name:'Tinho',        villa:'Ampo',     days:[0,1,1,1,1,1,1,1,0,0,0,0,0,0], arrive:1, depart:7 },
+  { name:'Moltke',       villa:'Nabo',     days:[1,1,1,1,0,0,0,0,0,0,0,0,0,0], arrive:0, depart:3 },
+  { name:'Liam',         villa:'Nabo',     days:[0,0,2,2,2,1,0,0,0,0,0,0,0,0], arrive:2, depart:5, tbd:true },
+  { name:'TJ',           villa:'Uluwatu',  days:[0,0,0,0,1,1,1,0,0,0,0,0,0,0], arrive:4, depart:6 },
+];
+
+const bdayIdx = [5, 6];
+const calTimes = {};
+
+function renderCalendar() {
+  var tbody = document.getElementById('cal-body');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  calGuests.forEach(function(g, gi) {
+    var tr = document.createElement('tr');
+    var tdName = document.createElement('td');
+    tdName.className = 'sticky-col';
+    tdName.innerHTML = g.name + '<span class="cal-villa">' + g.villa + '</span>';
+    tr.appendChild(tdName);
+
+    g.days.forEach(function(d, di) {
+      var td = document.createElement('td');
+      var isBday = bdayIdx.indexOf(di) > -1;
+      if (isBday && d >= 1) td.style.background = 'rgba(196,98,45,.06)';
+
+      var dotClass = 'absent';
+      if (d === 1) dotClass = isBday ? 'bday-present' : 'present';
+      else if (d === 2) dotClass = 'tbd';
+
+      var isArriveDay = (di === g.arrive);
+      var isDepartDay = (di === g.depart);
+
+      if ((isArriveDay || isDepartDay) && d >= 1) {
+        td.className = 'cal-time-cell';
+        var dot = document.createElement('span');
+        dot.className = 'cal-dot ' + dotClass;
+        td.appendChild(dot);
+        var label = document.createElement('div');
+        label.style.cssText = 'font-size:.55rem;font-family:"DM Mono",monospace;color:var(--muted);margin-top:1px;';
+        label.textContent = isArriveDay ? 'ARR' : 'DEP';
+        td.appendChild(label);
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'cal-time-input';
+        input.placeholder = '--:--';
+        input.maxLength = 8;
+        var key = gi + '-' + di;
+        if (calTimes[key]) input.value = calTimes[key];
+        input.addEventListener('change', function() { calTimes[key] = input.value; });
+        td.appendChild(input);
+      } else {
+        var dot2 = document.createElement('span');
+        dot2.className = 'cal-dot ' + dotClass;
+        td.appendChild(dot2);
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+document.addEventListener('DOMContentLoaded', renderCalendar);
+</script>
+
+<hr class="divider">
+
 
 <!-- ACTIVITIES -->
 <section id="activities">
