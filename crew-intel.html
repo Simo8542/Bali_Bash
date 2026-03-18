@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crew Intel &mdash; Bali Birthday Bash '26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+<style>
+:root {
+  --sand:#F5ECD7; --deep:#1A1208; --terra:#C4622D; --ocean:#2E6B8A;
+  --palm:#3D6B47; --gold:#D4A843; --night:#0D1B2A; --cream:#FBF6EE; --muted:#8A7D6B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,18,8,.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,67,.2);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:1rem;color:var(--gold);letter-spacing:.05em;text-decoration:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;overflow-x:auto;scrollbar-width:none;}
+.nav-links a{color:rgba(245,236,215,.7);text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+
+/* HERO */
+.hero{min-height:55vh;background:var(--night);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(46,107,138,.25) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 20% 20%,rgba(196,98,45,.15) 0%,transparent 60%);}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;position:relative;display:flex;align-items:center;gap:1rem;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold);opacity:.5;}
+.hero-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.5rem,8vw,5.5rem);font-weight:900;line-height:.95;color:var(--sand);position:relative;margin-bottom:.3rem;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-subtitle{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,2.5vw,1.4rem);font-style:italic;color:rgba(245,236,215,.5);margin-bottom:2rem;position:relative;}
+.hero-meta{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;position:relative;}
+.hero-meta-item{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:rgba(245,236,215,.5);text-transform:uppercase;}
+.hero-meta-item strong{color:var(--sand);display:block;font-size:.9rem;}
+
+/* SECTIONS */
+section{display:block;padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.band{display:block;background:var(--deep);color:var(--sand);padding:5rem 2rem;}
+.band-mid{display:block;background:#0D1B2A;color:var(--sand);padding:5rem 2rem;}
+.inner{max-width:1100px;margin:0 auto;}
+.divider{border:none;border-top:1px solid rgba(26,18,8,.08);margin:0;}
+
+/* LABELS & TITLES */
+.lbl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem;}
+.lbl::after{content:'';flex:1;height:1px;background:var(--terra);opacity:.3;max-width:80px;}
+.lbl-g{color:var(--gold);}
+.lbl-g::after{background:var(--gold);}
+.ttl{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;margin-bottom:1rem;}
+.ttl em{font-style:italic;color:var(--terra);}
+.ttl-lt{color:var(--sand);}
+.intro{font-size:1.05rem;color:var(--muted);max-width:620px;margin-bottom:3rem;line-height:1.8;}
+.intro-lt{color:rgba(245,236,215,.6);}
+
+/* FILTERS BAR */
+.filter-bar{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:2.5rem;}
+.filter-group{display:flex;align-items:center;gap:.5rem;}
+.filter-group label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.filter-group select{padding:.45rem .8rem;border:1px solid rgba(26,18,8,.15);border-radius:6px;background:var(--cream);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;outline:none;transition:border-color .2s;}
+.filter-group select:focus{border-color:var(--terra);}
+.filter-sep{width:1px;height:20px;background:rgba(26,18,8,.1);}
+
+/* KPI BAND */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem;}
+.kpi{background:rgba(245,236,215,.05);border:1px solid rgba(245,236,215,.1);border-radius:14px;padding:1.5rem 1.25rem;}
+.kpi-lbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,236,215,.45);margin-bottom:.4rem;}
+.kpi-val{font-family:'Playfair Display',Georgia,serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1;}
+.kpi-sub{font-size:.75rem;color:rgba(245,236,215,.4);margin-top:.35rem;}
+
+/* CHART CARDS */
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:1.5rem;margin-bottom:2rem;}
+.chart-card{background:var(--cream);border:1px solid rgba(26,18,8,.08);border-radius:16px;padding:1.75rem;}
+.chart-card.full{grid-column:1/-1;}
+.chart-head{font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:700;color:var(--deep);margin-bottom:1.25rem;}
+.chart-head-lt{color:var(--sand);}
+.chart-card-dk{background:rgba(245,236,215,.04);border:1px solid rgba(245,236,215,.1);}
+.chart-card canvas{max-height:300px;}
+
+/* CREW CARDS */
+.crew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem;}
+.ccard{background:rgba(245,236,215,.05);border:1px solid rgba(245,236,215,.1);border-radius:16px;padding:1.4rem;transition:transform .2s,border-color .2s;}
+.ccard:hover{transform:translateY(-3px);border-color:rgba(212,168,67,.3);}
+.cname{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;color:var(--sand);margin-bottom:.15rem;}
+.cnick{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:var(--gold);margin-bottom:.9rem;}
+.crow{display:flex;justify-content:space-between;align-items:baseline;padding:.2rem 0;font-size:.8rem;}
+.ck{color:rgba(245,236,215,.4);}
+.cv{color:var(--sand);font-weight:500;}
+.cdrink{margin-top:.75rem;padding:.4rem .75rem;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.15);border-radius:8px;font-size:.75rem;color:rgba(245,236,215,.6);}
+.canimal{margin-top:.35rem;font-size:.75rem;color:rgba(245,236,215,.45);}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid rgba(26,18,8,.08);}
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem;min-width:900px;}
+.tbl thead th{background:var(--deep);color:rgba(245,236,215,.6);font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.65rem 1rem;text-align:left;white-space:nowrap;border-right:1px solid rgba(245,236,215,.06);}
+.tbl thead th:last-child{border-right:none;}
+.tbl tbody td{padding:.8rem 1rem;border-bottom:1px solid rgba(26,18,8,.05);vertical-align:middle;}
+.tbl tbody tr:hover td{background:rgba(245,236,215,.4);}
+.tbl tbody tr:last-child td{border-bottom:none;}
+.stag{display:inline-block;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.06em;padding:.2rem .55rem;border-radius:20px;}
+.s-M{background:rgba(46,107,138,.12);color:var(--ocean);}
+.s-L{background:rgba(61,107,71,.12);color:var(--palm);}
+.s-XL{background:rgba(212,168,67,.12);color:var(--gold);}
+.s-XXL{background:rgba(196,98,45,.12);color:var(--terra);}
+.dance-sml{font-family:'DM Mono',monospace;font-size:.8rem;font-weight:500;}
+.dance-pos{color:var(--palm);}
+.dance-mid{color:var(--gold);}
+.dance-neg{color:var(--terra);}
+
+/* VIEW TOGGLE */
+.view-toggle{display:flex;gap:.5rem;margin-bottom:2rem;}
+.vtbtn{padding:.5rem 1.2rem;border-radius:30px;border:1px solid rgba(245,236,215,.2);background:transparent;color:rgba(245,236,215,.6);font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s;}
+.vtbtn:hover{border-color:var(--gold);color:var(--gold);}
+.vtbtn.on{background:var(--gold);color:var(--deep);border-color:var(--gold);font-weight:600;}
+
+footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;padding:3rem 2rem;font-size:.82rem;}
+.ftitle{font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;color:var(--gold);margin-bottom:.5rem;}
+
+@media(max-width:700px){
+  .chart-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .hero-meta{gap:1rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">&#127965;&#65039; Bali Bash '26</a>
+  <ul class="nav-links">
+    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="index.html#rooms">Rooms</a></li>
+    <li><a href="index.html#attendance">Attendance</a></li>
+    <li><a href="index.html#activities">Activities</a></li>
+    <li><a href="index.html#food">Food</a></li>
+    <li><a href="index.html#uluwatu">Uluwatu</a></li>
+    <li><a href="index.html#bingo">Bingo</a></li>
+    <li><a href="index.html#practical">Practical</a></li>
+    <li><a href="crew-intel.html" class="active">Crew Intel</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Simon &amp; Mike's 30th</div>
+  <h1 class="hero-title">Crew<br><em>Intel</em></h1>
+  <p class="hero-subtitle">17 legends. One dossier.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><strong id="meta-count">17</strong>Crew Members</div>
+    <div class="hero-meta-item"><strong id="meta-avg-h">&mdash;</strong>Avg Height (cm)</div>
+    <div class="hero-meta-item"><strong id="meta-avg-w">&mdash;</strong>Avg Weight (kg)</div>
+    <div class="hero-meta-item"><strong id="meta-best-dancer">&mdash;</strong>Best Dancer</div>
+  </div>
+</div>
+
+<!-- KPI BAND -->
+<div class="band">
+  <div class="inner">
+    <div class="lbl lbl-g">By the Numbers</div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-lbl">Crew Size</div>
+        <div class="kpi-val" id="kpi-count">17</div>
+        <div class="kpi-sub">confirmed legends</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Avg Height</div>
+        <div class="kpi-val" id="kpi-height">&mdash;</div>
+        <div class="kpi-sub">centimetres</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Avg Weight</div>
+        <div class="kpi-val" id="kpi-weight">&mdash;</div>
+        <div class="kpi-sub">kilograms</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Best Dancer</div>
+        <div class="kpi-val" id="kpi-dancer" style="font-size:1.5rem">&mdash;</div>
+        <div class="kpi-sub">self-certified</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Hometowns</div>
+        <div class="kpi-val" id="kpi-cities">&mdash;</div>
+        <div class="kpi-sub">different cities</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CHARTS — LIGHT -->
+<section>
+  <div class="lbl">Physical Intelligence</div>
+  <h2 class="ttl">Stats &amp; <em>Sizes</em></h2>
+  <p class="intro">Everything Simon and Mike need to order the right jerseys and make informed poolside seating decisions.</p>
+
+  <!-- Filters -->
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label>Hometown</label>
+      <select id="filter-city" onchange="applyFilters()">
+        <option value="all">All Cities</option>
+      </select>
+    </div>
+    <div class="filter-sep"></div>
+    <div class="filter-group">
+      <label>Shirt Size</label>
+      <select id="filter-shirt" onchange="applyFilters()">
+        <option value="all">All Sizes</option>
+        <option>M</option><option>L</option><option>XL</option><option>XXL</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-head">&#128207; Height Rankings (cm)</div>
+      <canvas id="chart-height"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head">&#128085; T-Shirt Size Distribution</div>
+      <canvas id="chart-shirts"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-grid">
+    <div class="chart-card">
+      <div class="chart-head">&#127961;&#65039; Hometowns</div>
+      <canvas id="chart-cities"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head">&#128116; Shoe Size Distribution (EU)</div>
+      <canvas id="chart-shoes"></canvas>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CHARTS — DARK -->
+<div class="band-mid">
+  <div class="inner">
+    <div class="lbl lbl-g">Cultural Research</div>
+    <h2 class="ttl ttl-lt">Dance Floors &amp; <em style="color:var(--gold)">Debatable Claims</em></h2>
+    <p class="intro intro-lt">Self-reported data. Treat accordingly.</p>
+
+    <div class="chart-grid">
+      <div class="chart-card chart-card-dk">
+        <div class="chart-head chart-head-lt">&#128378; Dance Moves — Sober vs Drunk</div>
+        <canvas id="chart-dance"></canvas>
+      </div>
+      <div class="chart-card chart-card-dk">
+        <div class="chart-head chart-head-lt">&#9898; Height vs Weight</div>
+        <canvas id="chart-scatter"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CREW ROSTER — DARK -->
+<div class="band">
+  <div class="inner">
+    <div class="lbl lbl-g">The Roster</div>
+    <h2 class="ttl ttl-lt">Full Crew <em style="color:var(--gold)">Dossier</em></h2>
+    <p class="intro intro-lt">Click a card to reveal their deepest secrets. Or just scroll.</p>
+
+    <div class="view-toggle">
+      <button class="vtbtn on" onclick="setView('cards',this)">Cards</button>
+      <button class="vtbtn" onclick="setView('table',this)">Table</button>
+    </div>
+
+    <div id="view-cards">
+      <div class="crew-grid" id="crew-cards"></div>
+    </div>
+
+    <div id="view-table" style="display:none">
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Nickname</th>
+              <th>From</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Shoe</th>
+              <th>Shirt</th>
+              <th>Shorts</th>
+              <th>Dance 🕺</th>
+              <th>Drink</th>
+              <th>Spirit Animal</th>
+              <th>Looks Like</th>
+            </tr>
+          </thead>
+          <tbody id="crew-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ftitle">Bali Birthday Bash '26</div>
+  <p>Simon &amp; Mike S&oslash;ndergaard &mdash; Turning 30 in Style</p>
+  <p style="margin-top:.5rem">Villa Ampo &middot; Canggu &middot; March 25 &ndash; April 7, 2026</p>
+  <p style="margin-top:1.5rem;font-size:.72rem;opacity:.4">Questions? Simon: +45 2551 4030 &middot; Mike: +45 2226 5707</p>
+</footer>
+
+<script>
+const CREW = [
+  { name:"Simon",       nick:"Son of God / Twin 1",          city:"Gjellerup", height:185, weight:81,  shoe:43,   shirt:"L",   shorts:"M", drink:"Long Island Ice Tea",       animal:"Wombat",           celeb:"Christian Eriksen, Brad Pitt",             dance_sober:3,    dance_drunk:4    },
+  { name:"Mike",        nick:"Mike Spike / Twin 2",          city:"Gjellerup", height:183, weight:80,  shoe:42.5, shirt:"L",   shorts:"M", drink:"Whisky Sour",               animal:"Koala",            celeb:"Brad",                                     dance_sober:1,    dance_drunk:1    },
+  { name:"Rasmus K.",   nick:"DJ Razz Razz",                 city:"Lemvig",    height:null,weight:null,shoe:null, shirt:"XL",  shorts:"L", drink:null,                        animal:null,               celeb:"Slenderman",                               dance_sober:null, dance_drunk:null },
+  { name:"Daniel",      nick:"Danni",                        city:"Lind",      height:186, weight:81,  shoe:44,   shirt:"XL",  shorts:"M", drink:"Light roast filter coffee", animal:"Puppies",          celeb:"Bradley Cooper & Pattesutter",             dance_sober:null, dance_drunk:null },
+  { name:"Nikolaj",     nick:"Niko/Piko",                    city:"Hammerum",  height:176, weight:75,  shoe:42,   shirt:"M",   shorts:"M", drink:"Amaretto Sour",             animal:"Earthworm",        celeb:"Brad Pitt, but fat",                       dance_sober:10,   dance_drunk:10   },
+  { name:"Jacob Z.",    nick:"Zacho",                        city:"Viborg",    height:183, weight:78,  shoe:44,   shirt:"L",   shorts:"M", drink:"Pisco Sour",                animal:null,               celeb:null,                                       dance_sober:null, dance_drunk:null },
+  { name:"Marcus",      nick:"Kuzze",                        city:"Rønde",     height:null,weight:null,shoe:null, shirt:"L",   shorts:"M", drink:null,                        animal:null,               celeb:"David Goggins from Temu",                  dance_sober:null, dance_drunk:null },
+  { name:"Andreas",     nick:"Moltke",                       city:"Aarhus",    height:186, weight:null,shoe:null, shirt:"XL",  shorts:"L", drink:"G&T",                       animal:null,               celeb:"Leonardo in 'The Revenant'",               dance_sober:9,    dance_drunk:9    },
+  { name:"Rasmus O.",   nick:"Ralle / Overarm",              city:"Lind",      height:185, weight:76,  shoe:41.5, shirt:"M",   shorts:"M", drink:"Espresso Martini",          animal:"Gazelle",          celeb:"R. Kelly",                                 dance_sober:10.5, dance_drunk:-3   },
+  { name:"Oliver",      nick:"Olli / Sejrup / Sliver",       city:"Gjellerup", height:170, weight:79,  shoe:42.5, shirt:"L",   shorts:"L", drink:"Bramble",                   animal:"Deer",             celeb:"Ronnie Coleman",                           dance_sober:3,    dance_drunk:-3   },
+  { name:"Max",         nick:"Maxi / Phillip / Piloten",     city:"Herning",   height:186, weight:92,  shoe:43,   shirt:"XL",  shorts:"L", drink:"Mojito",                    animal:"Tiger",            celeb:"Jason Statham",                            dance_sober:12,   dance_drunk:12   },
+  { name:"Kristian T.", nick:"Tinho / Mr. Hvidvask",         city:"Aarhus",    height:190, weight:92,  shoe:45,   shirt:"XXL", shorts:"L", drink:"Gin Tonic",                 animal:"Squirrel",         celeb:"Conor Gallagher",                          dance_sober:2,    dance_drunk:2    },
+  { name:"Frederik S.", nick:"Skafte / MP",                  city:"Aarhus",    height:184, weight:87,  shoe:43,   shirt:"L",   shorts:"M", drink:"Gin Tonic / Whiskey Sour",  animal:"Jaguar",           celeb:"Daniel Craig, Bradley Cooper",             dance_sober:-3,   dance_drunk:-3   },
+  { name:"Joachim",     nick:"Jogge",                        city:"Bejstrup",  height:181, weight:81,  shoe:41.5, shirt:"L",   shorts:"M", drink:"Piña Colada",               animal:"Golden Retriever", celeb:"Alexander Skarsgård",                      dance_sober:3,    dance_drunk:10   },
+  { name:"Liam",        nick:"Liam",                         city:"London",    height:180, weight:77,  shoe:null, shirt:"L",   shorts:"L", drink:null,                        animal:null,               celeb:null,                                       dance_sober:null, dance_drunk:null },
+  { name:"Tjalfe",      nick:"TJ",                           city:null,        height:null,weight:null,shoe:null, shirt:"M",   shorts:"M", drink:null,                        animal:null,               celeb:null,                                       dance_sober:null, dance_drunk:null },
+  { name:"Jonas",       nick:"Jones",                        city:"Herning",   height:187, weight:90,  shoe:43,   shirt:"L",   shorts:"L", drink:"Gin Tonic",                 animal:"Orangutang",       celeb:"Samuel L. Jackson",                        dance_sober:2,    dance_drunk:11   },
+];
+
+// Palette that fits the terra/gold/ocean scheme
+const PAL = ['#C4622D','#D4A843','#2E6B8A','#3D6B47','#8A7D6B','#C4622D','#D4A843','#2E6B8A','#3D6B47','#8A7D6B','#C4622D','#D4A843','#2E6B8A','#3D6B47','#8A7D6B','#C4622D','#D4A843'];
+
+let filtered = [...CREW];
+let charts = {};
+
+// ---- UTILS ----
+const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : null;
+
+// ---- FILTERS ----
+function populateCityFilter() {
+  const sel = document.getElementById('filter-city');
+  [...new Set(CREW.map(c=>c.city).filter(Boolean))].sort().forEach(c=>{
+    const o = document.createElement('option'); o.value=c; o.textContent=c; sel.appendChild(o);
+  });
+}
+
+function applyFilters() {
+  const city  = document.getElementById('filter-city').value;
+  const shirt = document.getElementById('filter-shirt').value;
+  filtered = CREW.filter(c => {
+    if (city  !== 'all' && c.city  !== city)  return false;
+    if (shirt !== 'all' && c.shirt !== shirt) return false;
+    return true;
+  });
+  renderKPIs();
+  Object.values(charts).forEach(ch=>ch.destroy());
+  charts={};
+  buildAllCharts();
+  renderCards();
+  renderTable();
+}
+
+// ---- KPIs ----
+function renderKPIs() {
+  const heights = filtered.filter(c=>c.height).map(c=>c.height);
+  const weights = filtered.filter(c=>c.weight).map(c=>c.weight);
+  const topDancer = [...filtered].filter(c=>c.dance_sober!==null).sort((a,b)=>b.dance_sober-a.dance_sober)[0];
+  const cities = new Set(filtered.filter(c=>c.city).map(c=>c.city));
+
+  const set = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+  set('kpi-count',    filtered.length);
+  set('kpi-height',   heights.length ? avg(heights).toFixed(1) : '—');
+  set('kpi-weight',   weights.length ? avg(weights).toFixed(1) : '—');
+  set('kpi-dancer',   topDancer ? topDancer.name.split(' ')[0]+' ('+topDancer.dance_sober+')' : '—');
+  set('kpi-cities',   cities.size);
+  set('meta-count',   filtered.length);
+  set('meta-avg-h',   heights.length ? avg(heights).toFixed(1) : '—');
+  set('meta-avg-w',   weights.length ? avg(weights).toFixed(1) : '—');
+  set('meta-best-dancer', topDancer ? topDancer.name.split(' ')[0] : '—');
+}
+
+// ---- CHARTS ----
+const chartOpts = (extra={}) => Object.assign({
+  responsive:true, maintainAspectRatio:false,
+  plugins:{ legend:{ display:false } }
+}, extra);
+
+function buildAllCharts() {
+  buildHeightChart();
+  buildShirtChart();
+  buildCityChart();
+  buildShoeChart();
+  buildDanceChart();
+  buildScatterChart();
+}
+
+function buildHeightChart() {
+  const data = filtered.filter(c=>c.height).sort((a,b)=>b.height-a.height);
+  const ctx = document.getElementById('chart-height').getContext('2d');
+  charts.height = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels: data.map(c=>c.name),
+      datasets:[{ label:'cm', data:data.map(c=>c.height),
+        backgroundColor: PAL.map(c=>c+'CC'), borderColor:PAL, borderWidth:1, borderRadius:4 }]
+    },
+    options:{ ...chartOpts(), indexAxis:'y',
+      scales:{
+        x:{ min:165, ticks:{callback:v=>v+' cm'}, grid:{color:'rgba(26,18,8,.05)'} },
+        y:{ grid:{display:false} }
+      }
+    }
+  });
+}
+
+function buildShirtChart() {
+  const sizes=['M','L','XL','XXL'];
+  const counts=sizes.map(s=>filtered.filter(c=>c.shirt===s).length);
+  const ctx=document.getElementById('chart-shirts').getContext('2d');
+  charts.shirts=new Chart(ctx,{
+    type:'doughnut',
+    data:{
+      labels:sizes,
+      datasets:[{ data:counts,
+        backgroundColor:['#2E6B8ACC','#3D6B47CC','#D4A843CC','#C4622DCC'],
+        borderColor:'#FBF6EE', borderWidth:3 }]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'62%',
+      plugins:{
+        legend:{ display:true, position:'right', labels:{ usePointStyle:true, padding:16, color:'#1A1208', font:{family:"'DM Mono', monospace", size:11} } },
+        tooltip:{ callbacks:{ label:ctx=>`${ctx.label}: ${ctx.parsed} guys` } }
+      }
+    }
+  });
+}
+
+function buildCityChart() {
+  const map={};
+  filtered.forEach(c=>{ if(c.city) map[c.city]=(map[c.city]||0)+1; });
+  const sorted=Object.entries(map).sort((a,b)=>b[1]-a[1]);
+  const ctx=document.getElementById('chart-cities').getContext('2d');
+  charts.cities=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:sorted.map(e=>e[0]),
+      datasets:[{ label:'People', data:sorted.map(e=>e[1]),
+        backgroundColor:PAL.map(c=>c+'CC'), borderColor:PAL, borderWidth:1, borderRadius:4 }]
+    },
+    options:{ ...chartOpts(),
+      scales:{ y:{beginAtZero:true,ticks:{stepSize:1},grid:{color:'rgba(26,18,8,.05)'}}, x:{grid:{display:false}} }
+    }
+  });
+}
+
+function buildShoeChart() {
+  const map={};
+  filtered.forEach(c=>{ if(c.shoe) { const k='EU '+c.shoe; map[k]=(map[k]||0)+1; } });
+  const sorted=Object.entries(map).sort((a,b)=>parseFloat(a[0].slice(3))-parseFloat(b[0].slice(3)));
+  const ctx=document.getElementById('chart-shoes').getContext('2d');
+  charts.shoes=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:sorted.map(e=>e[0]),
+      datasets:[{ label:'Count', data:sorted.map(e=>e[1]),
+        backgroundColor:'#C4622DCC', borderColor:'#C4622D', borderWidth:1, borderRadius:4 }]
+    },
+    options:{ ...chartOpts(),
+      scales:{ y:{beginAtZero:true,ticks:{stepSize:1},grid:{color:'rgba(26,18,8,.05)'}}, x:{grid:{display:false}} }
+    }
+  });
+}
+
+function buildDanceChart() {
+  const data=filtered.filter(c=>c.dance_sober!==null).sort((a,b)=>b.dance_sober-a.dance_sober);
+  const ctx=document.getElementById('chart-dance').getContext('2d');
+  charts.dance=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:data.map(c=>c.name.split(' ')[0]),
+      datasets:[
+        { label:'Sober 🥤', data:data.map(c=>c.dance_sober), backgroundColor:'#D4A843CC', borderColor:'#D4A843', borderWidth:1, borderRadius:4 },
+        { label:'Drunk 🍹', data:data.map(c=>c.dance_drunk),  backgroundColor:'#C4622DCC', borderColor:'#C4622D', borderWidth:1, borderRadius:4 }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:true, position:'top', labels:{ usePointStyle:true, padding:16, color:'rgba(245,236,215,.7)', font:{family:"'DM Mono', monospace", size:11} } } },
+      scales:{
+        y:{ title:{display:true,text:'Score',color:'rgba(245,236,215,.4)'}, grid:{color:'rgba(245,236,215,.07)'}, ticks:{color:'rgba(245,236,215,.5)'} },
+        x:{ grid:{display:false}, ticks:{color:'rgba(245,236,215,.6)'} }
+      }
+    }
+  });
+}
+
+function buildScatterChart() {
+  const data=filtered.filter(c=>c.height&&c.weight);
+  const ctx=document.getElementById('chart-scatter').getContext('2d');
+  charts.scatter=new Chart(ctx,{
+    type:'bubble',
+    data:{
+      datasets:[{
+        label:'Crew',
+        data:data.map(c=>({ x:c.height, y:c.weight, r:c.shoe?(c.shoe-38)*2.2:6, _name:c.name })),
+        backgroundColor:PAL.map(c=>c+'88'),
+        borderColor:PAL,
+        borderWidth:2,
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{ callbacks:{ label:ctx=>{
+          const d=data[ctx.dataIndex];
+          return `${d.name}: ${d.height}cm · ${d.weight}kg · EU ${d.shoe||'?'}`;
+        }}}
+      },
+      scales:{
+        x:{ min:165, title:{display:true,text:'Height (cm)',color:'rgba(245,236,215,.4)'}, grid:{color:'rgba(245,236,215,.07)'}, ticks:{color:'rgba(245,236,215,.5)'} },
+        y:{ title:{display:true,text:'Weight (kg)',color:'rgba(245,236,215,.4)'}, grid:{color:'rgba(245,236,215,.07)'}, ticks:{color:'rgba(245,236,215,.5)'} }
+      }
+    }
+  });
+}
+
+// ---- CREW CARDS ----
+function renderCards() {
+  const grid=document.getElementById('crew-cards');
+  grid.innerHTML='';
+  filtered.forEach((c,i)=>{
+    const border=PAL[i%PAL.length];
+    const div=document.createElement('div');
+    div.className='ccard';
+    div.style.borderColor=border+'33';
+    div.style.borderLeftColor=border;
+    div.style.borderLeftWidth='3px';
+    const rows=[
+      c.height ? `<div class="crow"><span class="ck">Height</span><span class="cv">${c.height} cm</span></div>` : '',
+      c.weight ? `<div class="crow"><span class="ck">Weight</span><span class="cv">${c.weight} kg</span></div>` : '',
+      c.shoe   ? `<div class="crow"><span class="ck">Shoe</span><span class="cv">EU ${c.shoe}</span></div>` : '',
+      `<div class="crow"><span class="ck">Shirt / Shorts</span><span class="cv">${c.shirt} / ${c.shorts}</span></div>`,
+      c.city   ? `<div class="crow"><span class="ck">From</span><span class="cv">${c.city}</span></div>` : '',
+      c.dance_sober!==null ? `<div class="crow"><span class="ck">Dance 🕺</span><span class="cv">${c.dance_sober}/10</span></div>` : '',
+    ].filter(Boolean).join('');
+
+    div.innerHTML=`
+      <div class="cname">${c.name}</div>
+      <div class="cnick">${c.nick}</div>
+      ${rows}
+      ${c.drink ? `<div class="cdrink">🍹 ${c.drink}</div>` : ''}
+      ${c.animal ? `<div class="canimal">🐾 ${c.animal}</div>` : ''}
+      ${c.celeb ? `<div class="canimal" style="margin-top:.25rem">🎬 ${c.celeb}</div>` : ''}
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// ---- TABLE ----
+function renderTable() {
+  const tbody=document.getElementById('crew-tbody');
+  tbody.innerHTML='';
+  filtered.forEach(c=>{
+    const danceClass = c.dance_sober===null ? '' : c.dance_sober>=7 ? 'dance-pos' : c.dance_sober>=3 ? 'dance-mid' : 'dance-neg';
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td><strong>${c.name}</strong></td>
+      <td style="font-size:.75rem;color:var(--muted)">${c.nick}</td>
+      <td>${c.city||'—'}</td>
+      <td>${c.height?c.height+' cm':'—'}</td>
+      <td>${c.weight?c.weight+' kg':'—'}</td>
+      <td>${c.shoe?'EU '+c.shoe:'—'}</td>
+      <td><span class="stag s-${c.shirt}">${c.shirt}</span></td>
+      <td><span class="stag s-${c.shorts}">${c.shorts}</span></td>
+      <td><span class="dance-sml ${danceClass}">${c.dance_sober!==null?c.dance_sober:'—'}</span></td>
+      <td style="font-size:.75rem">${c.drink||'—'}</td>
+      <td style="font-size:.75rem">${c.animal||'—'}</td>
+      <td style="font-size:.72rem;color:var(--muted)">${c.celeb||'—'}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ---- VIEW TOGGLE ----
+function setView(v, btn) {
+  document.querySelectorAll('.vtbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('view-cards').style.display = v==='cards'?'block':'none';
+  document.getElementById('view-table').style.display = v==='table'?'block':'none';
+}
+
+// ---- INIT ----
+populateCityFilter();
+renderKPIs();
+buildAllCharts();
+renderCards();
+renderTable();
+</script>
+</body>
+</html>
