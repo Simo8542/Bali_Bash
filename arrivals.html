@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrivals &amp; Transfers &mdash; Bali Birthday Bash '26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sand:#F5ECD7; --deep:#1A1208; --terra:#C4622D; --ocean:#2E6B8A;
+  --palm:#3D6B47; --gold:#D4A843; --night:#0D1B2A; --cream:#FBF6EE; --muted:#8A7D6B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,18,8,.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,67,.2);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:1rem;color:var(--gold);letter-spacing:.05em;text-decoration:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;overflow-x:auto;scrollbar-width:none;}
+.nav-links a{color:rgba(245,236,215,.7);text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+
+/* HERO */
+.hero{min-height:55vh;background:var(--night);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(46,107,138,.25) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 20% 20%,rgba(196,98,45,.15) 0%,transparent 60%);}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;position:relative;display:flex;align-items:center;gap:1rem;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold);opacity:.5;}
+.hero-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.5rem,8vw,5.5rem);font-weight:900;line-height:.95;color:var(--sand);position:relative;margin-bottom:.3rem;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-subtitle{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,2.5vw,1.4rem);font-style:italic;color:rgba(245,236,215,.5);margin-bottom:2rem;position:relative;}
+.hero-meta{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;position:relative;}
+.hero-meta-item{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:rgba(245,236,215,.5);text-transform:uppercase;}
+.hero-meta-item strong{color:var(--sand);display:block;font-size:.9rem;}
+
+/* LAYOUT */
+section{display:block;padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.band{display:block;background:var(--deep);color:var(--sand);padding:5rem 2rem;}
+.band-mid{display:block;background:#0D1B2A;color:var(--sand);padding:5rem 2rem;}
+.inner{max-width:1100px;margin:0 auto;}
+.divider{border:none;border-top:1px solid rgba(26,18,8,.08);margin:0;}
+
+/* LABELS & TITLES */
+.lbl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem;}
+.lbl::after{content:'';flex:1;height:1px;background:var(--terra);opacity:.3;max-width:80px;}
+.lbl-g{color:var(--gold);}
+.lbl-g::after{background:var(--gold);}
+.ttl{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;margin-bottom:1rem;}
+.ttl em{font-style:italic;color:var(--terra);}
+.ttl-lt{color:var(--sand);}
+.intro{font-size:1.05rem;color:var(--muted);max-width:620px;margin-bottom:3rem;line-height:1.8;}
+.intro-lt{color:rgba(245,236,215,.6);}
+
+/* KPI BAND */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1rem;}
+.kpi{background:rgba(245,236,215,.05);border:1px solid rgba(245,236,215,.1);border-radius:14px;padding:1.5rem 1.25rem;}
+.kpi-lbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,236,215,.45);margin-bottom:.4rem;}
+.kpi-val{font-family:'Playfair Display',Georgia,serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1;}
+.kpi-val.sm{font-size:1.4rem;}
+.kpi-sub{font-size:.75rem;color:rgba(245,236,215,.4);margin-top:.35rem;}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem;}
+.filter-group{display:flex;align-items:center;gap:.5rem;}
+.filter-group label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+.filter-group select{padding:.45rem .8rem;border:1px solid rgba(26,18,8,.15);border-radius:6px;background:var(--cream);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;outline:none;transition:border-color .2s;}
+.filter-group select:focus{border-color:var(--terra);}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:2.5rem;}
+.leg-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--muted);}
+
+/* STATUS BADGES */
+.sbadge{display:inline-block;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:20px;white-space:nowrap;}
+.sb-confirmed{background:rgba(46,107,138,.12);color:var(--ocean);}
+.sb-specified{background:rgba(61,107,71,.12);color:var(--palm);}
+.sb-estimated{background:rgba(212,168,67,.12);color:#8A6010;}
+.sb-villa{background:rgba(196,98,45,.12);color:var(--terra);}
+.sb-tbc{background:rgba(138,125,107,.1);color:var(--muted);}
+.sb-own{background:rgba(13,27,42,.07);color:#3A5070;}
+
+/* AIRLINE CHIPS */
+.airline{display:inline-block;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.04em;padding:.15rem .5rem;border-radius:4px;font-weight:500;}
+.al-ek{background:#C8102E;color:white;}
+.al-sq{background:#003580;color:white;}
+.al-klm{background:#009DDC;color:white;}
+.al-ga{background:#1C8A42;color:white;}
+.al-tk{background:#C8102E;color:white;}
+.al-unk{background:rgba(138,125,107,.12);color:var(--muted);}
+
+/* DAY BLOCKS */
+.day-block{margin-bottom:3.5rem;}
+.day-block[data-day="26"] .day-num{color:var(--terra);}
+.day-block[data-day="25"] .day-num{color:var(--gold);}
+.day-block[data-day="27"] .day-num{color:var(--palm);}
+.day-header{display:flex;align-items:flex-end;gap:1.25rem;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:2px solid rgba(26,18,8,.07);}
+.day-num{font-family:'Playfair Display',Georgia,serif;font-size:3.5rem;font-weight:900;line-height:1;color:var(--deep);}
+.day-label-wrap{margin-bottom:.3rem;}
+.day-dow{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+.day-month{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--deep);}
+.day-pill{margin-left:auto;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.06em;color:var(--terra);background:rgba(196,98,45,.08);padding:.25rem .8rem;border-radius:20px;white-space:nowrap;}
+
+/* ARRIVAL ROWS */
+.arr-list{display:flex;flex-direction:column;gap:.65rem;}
+.arr-row{display:grid;grid-template-columns:86px 1fr auto;align-items:center;gap:1.25rem;background:white;border:1px solid rgba(26,18,8,.06);border-radius:12px;padding:.95rem 1.25rem;transition:box-shadow .18s,transform .18s;}
+.arr-row:hover{box-shadow:0 4px 18px rgba(26,18,8,.07);transform:translateX(3px);}
+.arr-row.cl-a{border-left:3px solid var(--ocean);}
+.arr-row.cl-b{border-left:3px solid var(--terra);}
+.arr-row.cl-c{border-left:3px solid var(--palm);}
+.arr-time-wrap{text-align:center;}
+.arr-time{font-family:'Playfair Display',Georgia,serif;font-size:1.55rem;font-weight:700;color:var(--deep);line-height:1;}
+.arr-time.est{color:var(--muted);}
+.arr-tlabel{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.15rem;}
+.arr-name{font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:700;color:var(--deep);line-height:1.2;}
+.arr-nick{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:var(--gold);margin:.1rem 0 .4rem;}
+.arr-meta{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;font-size:.78rem;color:var(--muted);}
+.arr-flight{font-family:'DM Mono',monospace;font-size:.7rem;font-weight:500;color:var(--deep);}
+.arr-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;min-width:120px;}
+.arr-transport{font-size:.7rem;color:var(--muted);text-align:right;line-height:1.4;}
+
+/* CLUSTER DOT */
+.cdot{display:inline-block;width:7px;height:7px;border-radius:50%;vertical-align:middle;margin-right:.25rem;}
+
+/* TRANSPORT CLUSTERS */
+.cluster-card{background:rgba(46,107,138,.05);border:1px solid rgba(46,107,138,.18);border-radius:16px;padding:1.75rem;margin-bottom:1.25rem;}
+.cluster-card.hot{background:rgba(196,98,45,.05);border-color:rgba(196,98,45,.2);}
+.cluster-card.green{background:rgba(61,107,71,.05);border-color:rgba(61,107,71,.2);}
+.cluster-title{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--sand);margin-bottom:.3rem;}
+.cluster-sub{font-size:.8rem;color:rgba(245,236,215,.45);margin-bottom:1.1rem;}
+.cluster-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
+.cchip{display:flex;align-items:center;gap:.4rem;background:rgba(245,236,215,.06);border:1px solid rgba(245,236,215,.12);border-radius:8px;padding:.35rem .8rem;}
+.cchip-time{font-family:'DM Mono',monospace;font-size:.7rem;font-weight:500;color:var(--gold);}
+.cchip-name{color:var(--sand);font-size:.82rem;font-weight:500;}
+.cluster-rec{padding:.75rem 1rem;background:rgba(245,236,215,.04);border-left:3px solid var(--ocean);border-radius:0 8px 8px 0;font-size:.82rem;color:rgba(245,236,215,.7);line-height:1.6;}
+.cluster-rec.hot{border-left-color:var(--terra);}
+.cluster-rec.green{border-left-color:var(--palm);}
+
+/* TABLE */
+.view-toggle{display:flex;gap:.5rem;margin-bottom:2rem;}
+.vtbtn{padding:.5rem 1.2rem;border-radius:30px;border:1px solid rgba(26,18,8,.15);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s;}
+.vtbtn:hover{border-color:var(--terra);color:var(--terra);}
+.vtbtn.on{background:var(--terra);color:white;border-color:var(--terra);font-weight:600;}
+.tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid rgba(26,18,8,.08);}
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem;min-width:800px;}
+.tbl thead th{background:var(--deep);color:rgba(245,236,215,.6);font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.65rem 1rem;text-align:left;white-space:nowrap;border-right:1px solid rgba(245,236,215,.06);}
+.tbl thead th:last-child{border-right:none;}
+.tbl tbody td{padding:.75rem 1rem;border-bottom:1px solid rgba(26,18,8,.05);vertical-align:middle;}
+.tbl tbody tr:hover td{background:rgba(245,236,215,.4);}
+.tbl tbody tr:last-child td{border-bottom:none;}
+
+footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;padding:3rem 2rem;font-size:.82rem;}
+.ftitle{font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;color:var(--gold);margin-bottom:.5rem;}
+
+@media(max-width:700px){
+  .arr-row{grid-template-columns:70px 1fr;}
+  .arr-right{display:none;}
+  .nav-links{display:none;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">&#127965;&#65039; Bali Bash '26</a>
+  <ul class="nav-links">
+    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="index.html#rooms">Rooms</a></li>
+    <li><a href="index.html#attendance">Attendance</a></li>
+    <li><a href="index.html#activities">Activities</a></li>
+    <li><a href="index.html#food">Food</a></li>
+    <li><a href="index.html#uluwatu">Uluwatu</a></li>
+    <li><a href="index.html#bingo">Bingo</a></li>
+    <li><a href="index.html#practical">Practical</a></li>
+    <li><a href="crew-intel.html">Crew Intel</a></li>
+    <li><a href="arrivals.html" class="active">Arrivals</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Simon &amp; Mike's 30th</div>
+  <h1 class="hero-title">Arrivals &amp;<br><em>Transfers</em></h1>
+  <p class="hero-subtitle">19 legends. One runway. Who lands when.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><strong>Mar 23</strong>First Landing</div>
+    <div class="hero-meta-item"><strong>Thu 26</strong>Main Wave</div>
+    <div class="hero-meta-item"><strong>3</strong>Grab Clusters</div>
+    <div class="hero-meta-item"><strong>DPS</strong>Ngurah Rai Intl</div>
+  </div>
+</div>
+
+<!-- KPI BAND -->
+<div class="band">
+  <div class="inner">
+    <div class="lbl lbl-g">At a Glance</div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-lbl">Arriving at DPS</div>
+        <div class="kpi-val">16</div>
+        <div class="kpi-sub">at Ngurah Rai airport</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Times Confirmed</div>
+        <div class="kpi-val">12</div>
+        <div class="kpi-sub">exact arrival times</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Biggest Day</div>
+        <div class="kpi-val sm">Thu 26</div>
+        <div class="kpi-sub">7 arrivals in one day</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">20:20 Club</div>
+        <div class="kpi-val">6</div>
+        <div class="kpi-sub">land at exactly 20:20</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Private Cars</div>
+        <div class="kpi-val sm">Mar 28</div>
+        <div class="kpi-sub">7-seaters active from Sat</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="lbl">Day by Day</div>
+  <h2 class="ttl">Arrival <em>Timeline</em></h2>
+  <p class="intro">All times are local Bali time (WITA, UTC+8). Private 7-seater cars are booked from March 28 &ndash; all arrivals before that use Grab or coordinated transfers.</p>
+
+  <div class="filter-bar">
+    <div class="filter-group">
+      <label>Day</label>
+      <select id="filter-day" onchange="applyFilter()">
+        <option value="all">All Days</option>
+        <option value="23">Mon 23 Mar</option>
+        <option value="24">Tue 24 Mar</option>
+        <option value="25">Wed 25 Mar</option>
+        <option value="26">Thu 26 Mar</option>
+        <option value="27">Fri 27 Mar</option>
+        <option value="28">Sat 28 Mar</option>
+        <option value="29">Sun 29 Mar</option>
+        <option value="0">Already at Villa</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Status</label>
+      <select id="filter-status" onchange="applyFilter()">
+        <option value="all">All Statuses</option>
+        <option value="confirmed">Confirmed (screenshot)</option>
+        <option value="specified">Exact (Simon)</option>
+        <option value="estimated">Estimated</option>
+        <option value="tbc">TBC</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><span class="sbadge sb-confirmed">Confirmed</span>&nbsp;Flight screenshot verified</div>
+    <div class="leg-item"><span class="sbadge sb-specified">Exact</span>&nbsp;Specified by Simon</div>
+    <div class="leg-item"><span class="sbadge sb-estimated">Est.</span>&nbsp;Estimated from dep. date</div>
+    <div class="leg-item"><span class="sbadge sb-villa">At Villa</span>&nbsp;Already there</div>
+    <div class="leg-item"><span class="sbadge sb-tbc">TBC</span>&nbsp;Unconfirmed</div>
+    <div class="leg-item"><span class="cdot" style="background:var(--ocean)"></span>Cluster A</div>
+    <div class="leg-item"><span class="cdot" style="background:var(--terra)"></span>Cluster B</div>
+    <div class="leg-item"><span class="cdot" style="background:var(--palm)"></span>Cluster C</div>
+  </div>
+
+  <div id="timeline-body"></div>
+</section>
+
+<hr class="divider">
+
+<!-- TRANSPORT COORDINATION -->
+<div class="band-mid" id="transfers">
+  <div class="inner">
+    <div class="lbl lbl-g">Grab Coordination</div>
+    <h2 class="ttl ttl-lt">Transfer <em style="color:var(--gold)">Clusters</em></h2>
+    <p class="intro intro-lt">Three windows where people arrive close enough to share a ride. Private 7-seaters kick in from Saturday March 28 &mdash; these clusters cover the days before.</p>
+
+    <!-- Cluster A -->
+    <div class="cluster-card">
+      <div class="cluster-title">&#128760; Cluster A &mdash; Wednesday 25 March, Evening</div>
+      <div class="cluster-sub">2 people within 50 min &mdash; one Grab to wait at arrivals</div>
+      <div class="cluster-chips">
+        <div class="cchip">
+          <span class="cchip-time">19:30</span>
+          <span class="cchip-name">Jonas K.</span>
+          <span class="sbadge sb-confirmed" style="font-size:.52rem">via IST</span>
+        </div>
+        <div class="cchip">
+          <span class="cchip-time">20:20</span>
+          <span class="cchip-name">Frederik S.</span>
+          <span class="sbadge sb-confirmed" style="font-size:.52rem">KLM</span>
+        </div>
+      </div>
+      <div class="cluster-rec">&#128161; Book one GrabCar6 or metered taxi for Jonas at 19:30. Driver waits ~50 min, collects Frederik at 20:20. Both arrive in the same terminal &mdash; fare split two ways. Coordinate via WhatsApp beforehand so Jonas knows to wait.</div>
+    </div>
+
+    <!-- Cluster B -->
+    <div class="cluster-card hot">
+      <div class="cluster-title">&#128293; Cluster B &mdash; Thursday 26 March, Evening (Main Event)</div>
+      <div class="cluster-sub">5 people in two tight windows &mdash; splits perfectly into two Grabs</div>
+      <div class="cluster-chips">
+        <div class="cchip">
+          <span class="cchip-time">19:05</span>
+          <span class="cchip-name">Mike</span>
+          <span class="sbadge sb-specified" style="font-size:.52rem">SIN</span>
+        </div>
+        <div class="cchip">
+          <span class="cchip-time">19:30</span>
+          <span class="cchip-name">Daniel</span>
+          <span class="sbadge sb-specified" style="font-size:.52rem">CPH</span>
+        </div>
+        <div class="cchip" style="background:rgba(196,98,45,.06);border-color:rgba(196,98,45,.2);">
+          <span class="cchip-time">20:20</span>
+          <span class="cchip-name">Olli</span>
+          <span class="sbadge sb-specified" style="font-size:.52rem">CPH</span>
+        </div>
+        <div class="cchip" style="background:rgba(196,98,45,.06);border-color:rgba(196,98,45,.2);">
+          <span class="cchip-time">20:20</span>
+          <span class="cchip-name">Ralle</span>
+          <span class="sbadge sb-specified" style="font-size:.52rem">CPH</span>
+        </div>
+        <div class="cchip" style="background:rgba(196,98,45,.06);border-color:rgba(196,98,45,.2);">
+          <span class="cchip-time">20:20</span>
+          <span class="cchip-name">Tinho</span>
+          <span class="sbadge sb-specified" style="font-size:.52rem">AAL</span>
+        </div>
+      </div>
+      <div class="cluster-rec hot">&#128161; Two clean sub-runs: <strong>Grab 1</strong> &mdash; Mike (19:05) + Daniel (19:30), only 25 min apart so the driver waits in arrivals. <strong>Grab 2</strong> &mdash; Olli + Ralle + Tinho all land at exactly 20:20, one GrabCar6 or minivan. Five people, two vehicles, zero wasted trips.</div>
+    </div>
+
+    <!-- Cluster C -->
+    <div class="cluster-card">
+      <div class="cluster-title">&#128760; Cluster C &mdash; Friday 27 March, 20:20</div>
+      <div class="cluster-sub">2 people, same time exactly &mdash; zero coordination needed beyond one booking</div>
+      <div class="cluster-chips">
+        <div class="cchip">
+          <span class="cchip-time">20:20</span>
+          <span class="cchip-name">Jacob Z.</span>
+          <span class="sbadge sb-specified" style="font-size:.52rem">CPH</span>
+        </div>
+        <div class="cchip">
+          <span class="cchip-time">20:20</span>
+          <span class="cchip-name">Joachim</span>
+          <span class="sbadge sb-specified" style="font-size:.52rem">BLL</span>
+        </div>
+      </div>
+      <div class="cluster-rec">&#128161; Zacho and Joachim land at the same time &mdash; one Grab booked in advance, cost split. Last day needing Grab coordination; private cars available from the next morning.</div>
+    </div>
+
+    <!-- From Sat 28 -->
+    <div class="cluster-card green">
+      <div class="cluster-title">&#9989; From Saturday 28 March &mdash; Private Cars Active</div>
+      <div class="cluster-sub">2x 7-seater private cars available through April 1</div>
+      <div class="cluster-chips">
+        <div class="cchip">
+          <span class="cchip-time">~TBC</span>
+          <span class="cchip-name">Marcus</span>
+          <span class="sbadge sb-estimated" style="font-size:.52rem">CPH</span>
+        </div>
+      </div>
+      <div class="cluster-rec green">Marcus arrives Saturday &mdash; use one of the private 7-seaters for a proper villa welcome. All later pickups and day trips through April 1 covered by the cars.</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FULL TABLE -->
+<section id="roster">
+  <div class="lbl">Full Roster</div>
+  <h2 class="ttl">Complete <em>Overview</em></h2>
+  <p class="intro">Every person, every flight, sortable at a glance. Toggle to table view for a quick export-friendly format.</p>
+
+  <div class="view-toggle">
+    <button class="vtbtn on" onclick="setView('timeline', this)">&#128197; Timeline</button>
+    <button class="vtbtn" onclick="setView('table', this)">&#9776; Table</button>
+  </div>
+
+  <div id="view-timeline" style="display:block">
+    <p style="color:var(--muted);font-size:.9rem;">&#8593; Timeline view is above. Scroll up or use the day filter to focus.</p>
+  </div>
+
+  <div id="view-table" style="display:none">
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Nickname</th>
+            <th>Arr. Date</th>
+            <th>Arr. Time</th>
+            <th>From</th>
+            <th>Flight</th>
+            <th>Airline</th>
+            <th>Status</th>
+            <th>Cluster</th>
+            <th>Transfer Note</th>
+          </tr>
+        </thead>
+        <tbody id="arr-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ftitle">Bali Birthday Bash '26</div>
+  <p>Simon &amp; Mike S&oslash;ndergaard &mdash; Turning 30 in Style</p>
+  <p style="margin-top:.5rem">Villa Ampo &middot; Canggu &middot; March 26 &ndash; April 3, 2026</p>
+  <p style="margin-top:1.5rem;font-size:.72rem;opacity:.4">Questions? Simon: +45 2551 4030 &middot; Mike: +45 2226 5707</p>
+</footer>
+
+<script>
+/* ---- DATA ---- */
+const ARRIVALS = [
+  // Already at villa
+  { name:"Senior (Far)", nick:"The Boss / Dad",          day:0,  dow:"",    mo:"",    dLabel:"Already Here",        time:"Already at villa", tsort:0,    est:false, from:"HKG",       flight:"",        airline:"",                  alc:"al-unk", status:"villa",     cluster:null, note:"At Villa Ampo — settled in" },
+  // Monday 23 March
+  { name:"Max",          nick:"Maxi / Piloten",           day:23, dow:"Mon", mo:"Mar", dLabel:"Monday 23 March",     time:"21:50",            tsort:2150, est:false, from:"SIN",       flight:"GA843",   airline:"Garuda",            alc:"al-ga",  status:"confirmed", cluster:null, note:"Own Grab — villa not open to group yet" },
+  // Tuesday 24 March
+  { name:"Andreas",      nick:"Moltke",                   day:24, dow:"Tue", mo:"Mar", dLabel:"Tuesday 24 March",    time:"22:20",            tsort:2220, est:false, from:"DXB",       flight:"EK398",   airline:"Emirates",          alc:"al-ek",  status:"confirmed", cluster:null, note:"Own Grab to villa" },
+  // Wednesday 25 March
+  { name:"Simon",        nick:"Twin 1 / Son of God",      day:25, dow:"Wed", mo:"Mar", dLabel:"Wednesday 25 March",  time:"~11:05",           tsort:1105, est:false, from:"CPH \u2192 SIN", flight:"SQ936",  airline:"Singapore Air",    alc:"al-sq",  status:"confirmed", cluster:null, note:"Own Grab" },
+  { name:"Jonas K.",     nick:"Jones",                    day:25, dow:"Wed", mo:"Mar", dLabel:"Wednesday 25 March",  time:"19:30",            tsort:1930, est:false, from:"CPH via IST", flight:"via IST", airline:"Turkish?",         alc:"al-tk",  status:"confirmed", cluster:"A",  note:"Cluster A — share Grab with Frederik" },
+  { name:"Frederik S.",  nick:"Skafte / MP",              day:25, dow:"Wed", mo:"Mar", dLabel:"Wednesday 25 March",  time:"20:20",            tsort:2020, est:false, from:"AAL",       flight:"KLM",     airline:"KLM",               alc:"al-klm", status:"confirmed", cluster:"A",  note:"Cluster A — share Grab with Jonas" },
+  // Thursday 26 March
+  { name:"Rasmus K.",    nick:"DJ Razz Razz",             day:26, dow:"Thu", mo:"Mar", dLabel:"Thursday 26 March",   time:"~10:00",           tsort:1000, est:true,  from:"—",         flight:"—",       airline:"",                  alc:"al-unk", status:"specified", cluster:null, note:"Solo Grab — morning run" },
+  { name:"Mike",         nick:"Mike Spike / Twin 2",      day:26, dow:"Thu", mo:"Mar", dLabel:"Thursday 26 March",   time:"19:05",            tsort:1905, est:false, from:"SIN",       flight:"—",       airline:"",                  alc:"al-unk", status:"specified", cluster:"B",  note:"Cluster B — share Grab with Daniel (25 min apart)" },
+  { name:"Daniel",       nick:"Danni",                    day:26, dow:"Thu", mo:"Mar", dLabel:"Thursday 26 March",   time:"19:30",            tsort:1930, est:false, from:"CPH",       flight:"—",       airline:"",                  alc:"al-unk", status:"specified", cluster:"B",  note:"Cluster B — share Grab with Mike (25 min apart)" },
+  { name:"Olli",         nick:"Sejrup / Sliver",          day:26, dow:"Thu", mo:"Mar", dLabel:"Thursday 26 March",   time:"20:20",            tsort:2020, est:false, from:"CPH",       flight:"—",       airline:"",                  alc:"al-unk", status:"specified", cluster:"B",  note:"Cluster B — same ride as Ralle + Tinho" },
+  { name:"Ralle",        nick:"Overarm / Rasmus O.",      day:26, dow:"Thu", mo:"Mar", dLabel:"Thursday 26 March",   time:"20:20",            tsort:2020, est:false, from:"CPH",       flight:"—",       airline:"",                  alc:"al-unk", status:"specified", cluster:"B",  note:"Cluster B — same ride as Olli + Tinho" },
+  { name:"Tinho",        nick:"Mr. Hvidvask",             day:26, dow:"Thu", mo:"Mar", dLabel:"Thursday 26 March",   time:"20:20",            tsort:2020, est:false, from:"AAL",       flight:"KLM?",    airline:"KLM?",              alc:"al-klm", status:"specified", cluster:"B",  note:"Cluster B — same ride as Olli + Ralle" },
+  // Friday 27 March
+  { name:"Jacob Z.",     nick:"Zacho",                    day:27, dow:"Fri", mo:"Mar", dLabel:"Friday 27 March",     time:"20:20",            tsort:2020, est:false, from:"CPH",       flight:"—",       airline:"",                  alc:"al-unk", status:"specified", cluster:"C",  note:"Cluster C — same ride as Joachim" },
+  { name:"Joachim",      nick:"Jogge",                    day:27, dow:"Fri", mo:"Mar", dLabel:"Friday 27 March",     time:"20:20",            tsort:2020, est:false, from:"BLL",       flight:"—",       airline:"",                  alc:"al-unk", status:"specified", cluster:"C",  note:"Cluster C — same ride as Zacho" },
+  // Saturday 28 March
+  { name:"Marcus",       nick:"Kuzze",                    day:28, dow:"Sat", mo:"Mar", dLabel:"Saturday 28 March",   time:"~TBC",             tsort:9999, est:true,  from:"CPH",       flight:"—",       airline:"",                  alc:"al-unk", status:"estimated", cluster:null, note:"Private car available from Mar 28" },
+  // TBC / unconfirmed
+  { name:"Nikolaj",      nick:"Niko / Piko",              day:0,  dow:"",    mo:"",    dLabel:"Already Here",        time:"Already at villa", tsort:1,    est:false, from:"BLL",       flight:"—",       airline:"",                  alc:"al-unk", status:"villa",     cluster:null, note:"Already at Villa Ampo" },
+  { name:"Liam",         nick:"Liam",                     day:26, dow:"Thu", mo:"Mar", dLabel:"Thursday 26 March",   time:"~TBC",             tsort:2100, est:true,  from:"SIN",       flight:"—",       airline:"",                  alc:"al-unk", status:"tbc",       cluster:null, note:"Own transport — separate accommodation. Departs Tue 31 Mar" },
+  // Sunday 29 March
+  { name:"TJ",           nick:"Tjalfe",                   day:29, dow:"Sun", mo:"Mar", dLabel:"Sunday 29 March",     time:"~TBC",             tsort:9997, est:true,  from:"SIN",       flight:"—",       airline:"",                  alc:"al-unk", status:"own",       cluster:null, note:"Uluwatu villa — own arrangement. Returns to SIN Tue/Wed" },
+];
+
+const STATUS_LABEL = { confirmed:"Confirmed", specified:"Exact", estimated:"Est.", villa:"At Villa", tbc:"TBC", own:"Own Villa" };
+const STATUS_CLASS = { confirmed:"sb-confirmed", specified:"sb-specified", estimated:"sb-estimated", villa:"sb-villa", tbc:"sb-tbc", own:"sb-own" };
+const CLUSTER_COLOR = { A:"var(--ocean)", B:"var(--terra)", C:"var(--palm)" };
+const CLUSTER_CLASS = { A:"cl-a", B:"cl-b", C:"cl-c" };
+
+/* ---- DAY CONFIG ---- */
+const DAY_CONFIG = [
+  { day:0,  color:"var(--muted)" },
+  { day:23, color:"var(--ocean)" },
+  { day:24, color:"var(--ocean)" },
+  { day:25, color:"var(--gold)"  },
+  { day:26, color:"var(--terra)" },
+  { day:27, color:"var(--palm)"  },
+  { day:28, color:"var(--palm)"  },
+  { day:29, color:"var(--muted)" },
+  { day:99, color:"var(--muted)" },
+];
+
+/* ---- RENDER TIMELINE ---- */
+function renderTimeline(dayFilter='all', statusFilter='all') {
+  const body = document.getElementById('timeline-body');
+  body.innerHTML = '';
+
+  // Collect unique days matching filter
+  let days = [...new Set(ARRIVALS.map(a => a.day))].sort((a,b) => a - b);
+
+  days.forEach(d => {
+    let people = ARRIVALS.filter(a => a.day === d);
+
+    if (dayFilter !== 'all') {
+      const fd = parseInt(dayFilter);
+      if (d !== fd) return;
+    }
+    if (statusFilter !== 'all') {
+      people = people.filter(a => a.status === statusFilter);
+    }
+    if (people.length === 0) return;
+
+    people.sort((a,b) => a.tsort - b.tsort);
+
+    const cfg = DAY_CONFIG.find(c => c.day === d) || { color:"var(--muted)" };
+    const rep = people[0];
+
+    const block = document.createElement('div');
+    block.className = 'day-block';
+    block.dataset.day = d;
+
+    const headerHtml = `
+      <div class="day-header">
+        <div>
+          <div class="day-dow">${rep.dow}</div>
+          <div class="day-num" style="color:${cfg.color}">${rep.dLabel}</div>
+        </div>
+        <div class="day-pill">${people.length} arrival${people.length !== 1 ? 's' : ''}</div>
+      </div>
+    `;
+
+    const rowsHtml = people.map(p => {
+      const clsBorder = p.cluster ? CLUSTER_CLASS[p.cluster] : '';
+      const clusterBadge = p.cluster
+        ? `<span style="font-family:'DM Mono',monospace;font-size:.65rem;color:${CLUSTER_COLOR[p.cluster]};"><span class="cdot" style="background:${CLUSTER_COLOR[p.cluster]}"></span>Cluster ${p.cluster}</span>`
+        : '';
+      const airlineHtml = p.airline
+        ? `<span class="airline ${p.alc}">${p.airline}</span>`
+        : '';
+      const flightHtml = (p.flight && p.flight !== '—')
+        ? `<span class="arr-flight">${p.flight}</span>`
+        : '';
+      const routeHtml = (p.from && p.from !== '—')
+        ? `<span>${p.from} &rarr; DPS</span>`
+        : '';
+
+      return `
+        <div class="arr-row ${clsBorder}">
+          <div class="arr-time-wrap">
+            <div class="arr-time${p.est ? ' est' : ''}">${p.time}</div>
+            <div class="arr-tlabel">local</div>
+          </div>
+          <div>
+            <div class="arr-name">${p.name}</div>
+            <div class="arr-nick">${p.nick}</div>
+            <div class="arr-meta">
+              ${airlineHtml}
+              ${flightHtml}
+              ${routeHtml}
+              ${clusterBadge}
+            </div>
+          </div>
+          <div class="arr-right">
+            <span class="sbadge ${STATUS_CLASS[p.status]}">${STATUS_LABEL[p.status]}</span>
+            <span class="arr-transport">${p.note}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    block.innerHTML = headerHtml + `<div class="arr-list">${rowsHtml}</div>`;
+    body.appendChild(block);
+  });
+}
+
+/* ---- RENDER TABLE ---- */
+function renderTable() {
+  const tbody = document.getElementById('arr-tbody');
+  const sorted = [...ARRIVALS].sort((a,b) => {
+    if (a.day !== b.day) return a.day - b.day;
+    return a.tsort - b.tsort;
+  });
+  tbody.innerHTML = sorted.map((p, i) => {
+    const clusterHtml = p.cluster
+      ? `<span class="sbadge" style="background:${CLUSTER_COLOR[p.cluster]}18;color:${CLUSTER_COLOR[p.cluster]}">Cluster ${p.cluster}</span>`
+      : '<span style="color:var(--muted);font-size:.75rem">—</span>';
+    return `
+      <tr>
+        <td style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted)">${i+1}</td>
+        <td><strong>${p.name}</strong></td>
+        <td style="font-size:.75rem;color:var(--muted)">${p.nick}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:.75rem;white-space:nowrap">${p.dLabel}</td>
+        <td style="font-family:'Playfair Display',serif;font-weight:700;${p.est ? 'color:var(--muted)' : ''}">${p.time}</td>
+        <td style="font-size:.8rem">${p.from}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:.72rem">${p.flight || '—'}</td>
+        <td>${p.airline ? `<span class="airline ${p.alc}">${p.airline}</span>` : '<span style="color:var(--muted)">—</span>'}</td>
+        <td><span class="sbadge ${STATUS_CLASS[p.status]}">${STATUS_LABEL[p.status]}</span></td>
+        <td>${clusterHtml}</td>
+        <td style="font-size:.73rem;color:var(--muted)">${p.note}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+/* ---- FILTER ---- */
+function applyFilter() {
+  const d = document.getElementById('filter-day').value;
+  const s = document.getElementById('filter-status').value;
+  renderTimeline(d, s);
+}
+
+/* ---- VIEW TOGGLE ---- */
+function setView(v, btn) {
+  document.querySelectorAll('.vtbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  if (v === 'timeline') {
+    document.getElementById('view-timeline').style.display = 'block';
+    document.getElementById('view-table').style.display = 'none';
+    window.scrollTo({ top: document.getElementById('timeline').offsetTop - 70, behavior:'smooth' });
+  } else {
+    document.getElementById('view-timeline').style.display = 'none';
+    document.getElementById('view-table').style.display = 'block';
+  }
+}
+
+/* ---- INIT ---- */
+renderTimeline();
+renderTable();
+</script>
+</body>
+</html>
