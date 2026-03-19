@@ -17,7 +17,7 @@ body{background:var(--cream);color:var(--deep);font-family:'DM Sans',sans-serif;
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,18,8,.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,67,.2);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:1rem;color:var(--gold);letter-spacing:.05em;}
+.nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:1rem;color:var(--gold);letter-spacing:.05em;text-decoration:none;}
 .nav-links{display:flex;gap:1.5rem;list-style:none;overflow-x:auto;scrollbar-width:none;}
 .nav-links a{color:rgba(245,236,215,.7);text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:color .2s;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);}
@@ -211,14 +211,68 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 .ftitle{font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;color:var(--gold);margin-bottom:.5rem;}
 h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bottom:1rem;}
 
+/* HAMBURGER BUTTON */
+.nav-burger{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;width:40px;height:40px;
+  background:none;border:none;cursor:pointer;padding:4px;flex-shrink:0;
+}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--gold);border-radius:2px;transition:transform .25s,opacity .25s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-links.nav-open{
+  display:flex !important;flex-direction:column;
+  position:fixed;top:56px;left:0;right:0;
+  background:rgba(13,10,5,.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(212,168,67,.25);
+  padding:1rem 0 1.25rem;gap:0;z-index:99;
+  max-height:calc(100vh - 56px);overflow-y:auto;animation:slideDown .2s ease;
+}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+.nav-links.nav-open li{border-bottom:1px solid rgba(245,236,215,.06);}
+.nav-links.nav-open li:last-child{border-bottom:none;}
+.nav-links.nav-open a{display:block;padding:.85rem 1.75rem;font-size:.85rem;letter-spacing:.1em;}
+
 @media(max-width:700px){
-  .two{grid-template-columns:1fr;gap:2rem;}
+  /* nav */
   .nav-links{display:none;}
+  .nav-burger{display:flex;}
+
+  /* spacing */
+  section{padding:3rem 1.25rem;}
+  .band,.band-mid,.band-dark,.band-ulu{padding:3rem 1.25rem;}
+
+  /* hero */
+  .hero{padding:5rem 1.25rem 3rem;}
+  .hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;text-align:center;}
+  .hero-eyebrow::before,.hero-eyebrow::after{width:20px;}
+
+  /* schedule */
   .srow{grid-template-columns:70px 1fr;}
+  .s2row{grid-template-columns:60px 1fr;}
   .nrow{grid-template-columns:80px 1fr;}
+  .scont{padding:.85rem 1rem;}
+
+  /* rooms */
+  .rgrid{grid-template-columns:1fr;}
+  .rrow{grid-template-columns:80px 1fr;}
+
+  /* activities / layout */
+  .two{grid-template-columns:1fr;gap:2rem;}
   .cev{grid-template-columns:30px 1fr;}
   .cet{display:none;}
-  .rgrid{grid-template-columns:1fr;}
+
+  /* bingo */
+  .bgrid{grid-template-columns:repeat(5,1fr) !important;}
+}
+
+@media(max-width:900px) and (orientation:landscape){
+  .hero{padding:4rem 2rem 3rem;min-height:70vh;}
+  .hero-meta{gap:1.5rem;}
+  section{padding:3.5rem 2rem;}
+  .band,.band-mid,.band-dark,.band-ulu{padding:3.5rem 2rem;}
 }
 </style>
 </head>
@@ -226,18 +280,21 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
 
 <nav>
   <a class="nav-logo" href="#">&#127965;&#65039; Bali Bash '26</a>
-  <ul class="nav-links">
-    <li><a href="#schedule">Schedule</a></li>
-    <li><a href="#rooms">Rooms</a></li>
-    <li><a href="#activities">Activities</a></li>
-    <li><a href="#food">Food</a></li>
-    <li><a href="#uluwatu">Uluwatu</a></li>
-    <li><a href="#bingo">Bingo</a></li>
-    <li><a href="#practical">Practical</a></li>
-    <li><a href="crew-intel.html">Crew Intel</a></li>
-    <li><a href="arrivals.html">Arrivals</a></li>
-    <li><a href="comp-day.html">&#127941; Comp Day</a></li>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#schedule" onclick="closeNav()">Schedule</a></li>
+    <li><a href="#rooms" onclick="closeNav()">Rooms</a></li>
+    <li><a href="#activities" onclick="closeNav()">Activities</a></li>
+    <li><a href="#food" onclick="closeNav()">Food</a></li>
+    <li><a href="#uluwatu" onclick="closeNav()">Uluwatu</a></li>
+    <li><a href="#bingo" onclick="closeNav()">Bingo</a></li>
+    <li><a href="#practical" onclick="closeNav()">Practical</a></li>
+    <li><a href="crew-intel.html" onclick="closeNav()">Crew Intel</a></li>
+    <li><a href="arrivals.html" onclick="closeNav()">Arrivals</a></li>
+    <li><a href="comp-day.html" onclick="closeNav()">&#127941; Comp Day</a></li>
   </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <div class="hero">
@@ -964,5 +1021,22 @@ window.addEventListener('scroll',()=>{
     </button>
   </div>
 </div>
+<script>
+function toggleNav(){
+  const links=document.getElementById('nav-links');
+  const burger=document.getElementById('nav-burger');
+  const open=links.classList.toggle('nav-open');
+  burger.classList.toggle('open',open);
+  burger.setAttribute('aria-expanded',open);
+}
+function closeNav(){
+  document.getElementById('nav-links').classList.remove('nav-open');
+  document.getElementById('nav-burger').classList.remove('open');
+}
+document.addEventListener('click',function(e){
+  const nav=document.querySelector('nav');
+  if(!nav.contains(e.target)) closeNav();
+});
+</script>
 </body>
 </html>
