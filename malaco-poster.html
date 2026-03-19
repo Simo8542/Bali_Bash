@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malaco Caramel Race — Villa Games Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#E8DCC8;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem;}
+
+/* A3 POSTER */
+.poster{
+  width:297mm;min-height:420mm;
+  background:linear-gradient(160deg,#F5ECD7 0%,#EDE0C4 40%,#F0E6CC 100%);
+  border:6px solid #2A1A08;
+  border-radius:4px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  padding:0;
+  box-shadow:0 8px 40px rgba(0,0,0,.3);
+}
+
+/* CORNER ORNAMENTS */
+.poster::before,.poster::after{
+  content:'✦';
+  position:absolute;
+  font-size:1.5rem;
+  color:rgba(42,26,8,.25);
+  z-index:1;
+}
+.poster::before{top:1rem;left:1.25rem;}
+.poster::after{top:1rem;right:1.25rem;}
+.corner-bl,.corner-br{position:absolute;bottom:1rem;font-size:1.5rem;color:rgba(42,26,8,.25);z-index:1;}
+.corner-bl{left:1.25rem;}
+.corner-br{right:1.25rem;}
+
+/* HEADER BAND */
+.poster-header{
+  background:linear-gradient(135deg,#1A3A5C 0%,#2E6B8A 60%,#1A4A6A 100%);
+  padding:1.5rem 2.5rem 1rem;
+  text-align:center;
+  position:relative;
+  border-bottom:4px solid #D4A843;
+}
+.villa-tag{
+  font-family:'DM Mono',monospace;
+  font-size:.65rem;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:rgba(245,236,215,.6);
+  margin-bottom:.4rem;
+}
+.poster-header h1{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:3.2rem;
+  font-weight:900;
+  color:#F5ECD7;
+  line-height:1;
+  margin-bottom:.25rem;
+}
+.poster-header h2{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:2rem;
+  font-weight:700;
+  color:#D4A843;
+  font-style:italic;
+  line-height:1;
+  margin-bottom:.75rem;
+}
+.poster-header .tagline{
+  font-family:'DM Mono',monospace;
+  font-size:.68rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:rgba(245,236,215,.5);
+  border-top:1px solid rgba(245,236,215,.15);
+  padding-top:.6rem;
+  margin-top:.1rem;
+}
+
+/* CANDY STRIP */
+.candy-strip{
+  background:repeating-linear-gradient(
+    90deg,
+    #C4622D 0px,#C4622D 18px,
+    #F5ECD7 18px,#F5ECD7 36px,
+    #2E6B8A 36px,#2E6B8A 54px,
+    #F5ECD7 54px,#F5ECD7 72px
+  );
+  height:10px;
+}
+
+/* MAIN BODY */
+.poster-body{
+  display:grid;
+  grid-template-columns:1fr 200px;
+  gap:0;
+  flex:1;
+  padding:1.75rem 2.5rem;
+}
+
+/* RULES */
+.rules-section{padding-right:1.5rem;}
+.section-label{
+  font-family:'DM Mono',monospace;
+  font-size:.58rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#C4622D;
+  margin-bottom:.75rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+.section-label::after{content:'';flex:1;height:1px;background:#C4622D;opacity:.3;}
+.rules-title{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.6rem;
+  font-weight:700;
+  color:#1A1208;
+  margin-bottom:1.25rem;
+}
+
+.rules-list{list-style:none;counter-reset:r;display:flex;flex-direction:column;gap:.85rem;}
+.rules-list li{
+  counter-increment:r;
+  display:flex;
+  gap:.9rem;
+  align-items:flex-start;
+}
+.rules-list li::before{
+  content:counter(r);
+  min-width:28px;height:28px;
+  background:#C4622D;color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;
+  font-family:'DM Mono',monospace;
+  flex-shrink:0;margin-top:.1rem;
+}
+.rules-list li .rule-text{
+  font-size:.9rem;
+  color:#2A1A08;
+  line-height:1.6;
+}
+.rules-list li .rule-text strong{color:#C4622D;}
+.rules-list li .rule-text em{color:#1A3A5C;font-style:normal;font-weight:600;}
+
+/* TIPS BOX */
+.tips-box{
+  margin-top:1.5rem;
+  background:rgba(196,98,45,.08);
+  border:1.5px solid rgba(196,98,45,.25);
+  border-radius:10px;
+  padding:1rem 1.25rem;
+}
+.tips-title{
+  font-family:'DM Mono',monospace;
+  font-size:.6rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#C4622D;
+  margin-bottom:.6rem;
+}
+.tips-list{list-style:none;display:flex;flex-direction:column;gap:.4rem;}
+.tips-list li{
+  font-size:.8rem;
+  color:#5A4030;
+  line-height:1.5;
+  padding-left:.9rem;
+  position:relative;
+}
+.tips-list li::before{content:'→';position:absolute;left:0;color:#C4622D;font-size:.7rem;}
+
+/* SIDE PANEL */
+.side-panel{
+  border-left:2px solid rgba(42,26,8,.1);
+  padding-left:1.25rem;
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+}
+.side-card{
+  background:rgba(42,26,8,.05);
+  border:1px solid rgba(42,26,8,.1);
+  border-radius:10px;
+  padding:1rem;
+  text-align:center;
+}
+.side-card .sc-icon{font-size:2rem;margin-bottom:.4rem;}
+.side-card .sc-label{
+  font-family:'DM Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#8A7D6B;
+  margin-bottom:.25rem;
+}
+.side-card .sc-val{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.1rem;
+  font-weight:700;
+  color:#1A1208;
+  line-height:1.2;
+}
+.side-card.sc-warn{
+  background:rgba(196,98,45,.1);
+  border-color:rgba(196,98,45,.3);
+}
+.side-card.sc-warn .sc-val{color:#C4622D;}
+
+/* CANDY ILLUSTRATION AREA */
+.candy-visual{
+  margin-top:1rem;
+  padding:1rem;
+  background:rgba(212,168,67,.08);
+  border:1.5px dashed rgba(212,168,67,.4);
+  border-radius:10px;
+  text-align:center;
+}
+.candy-visual .cv-icon{font-size:3.5rem;line-height:1;margin-bottom:.3rem;}
+.candy-visual .cv-txt{
+  font-family:'DM Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#8A7D6B;
+}
+
+/* SCOREBOARD */
+.scoreboard{
+  margin-top:auto;
+  background:#1A1208;
+  border-radius:10px;
+  padding:.9rem 1rem;
+}
+.sb-title{
+  font-family:'DM Mono',monospace;
+  font-size:.55rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(245,236,215,.4);
+  margin-bottom:.6rem;
+  text-align:center;
+}
+.sb-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:.3rem 0;
+  border-bottom:1px solid rgba(245,236,215,.06);
+}
+.sb-row:last-child{border-bottom:none;}
+.sb-team{font-size:.72rem;color:rgba(245,236,215,.7);}
+.sb-score{
+  background:rgba(245,236,215,.08);
+  padding:.15rem .7rem;
+  border-radius:4px;
+  font-family:'DM Mono',monospace;
+  font-size:.7rem;
+  color:#D4A843;
+  min-width:40px;
+  text-align:center;
+}
+
+/* FOOTER BAND */
+.poster-footer{
+  background:#1A1208;
+  padding:.8rem 2.5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-top:4px solid #D4A843;
+}
+.pf-left{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,236,215,.4);}
+.pf-center{font-family:'Playfair Display',Georgia,serif;font-size:1rem;font-weight:700;color:#D4A843;}
+.pf-right{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,236,215,.4);}
+
+/* PRINT */
+@media print{
+  body{background:none;padding:0;}
+  .poster{box-shadow:none;width:297mm;min-height:420mm;}
+}
+@media(max-width:700px){
+  .poster{width:100%;min-height:auto;}
+  .poster-body{grid-template-columns:1fr;}
+  .rules-section{padding-right:0;}
+  .side-panel{border-left:none;border-top:2px solid rgba(42,26,8,.1);padding-left:0;padding-top:1.25rem;}
+  .poster-header h1{font-size:2rem;}
+  .poster-header h2{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <span class="corner-bl">✦</span>
+  <span class="corner-br">✦</span>
+
+  <!-- HEADER -->
+  <div class="poster-header">
+    <div class="villa-tag">&#127968; Villa Games &middot; Event 4 &middot; Head-to-Head Duel</div>
+    <h1>VILLA GAMES</h1>
+    <h2>Malaco Caramel Race</h2>
+    <div class="tagline">No hands &middot; Full string &middot; First to finish wins &middot; Villa Ampo, Bali</div>
+  </div>
+
+  <div class="candy-strip"></div>
+
+  <!-- MAIN BODY -->
+  <div class="poster-body">
+
+    <!-- RULES -->
+    <div class="rules-section">
+      <div class="section-label">Official Rules</div>
+      <div class="rules-title">How to Play</div>
+
+      <ol class="rules-list">
+        <li>
+          <div class="rule-text">
+            Each competitor receives a <strong>full string of Malaco caramel candy.</strong>
+            Hold it at arm's length, ready to place in mouth on the start signal.
+          </div>
+        </li>
+        <li>
+          <div class="rule-text">
+            On the whistle: place the candy string in your mouth so it
+            <strong>hangs freely</strong> from your lips &mdash; dangling out, not bitten through.
+          </div>
+        </li>
+        <li>
+          <div class="rule-text">
+            <strong>Eat the entire string</strong> as fast as possible.
+            Chew, suction, work it in. <em>The full string must be consumed.</em>
+          </div>
+        </li>
+        <li>
+          <div class="rule-text">
+            <strong>NO HANDS at any point.</strong> Any contact between hands and candy
+            = immediate disqualification. Arms must stay at your sides or behind your back.
+          </div>
+        </li>
+        <li>
+          <div class="rule-text">
+            First competitor to <strong>fully consume the string</strong> and open their mouth
+            empty wins the duel. Referee decision is final.
+          </div>
+        </li>
+        <li>
+          <div class="rule-text">
+            <em>Series format:</em> Head-to-head duels across team members.
+            Most wins takes the event point for their team.
+          </div>
+        </li>
+      </ol>
+
+      <div class="tips-box">
+        <div class="tips-title">&#9672; Techniques &amp; Strategy</div>
+        <ul class="tips-list">
+          <li>Suction beats brute chomping — pull the string in rhythmically.</li>
+          <li>Lateral jaw movement helps break down caramel sections faster.</li>
+          <li>Once you stop pulling it in, you stall — keep the momentum going.</li>
+          <li>Breathe through your nose. Panicking slows the jaw.</li>
+          <li>Straight posture helps — leaning forward gives your jaw more purchase.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SIDE PANEL -->
+    <div class="side-panel">
+      <div class="side-card">
+        <div class="sc-icon">&#127852;</div>
+        <div class="sc-label">Format</div>
+        <div class="sc-val">Full Malaco String</div>
+      </div>
+      <div class="side-card sc-warn">
+        <div class="sc-icon">&#9940;</div>
+        <div class="sc-label">Critical Rule</div>
+        <div class="sc-val">Zero Hand Contact</div>
+      </div>
+      <div class="side-card">
+        <div class="sc-icon">&#127937;</div>
+        <div class="sc-label">Win Condition</div>
+        <div class="sc-val">First to Empty Mouth</div>
+      </div>
+      <div class="side-card">
+        <div class="sc-icon">&#128081;</div>
+        <div class="sc-label">Series</div>
+        <div class="sc-val">Head-to-Head Duels</div>
+      </div>
+
+      <div class="candy-visual">
+        <div class="cv-icon">&#129361;</div>
+        <div class="cv-txt">Candy hangs from mouth<br>at start position</div>
+      </div>
+
+      <div class="scoreboard">
+        <div class="sb-title">Event Score</div>
+        <div class="sb-row"><span class="sb-team">Team A</span><span class="sb-score">&nbsp;</span></div>
+        <div class="sb-row"><span class="sb-team">Team B</span><span class="sb-score">&nbsp;</span></div>
+      </div>
+    </div>
+
+  </div><!-- /poster-body -->
+
+  <!-- FOOTER -->
+  <div class="poster-footer">
+    <div class="pf-left">Team A Score ____________</div>
+    <div class="pf-center">&#127965;&#65039; Villa Games &middot; Event 4</div>
+    <div class="pf-right">Team B Score ____________</div>
+  </div>
+
+</div><!-- /poster -->
+
+</body>
+</html>

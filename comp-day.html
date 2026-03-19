@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competition Day — Bali Birthday Bash '26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sand:#F5ECD7;--deep:#1A1208;--terra:#C4622D;--ocean:#2E6B8A;
+  --palm:#3D6B47;--gold:#D4A843;--night:#0D1B2A;--cream:#FBF6EE;--muted:#8A7D6B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--deep);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,18,8,.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,67,.2);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:1rem;color:var(--gold);letter-spacing:.05em;text-decoration:none;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;overflow-x:auto;scrollbar-width:none;}
+.nav-links a{color:rgba(245,236,215,.7);text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+
+/* LABELS & TITLES */
+.lbl{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem;}
+.lbl::after{content:'';flex:1;height:1px;background:var(--terra);opacity:.3;max-width:80px;}
+.lbl-g{color:var(--gold);}.lbl-g::after{background:var(--gold);}
+.lbl-lt{color:rgba(245,236,215,.5);}.lbl-lt::after{background:rgba(245,236,215,.3);}
+.ttl{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;margin-bottom:1rem;}
+.ttl em{font-style:italic;color:var(--terra);}
+.ttl-lt{color:var(--sand);}
+.ttl-lt em{color:var(--gold);}
+.intro{font-size:1.05rem;color:var(--muted);max-width:620px;margin-bottom:2.5rem;line-height:1.8;}
+.intro-lt{color:rgba(245,236,215,.6);}
+
+/* SECTIONS */
+section{display:block;padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.band{display:block;background:var(--deep);color:var(--sand);padding:5rem 2rem;}
+.band-dark{display:block;background:#0A1520;color:var(--sand);padding:5rem 2rem;}
+.band-beach{display:block;background:linear-gradient(135deg,#0D2B1A 0%,#0A3024 100%);color:var(--sand);padding:5rem 2rem;}
+.inner{max-width:1100px;margin:0 auto;}
+.divider{border:none;border-top:1px solid rgba(26,18,8,.08);margin:0;}
+a.vl{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;transition:opacity .2s;}
+a.vl:hover{opacity:.7;}
+
+/* COUNTDOWN HERO */
+.cd-hero{min-height:100vh;background:var(--night);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.cd-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(196,98,45,.2) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 20% 20%,rgba(46,107,138,.15) 0%,transparent 60%);}
+.cd-lock{font-size:3rem;margin-bottom:1.5rem;position:relative;filter:drop-shadow(0 0 20px rgba(196,98,45,.4));}
+.cd-eyebrow{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;position:relative;}
+.cd-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.5rem,8vw,5.5rem);font-weight:900;line-height:.95;color:var(--sand);position:relative;margin-bottom:1rem;}
+.cd-title em{font-style:italic;color:var(--terra);}
+.cd-subtitle{font-size:.95rem;color:rgba(245,236,215,.4);margin-bottom:3rem;position:relative;font-family:'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;}
+.cd-countdown{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;position:relative;margin-bottom:2.5rem;}
+.cd-unit{display:flex;flex-direction:column;align-items:center;}
+.cd-num{font-family:'Playfair Display',Georgia,serif;font-size:clamp(3rem,8vw,5rem);font-weight:900;color:var(--gold);line-height:1;min-width:3ch;text-align:center;}
+.cd-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,236,215,.35);margin-top:.3rem;}
+.cd-sep{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.5rem,6vw,4rem);color:rgba(245,236,215,.2);align-self:flex-start;padding-top:.2rem;}
+.cd-teaser{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;position:relative;}
+.cd-tease-item{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.08em;color:rgba(245,236,215,.35);text-transform:uppercase;}
+.cd-tease-item strong{display:block;color:var(--sand);font-size:.85rem;margin-bottom:.15rem;}
+
+/* REVEAL HERO */
+.rv-hero{min-height:60vh;background:var(--night);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.rv-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(196,98,45,.25) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 20%,rgba(61,107,71,.2) 0%,transparent 60%);}
+.rv-eyebrow{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;position:relative;display:flex;align-items:center;gap:1rem;}
+.rv-eyebrow::before,.rv-eyebrow::after{content:'';width:40px;height:1px;background:var(--gold);opacity:.5;}
+.rv-title{font-family:'Playfair Display',Georgia,serif;font-size:clamp(3rem,10vw,6.5rem);font-weight:900;line-height:.92;color:var(--sand);position:relative;margin-bottom:.5rem;}
+.rv-title em{font-style:italic;color:var(--terra);}
+.rv-subtitle{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1rem,2.5vw,1.5rem);font-style:italic;color:rgba(245,236,215,.4);margin-bottom:2.5rem;position:relative;}
+.rv-meta{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;position:relative;}
+.rv-meta-item{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:rgba(245,236,215,.45);text-transform:uppercase;}
+.rv-meta-item strong{color:var(--sand);display:block;font-size:.9rem;}
+
+/* KPI BAND */
+.kpi-band{background:var(--terra);padding:1.75rem 2rem;}
+.kpi-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;text-align:center;}
+.kpi-num{font-family:'Playfair Display',Georgia,serif;font-size:2rem;font-weight:900;color:#fff;line-height:1;}
+.kpi-lbl{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:.25rem;}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;border:1px solid rgba(26,18,8,.08);border-radius:16px;overflow:hidden;}
+.tl-row{display:grid;grid-template-columns:90px 1fr;align-items:stretch;border-bottom:1px solid rgba(26,18,8,.06);transition:background .15s;}
+.tl-row:last-child{border-bottom:none;}
+.tl-row:hover{background:rgba(26,18,8,.02);}
+.tl-row.tl-key{background:linear-gradient(135deg,rgba(196,98,45,.05),rgba(212,168,67,.03));border-left:3px solid var(--terra);}
+.tl-time{padding:1rem .75rem;display:flex;align-items:center;justify-content:center;text-align:center;border-right:1px solid rgba(26,18,8,.06);}
+.tl-t{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--deep);font-weight:500;white-space:nowrap;}
+.tl-row.tl-key .tl-t{color:var(--terra);}
+.tl-cont{padding:.9rem 1.25rem;}
+.tl-hl{font-family:'Playfair Display',Georgia,serif;font-size:1rem;font-weight:700;color:var(--deep);margin-bottom:.2rem;}
+.tl-row.tl-key .tl-hl{color:var(--terra);}
+.tl-det{font-size:.8rem;color:var(--muted);line-height:1.5;}
+.stag{display:inline-block;font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .55rem;border-radius:20px;margin-right:.4rem;}
+.t-villa{background:rgba(196,98,45,.12);color:var(--terra);}
+.t-beach{background:rgba(61,107,71,.12);color:var(--palm);}
+.t-food{background:rgba(212,168,67,.12);color:var(--gold);}
+.t-night{background:rgba(46,107,138,.12);color:var(--ocean);}
+
+/* GAME CARDS */
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;}
+.game-card{background:rgba(245,236,215,.05);border:1px solid rgba(245,236,215,.1);border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.game-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.25);}
+.gc-head{padding:1.25rem 1.5rem;background:rgba(245,236,215,.04);border-bottom:1px solid rgba(245,236,215,.08);}
+.gc-num{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,236,215,.35);margin-bottom:.4rem;}
+.gc-title{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;color:var(--sand);}
+.gc-sub{font-size:.78rem;color:rgba(245,236,215,.45);margin-top:.2rem;}
+.gc-body{padding:1.25rem 1.5rem;}
+.gc-rules{list-style:none;counter-reset:rules;display:flex;flex-direction:column;gap:.6rem;}
+.gc-rules li{counter-increment:rules;display:flex;gap:.75rem;align-items:flex-start;font-size:.83rem;color:rgba(245,236,215,.75);line-height:1.5;}
+.gc-rules li::before{content:counter(rules);min-width:20px;height:20px;background:var(--terra);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0;margin-top:.1rem;}
+.gc-rules li strong{color:var(--sand);}
+.gc-rules li em{color:var(--gold);font-style:normal;}
+.gc-tip{margin-top:1rem;padding:.75rem 1rem;background:rgba(212,168,67,.08);border-left:2px solid rgba(212,168,67,.4);border-radius:0 8px 8px 0;font-size:.78rem;color:rgba(245,236,215,.55);line-height:1.5;}
+.gc-tip strong{color:var(--gold);}
+.gc-final{border:2px solid var(--gold);background:rgba(212,168,67,.05);}
+.gc-final .gc-head{background:rgba(212,168,67,.08);border-bottom-color:rgba(212,168,67,.2);}
+.gc-final .gc-num{color:var(--gold);}
+.gc-final .gc-rules li::before{background:var(--gold);color:var(--deep);}
+
+/* BEACH GAME CARDS (lighter on dark bg) */
+.game-card-beach{background:rgba(245,236,215,.04);border-color:rgba(61,107,71,.25);}
+.game-card-beach .gc-rules li::before{background:var(--palm);}
+
+/* ROUND BADGES (duck race) */
+.rounds{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
+.round{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:rgba(245,236,215,.04);border-radius:8px;border:1px solid rgba(245,236,215,.07);}
+.round-num{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--terra);white-space:nowrap;}
+.round-txt{font-size:.8rem;color:rgba(245,236,215,.7);}
+
+/* RELAY STATIONS */
+.stations{display:flex;flex-direction:column;gap:.4rem;margin-top:.5rem;}
+.station{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:rgba(245,236,215,.03);border-radius:8px;border:1px solid rgba(61,107,71,.15);}
+.st-num{min-width:22px;height:22px;background:var(--palm);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;font-family:'DM Mono',monospace;flex-shrink:0;}
+.st-txt{font-size:.8rem;color:rgba(245,236,215,.7);}
+.st-txt strong{color:var(--sand);}
+
+/* FOOTER */
+footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;padding:3rem 2rem;font-size:.82rem;}
+.ftitle{font-family:'Playfair Display',Georgia,serif;font-size:1.5rem;color:var(--gold);margin-bottom:.5rem;}
+
+@media(max-width:700px){
+  .nav-links{display:none;}
+  .kpi-inner{grid-template-columns:repeat(2,1fr);}
+  .game-grid{grid-template-columns:1fr;}
+  .cd-countdown{gap:1rem;}
+  .tl-row{grid-template-columns:70px 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">&#127965;&#65039; Bali Bash '26</a>
+  <ul class="nav-links">
+    <li><a href="index.html#schedule">Schedule</a></li>
+    <li><a href="index.html#rooms">Rooms</a></li>
+    <li><a href="index.html#activities">Activities</a></li>
+    <li><a href="index.html#food">Food</a></li>
+    <li><a href="index.html#bingo">Bingo</a></li>
+    <li><a href="index.html#practical">Practical</a></li>
+    <li><a href="crew-intel.html">Crew Intel</a></li>
+    <li><a href="arrivals.html">Arrivals</a></li>
+    <li><a href="comp-day.html" class="active">&#127941; Comp Day</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════ COUNTDOWN STATE (pre-March 30) ═══════════════ -->
+<div id="cd-locked">
+  <div class="cd-hero">
+    <div class="cd-hero-bg"></div>
+    <div class="cd-lock">&#128274;</div>
+    <div class="cd-eyebrow">Monday &middot; 30 March 2026 &middot; Bali</div>
+    <h1 class="cd-title">Competition<br><em>Day</em></h1>
+    <p class="cd-subtitle">Agenda unseals at midnight Bali time</p>
+    <div class="cd-countdown">
+      <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><span class="cd-label">Days</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-label">Hours</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><span class="cd-label">Minutes</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-label">Seconds</span></div>
+    </div>
+    <div class="cd-teaser">
+      <div class="cd-tease-item"><strong>7 Events</strong>Two venues</div>
+      <div class="cd-tease-item"><strong>18 Competitors</strong>One champion</div>
+      <div class="cd-tease-item"><strong>All Day</strong>Villa AM &rarr; Beach PM</div>
+      <div class="cd-tease-item"><strong>Mar 30</strong>The big one</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ REVEALED STATE (March 30+) ═══════════════ -->
+<div id="cd-revealed" style="display:none;">
+
+  <!-- HERO -->
+  <div class="rv-hero">
+    <div class="rv-hero-bg"></div>
+    <div class="rv-eyebrow">Monday &middot; 30 March 2026 &middot; Bali</div>
+    <h1 class="rv-title">Competition<br><em>Day</em></h1>
+    <p class="rv-subtitle">The full programme. No excuses.</p>
+    <div class="rv-meta">
+      <div class="rv-meta-item"><strong>7 Events</strong>4 Villa + 3 Beach</div>
+      <div class="rv-meta-item"><strong>2 Venues</strong>Villa Ampo &rarr; Times Beach</div>
+      <div class="rv-meta-item"><strong>18 Legends</strong>One champion emerges</div>
+      <div class="rv-meta-item"><strong>Black Shorts</strong>Mandatory — no exceptions</div>
+    </div>
+  </div>
+
+  <!-- KPI BAND -->
+  <div class="kpi-band">
+    <div class="kpi-inner">
+      <div><div class="kpi-num">4</div><div class="kpi-lbl">Villa Games &middot; AM</div></div>
+      <div><div class="kpi-num">3</div><div class="kpi-lbl">Beach Events &middot; PM</div></div>
+      <div><div class="kpi-num">12:30</div><div class="kpi-lbl">Lunch at Villa</div></div>
+      <div><div class="kpi-num">19:30</div><div class="kpi-lbl">Luigi's Birthday Dinner</div></div>
+    </div>
+  </div>
+
+  <!-- DAY TIMELINE -->
+  <section>
+    <div class="lbl">The Full Day</div>
+    <h2 class="ttl">Day <em>Timeline</em></h2>
+    <p class="intro">Every hour, every event. Mandatory attendance all day. Black shorts required for all activities.</p>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-time"><span class="tl-t">08:00</span></div>
+        <div class="tl-cont"><span class="stag t-villa">Villa</span><div class="tl-hl">Wake Up &amp; Fuel</div><div class="tl-det">Villa breakfast. Eat something. You'll need it.</div></div>
+      </div>
+      <div class="tl-row tl-key">
+        <div class="tl-time"><span class="tl-t">09:00</span></div>
+        <div class="tl-cont"><span class="stag t-villa">Villa</span><div class="tl-hl">Villa Games Begin</div><div class="tl-det">4 events at Villa Ampo. Event 1 kicks off sharp — no stragglers.</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time"><span class="tl-t">~11:30</span></div>
+        <div class="tl-cont"><span class="stag t-villa">Villa</span><div class="tl-hl">Villa Games Wrap</div><div class="tl-det">All 4 villa events complete. Points tallied. Brief swim/freshen up window.</div></div>
+      </div>
+      <div class="tl-row tl-key">
+        <div class="tl-time"><span class="tl-t">12:30</span></div>
+        <div class="tl-cont"><span class="stag t-food">Lunch</span><div class="tl-hl">Lunch at the Villa</div><div class="tl-det">Full group lunch before the beach run. Refuel and hydrate properly — the relay is no joke.</div></div>
+      </div>
+      <div class="tl-row tl-key">
+        <div class="tl-time"><span class="tl-t">13:00</span></div>
+        <div class="tl-cont"><span class="stag t-beach">Beach</span><div class="tl-hl">Move to Times Beach Warung</div><div class="tl-det">Group transport to <a class="vl" href="https://www.instagram.com/timesbeachwarung" target="_blank">Times Beach Warung</a>. Beach events begin on arrival.</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time"><span class="tl-t">13:15</span></div>
+        <div class="tl-cont"><span class="stag t-beach">Beach</span><div class="tl-hl">Canggu Relay Challenge</div><div class="tl-det">5 stations. Run until the 8L bottle is full. First team to fill it wins.</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time"><span class="tl-t">~14:30</span></div>
+        <div class="tl-cont"><span class="stag t-beach">Beach</span><div class="tl-hl">Giant Beach Beer Pong</div><div class="tl-det">Oversized trash bins. Two footballs. Classic rules scaled up.</div></div>
+      </div>
+      <div class="tl-row tl-key">
+        <div class="tl-time"><span class="tl-t">~15:30</span></div>
+        <div class="tl-cont"><span class="stag t-beach">Beach — Final Event</span><div class="tl-hl">Survivor Beer Bottle Balance</div><div class="tl-det">Every man for himself. Last arm standing takes the point.</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-time"><span class="tl-t">16:30</span></div>
+        <div class="tl-cont"><span class="stag t-villa">Villa</span><div class="tl-hl">Return to Villa &mdash; Points Ceremony</div><div class="tl-det">Final scores announced. Bragging rights secured. Results posted before dinner.</div></div>
+      </div>
+      <div class="tl-row tl-key">
+        <div class="tl-time"><span class="tl-t">19:30</span></div>
+        <div class="tl-cont"><span class="stag t-night">Dinner</span><div class="tl-hl">Luigi's Hot Pizza &mdash; Birthday Dinner</div><div class="tl-det">Hosts cover the bill. Group booking confirmed. Smart-casual. Mexicola after.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid rgba(26,18,8,.08);">
+
+  <!-- VILLA GAMES -->
+  <div class="band-dark">
+    <div class="inner">
+      <div class="lbl lbl-g">09:00 &mdash; ~11:30 &middot; Villa Ampo</div>
+      <h2 class="ttl ttl-lt">Villa <em>Games</em></h2>
+      <p class="intro intro-lt">Four events at the villa. Points awarded per event. Black shorts on from the moment you wake up.</p>
+
+      <div class="game-grid">
+
+        <!-- GAME 1: Stick It -->
+        <div class="game-card">
+          <div class="gc-head">
+            <div class="gc-num">Villa Event 1</div>
+            <div class="gc-title">Stick It &#129388;</div>
+            <div class="gc-sub">The Ultimate Matchstick Duel &middot; Head-to-head</div>
+          </div>
+          <div class="gc-body">
+            <ol class="gc-rules">
+              <li><strong>15 matches</strong> laid on the table between two players.</li>
+              <li>Players alternate turns. Each turn: remove <em>1, 2, or 3</em> matches — your choice.</li>
+              <li><strong>Win condition:</strong> The player left with the last match <em>loses</em>.</li>
+              <li>Rock Paper Scissors determines who goes first.</li>
+              <li><strong>Best of 3</strong> rounds decides the match winner.</li>
+            </ol>
+            <div class="gc-tip"><strong>Strategy:</strong> Plan ahead and control the match count. The optimal play is mathematical — if you can leave your opponent with a multiple of 4, they cannot win.</div>
+          </div>
+        </div>
+
+        <!-- GAME 2: Minefield -->
+        <div class="game-card">
+          <div class="gc-head">
+            <div class="gc-num">Villa Event 2</div>
+            <div class="gc-title">Minefield &#128165;</div>
+            <div class="gc-sub">Secret route grid on the villa lawn &middot; Teams race simultaneously</div>
+          </div>
+          <div class="gc-body">
+            <ol class="gc-rules">
+              <li>A rope grid is laid on the grass. Each team has a <strong>secret safe route</strong> through it.</li>
+              <li>Team members cross one at a time, stepping square to square, trying to find the path.</li>
+              <li>Step on a <strong>mine</strong> = explosion. <em>Penalty:</em> spin 5 times + jumping jacks, OR 10 push-ups.</li>
+              <li>After a mine hit, the next team member starts from the beginning.</li>
+              <li><strong>Watch the opposing team</strong> — you can learn their wrong squares from their mistakes.</li>
+              <li>First team to get all members across wins the event.</li>
+            </ol>
+            <div class="gc-tip"><strong>Strategy:</strong> Cooperate and memorise the path. Coordinate team transitions for speed. Watch what the other team does.</div>
+          </div>
+        </div>
+
+        <!-- GAME 3: Duck Race -->
+        <div class="game-card">
+          <div class="gc-head">
+            <div class="gc-num">Villa Event 3</div>
+            <div class="gc-title">Pool Rubber Duck Race &#128060;</div>
+            <div class="gc-sub">4 rounds &middot; End to end and back &times;4 &middot; No hands</div>
+          </div>
+          <div class="gc-body">
+            <ol class="gc-rules">
+              <li>Each team gets a rubber duck at their end of the pool.</li>
+              <li>Goal: move your duck from Start to the Other End and <strong>back 4 times</strong>.</li>
+              <li>Every team member participates across the rounds.</li>
+            </ol>
+            <div class="rounds">
+              <div class="round"><span class="round-num">Round 1</span><span class="round-txt">Long straw &mdash; <strong>blow</strong> the duck. Aimed blowing beats powerful.</span></div>
+              <div class="round"><span class="round-num">Round 2</span><span class="round-txt"><strong>Forehead</strong> push only. No hands, no other forehead.</span></div>
+              <div class="round"><span class="round-num">Round 3</span><span class="round-txt">Deliberate <strong>waves</strong> only &mdash; coordinate for max speed.</span></div>
+              <div class="round"><span class="round-num">Round 4</span><span class="round-txt"><strong>Balloon air</strong> &mdash; inflate, release, direct. No hands on duck.</span></div>
+            </div>
+            <div class="gc-tip"><strong>Strategy:</strong> Steady forehead contact beats jarring hits. Coordinate wave rhythm for Round 3.</div>
+          </div>
+        </div>
+
+        <!-- GAME 4: Malaco Race -->
+        <div class="game-card">
+          <div class="gc-head">
+            <div class="gc-num">Villa Event 4</div>
+            <div class="gc-title">Malaco Caramel Race &#127852;</div>
+            <div class="gc-sub">Speed eating &middot; No hands &middot; First to finish wins</div>
+          </div>
+          <div class="gc-body">
+            <ol class="gc-rules">
+              <li>Each competitor receives a <strong>full string of Malaco caramel</strong> candy.</li>
+              <li>The string hangs from your <strong>mouth only</strong> &mdash; dangling freely before the start signal.</li>
+              <li><strong>Eat the entire string</strong> as fast as possible. Chew, work, finish.</li>
+              <li><strong>No hands at any point.</strong> Any hand contact = immediate disqualification.</li>
+              <li>First competitor to fully consume the string wins. Judge call is final.</li>
+            </ol>
+            <div class="gc-tip"><strong>Strategy:</strong> Suction and jaw speed over brute chomping. The string has to keep moving — once you stop pulling it in, you stall. Lateral jaw movement helps on the caramel sections.</div>
+          </div>
+        </div>
+
+      </div><!-- /game-grid -->
+    </div>
+  </div>
+
+  <!-- BEACH GAMES -->
+  <div class="band-beach">
+    <div class="inner">
+      <div class="lbl lbl-lt">13:00+ &mdash; ~16:00 &middot; Times Beach Warung, Canggu</div>
+      <h2 class="ttl ttl-lt">Beach <em style="color:var(--palm)">Games</em></h2>
+      <p class="intro intro-lt">Three events on the sand. Arrive ready. The relay does not wait for stragglers.</p>
+
+      <div class="game-grid">
+
+        <!-- BEACH EVENT 1: Relay -->
+        <div class="game-card game-card-beach" style="grid-column:1 / -1;">
+          <div class="gc-head">
+            <div class="gc-num">Beach Event 1 &mdash; Main Event</div>
+            <div class="gc-title">Canggu Relay Challenge &#127937;</div>
+            <div class="gc-sub">5 stations &rarr; fill the team 8L bottle &middot; First full bottle wins</div>
+          </div>
+          <div class="gc-body" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+            <div>
+              <ol class="gc-rules">
+                <li>Two teams. Each team runs the 5 stations in order, one member at a time.</li>
+                <li>After completing all 5 stations, carry your <strong>1L water bottle</strong> back to the start.</li>
+                <li>Pour it into your team's <strong>8L communal bottle.</strong></li>
+                <li>Next team member runs. Repeat until the 8L bottle is completely full.</li>
+                <li>First team to fill their 8L bottle wins.</li>
+              </ol>
+            </div>
+            <div>
+              <div class="stations">
+                <div class="station"><span class="st-num">1</span><span class="st-txt"><strong>Beach Tennis</strong> &mdash; 10 consecutive hits before moving on.</span></div>
+                <div class="station"><span class="st-num">2</span><span class="st-txt"><strong>Cornhole</strong> &mdash; score a bag in the hole before moving on.</span></div>
+                <div class="station"><span class="st-num">3</span><span class="st-txt"><strong>Dizzy Spins &amp; Speed Ladder</strong> &mdash; spin 10 times, then run the ladder.</span></div>
+                <div class="station"><span class="st-num">4</span><span class="st-txt"><strong>Beer Chug</strong> &mdash; drink for time at the table.</span></div>
+                <div class="station"><span class="st-num">5</span><span class="st-txt"><strong>Ocean Water Run</strong> &mdash; fill 1L bottle in the sea, return to start.</span></div>
+              </div>
+              <div class="gc-tip" style="margin-top:.75rem;"><strong>Tip:</strong> Fastest legs on Station 5. Station 3 is where teams fall apart &mdash; practice your dizzy sprint.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BEACH EVENT 2: Beer Pong -->
+        <div class="game-card game-card-beach">
+          <div class="gc-head">
+            <div class="gc-num">Beach Event 2</div>
+            <div class="gc-title">Giant Beach Beer Pong &#9968;&#65039;</div>
+            <div class="gc-sub">Giant trash bins &middot; Two footballs &middot; Classic rules, massive scale</div>
+          </div>
+          <div class="gc-body">
+            <ol class="gc-rules">
+              <li>Bins arranged in beer pong formation. Two teams, two footballs.</li>
+              <li><strong>Both balls in the same bin</strong> = remove <em>3 bins</em>.</li>
+              <li><strong>Two different bins hit</strong> = balls come back, no bins removed.</li>
+              <li>Non-starting team always gets a <strong>redemption shot</strong> after a winning turn.</li>
+              <li>Team to clear all opposing bins wins.</li>
+            </ol>
+            <div class="gc-tip"><strong>Tip:</strong> Coordinate throws so both land together. Split shots cancel out — you need the pair.</div>
+          </div>
+        </div>
+
+        <!-- BEACH FINAL: Survivor -->
+        <div class="game-card game-card-beach gc-final">
+          <div class="gc-head">
+            <div class="gc-num">&#127881; Beach Final Event</div>
+            <div class="gc-title">Survivor Beer Bottle Balance &#127867;</div>
+            <div class="gc-sub">Last man standing &middot; Full arm extended &middot; All team members participate</div>
+          </div>
+          <div class="gc-body">
+            <ol class="gc-rules">
+              <li>All competitors stand with a <strong>beer bottle balanced on their palm</strong>, arm <em>fully extended</em>.</li>
+              <li>Goal: be the <strong>last man standing</strong> with arm extended and bottle upright.</li>
+              <li>Drop your bottle = you are <em>OUT</em> and must drink it.</li>
+              <li><strong>Buy-in option:</strong> hold a bottle on <em>each arm</em> for double points &mdash; but if either drops, you're out and drink both.</li>
+              <li>Winner takes maximum points. Positions determine team score.</li>
+            </ol>
+            <div class="gc-tip" style="background:rgba(212,168,67,.1);border-left-color:var(--gold);">&#127881; <strong>Final event.</strong> The team standings at this point may determine everything. Coordinate with your team &mdash; sacrifice plays are valid.</div>
+          </div>
+        </div>
+
+      </div><!-- /game-grid beach -->
+    </div>
+  </div>
+
+  <!-- RULES NOTE -->
+  <section>
+    <div class="lbl">Important</div>
+    <h2 class="ttl">Ground <em>Rules</em></h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;">
+      <div style="background:rgba(196,98,45,.08);border:1px solid rgba(196,98,45,.2);border-radius:12px;padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">&#128085;</div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-weight:700;margin-bottom:.4rem;color:var(--deep);">Black Shorts</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;">Mandatory. No exceptions. You were warned — it's in the packing list.</div>
+      </div>
+      <div style="background:rgba(61,107,71,.06);border:1px solid rgba(61,107,71,.2);border-radius:12px;padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">&#128200;</div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-weight:700;margin-bottom:.4rem;color:var(--deep);">Scoring</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;">Points awarded per event. Running tally kept by Simon &amp; Mike. Final results at 16:30.</div>
+      </div>
+      <div style="background:rgba(46,107,138,.06);border:1px solid rgba(46,107,138,.2);border-radius:12px;padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">&#129337;</div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-weight:700;margin-bottom:.4rem;color:var(--deep);">Team Split</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;">Teams announced morning of March 30. No trading. No complaining. Teams are final.</div>
+      </div>
+      <div style="background:rgba(212,168,67,.06);border:1px solid rgba(212,168,67,.2);border-radius:12px;padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:.5rem;">&#128274;</div>
+        <div style="font-family:'Playfair Display',Georgia,serif;font-weight:700;margin-bottom:.4rem;color:var(--deep);">Ref Decisions</div>
+        <div style="font-size:.83rem;color:var(--muted);line-height:1.6;">Simon &amp; Mike referee jointly. Their call is final. Protests heard, ignored politely.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ftitle">Competition Day &mdash; Bali Birthday Bash '26</div>
+    <p>Monday 30 March &middot; Villa Ampo AM &rarr; Times Beach Warung PM</p>
+    <p style="margin-top:.5rem">19:30 Luigi's Hot Pizza &middot; Then Mexicola until dawn</p>
+    <p style="margin-top:1.5rem;font-size:.72rem;opacity:.4">Questions? Simon: +45 2551 4030 &middot; Mike: +45 2226 5707</p>
+  </footer>
+
+</div><!-- /cd-revealed -->
+
+<script>
+const REVEAL = new Date('2026-03-30T00:00:00+08:00');
+
+function pad(n){ return String(n).padStart(2,'0'); }
+
+function tick(){
+  const now = new Date();
+  if(now >= REVEAL){
+    document.getElementById('cd-locked').style.display = 'none';
+    document.getElementById('cd-revealed').style.display = 'block';
+    return;
+  }
+  const diff = REVEAL - now;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = pad(d);
+  document.getElementById('cd-h').textContent = pad(h);
+  document.getElementById('cd-m').textContent = pad(m);
+  document.getElementById('cd-s').textContent = pad(s);
+}
+
+tick();
+setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
