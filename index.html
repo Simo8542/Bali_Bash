@@ -80,6 +80,18 @@ a.vl:hover{opacity:.7;}
 .sdet strong{color:var(--deep);}
 
 /* ROOMS */
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.vblock{border:1px solid rgba(26,18,8,.1);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(26,18,8,.06);}
+.vhead{background:var(--deep);padding:1.25rem 1.5rem;}
+.vhead.nb{background:var(--night);}
+.vname{font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;color:var(--sand);margin-bottom:.3rem;}
+.vsub{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,236,215,.4);}
+.vrooms{display:flex;flex-direction:column;background:var(--cream);}
+.rrow{display:grid;grid-template-columns:88px 1fr;align-items:baseline;padding:.75rem 1.5rem;border-bottom:1px solid rgba(26,18,8,.06);gap:1rem;transition:background .15s;}
+.rrow:last-child{border-bottom:none;}
+.rrow:hover{background:rgba(26,18,8,.025);}
+.rlbl{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;padding-top:.1rem;}
+.rnames{font-size:.88rem;font-weight:500;color:var(--deep);line-height:1.5;}
 .rtag{display:inline-block;font-size:.58rem;font-family:'DM Mono',monospace;padding:.15rem .5rem;border-radius:10px;margin-left:.4rem;text-transform:uppercase;letter-spacing:.05em;vertical-align:middle;}
 .rtag.solo{background:rgba(212,168,67,.15);color:var(--gold);}
 .rtag.reserve{background:rgba(138,125,107,.15);color:var(--muted);}
@@ -206,6 +218,7 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
   .nrow{grid-template-columns:80px 1fr;}
   .cev{grid-template-columns:30px 1fr;}
   .cet{display:none;}
+  .rgrid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -372,9 +385,6 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
 </section>
 
 <hr class="divider">
-
-<hr class="divider">
-
 
 <!-- ACTIVITIES -->
 <section id="activities">
