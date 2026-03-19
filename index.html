@@ -225,7 +225,7 @@ h3.sub{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;margin-bott
 <body>
 
 <nav>
-  <div class="nav-logo">&#127965;&#65039; Bali Bash '26</div>
+  <a class="nav-logo" href="#">&#127965;&#65039; Bali Bash '26</a>
   <ul class="nav-links">
     <li><a href="#schedule">Schedule</a></li>
     <li><a href="#rooms">Rooms</a></li>
@@ -750,6 +750,26 @@ setInterval(loadActivities, 30000);
   </div>
 </div>
 
+<!-- BINGO -->
+<div class="band-dark" id="bingo">
+  <div class="inner">
+    <div class="lbl lbl-g">Your Card Awaits</div>
+    <h2 class="ttl ttl-lt">Bali <em style="color:var(--gold)">Bingo</em></h2>
+    <p class="intro intro-lt">Three decks. Pick your danger level. A physical card awaits you on arrival.</p>
+    <div class="bbtns">
+      <button class="bb on" onclick="loadDeck('classic',this)">&#127796; Classic</button>
+      <button class="bb" onclick="loadDeck('rowdy',this)">&#128293; Rowdy</button>
+      <button class="bb" onclick="loadDeck('filthy',this)">&#9760;&#65039; Filthy</button>
+    </div>
+    <div class="bcard">
+      <div class="bhdr"><div class="bhcol">B</div><div class="bhcol">A</div><div class="bhcol">L</div><div class="bhcol">I</div><div class="bhcol">!</div></div>
+      <div class="bgrid" id="bgrid"></div>
+      <div class="bwin" id="bwin">&#127881; BALI! &#127881;</div>
+    </div>
+    <p style="font-size:.75rem;color:rgba(245,236,215,.3);margin-top:1rem">Tap cells to mark them. Get a line in any direction to win.</p>
+  </div>
+</div>
+
 <!-- PRACTICAL -->
 <section id="practical">
   <div class="lbl">Everything Else</div>
@@ -945,22 +965,3 @@ window.addEventListener('scroll',()=>{
 </div>
 </body>
 </html>
-<!-- BINGO -->
-<div class="band-dark" id="bingo">
-  <div class="inner">
-    <div class="lbl lbl-g">Your Card Awaits</div>
-    <h2 class="ttl ttl-lt">Bali <em style="color:var(--gold)">Bingo</em></h2>
-    <p class="intro intro-lt">Three decks. Pick your danger level. A physical card awaits you on arrival.</p>
-    <div class="bbtns">
-      <button class="bb on" onclick="loadDeck('classic',this)">&#127796; Classic</button>
-      <button class="bb" onclick="loadDeck('rowdy',this)">&#128293; Rowdy</button>
-      <button class="bb" onclick="loadDeck('filthy',this)">&#9760;&#65039; Filthy</button>
-    </div>
-    <div class="bcard">
-      <div class="bhdr"><div class="bhcol">B</div><div class="bhcol">A</div><div class="bhcol">L</div><div class="bhcol">I</div><div class="bhcol">!</div></div>
-      <div class="bgrid" id="bgrid"></div>
-      <div class="bwin" id="bwin">&#127881; BALI! &#127881;</div>
-    </div>
-    <p style="font-size:.75rem;color:rgba(245,236,215,.3);margin-top:1rem">Tap cells to mark them. Get a line in any direction to win.</p>
-  </div>
-</div>
