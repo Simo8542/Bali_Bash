@@ -484,12 +484,13 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
 <script>
 const REVEAL = new Date('2026-03-30T00:00:00+08:00');
+const PREVIEW = new URLSearchParams(window.location.search).get('preview') === '1';
 
 function pad(n){ return String(n).padStart(2,'0'); }
 
 function tick(){
   const now = new Date();
-  if(now >= REVEAL){
+  if(PREVIEW || now >= REVEAL){
     document.getElementById('cd-locked').style.display = 'none';
     document.getElementById('cd-revealed').style.display = 'block';
     return;
