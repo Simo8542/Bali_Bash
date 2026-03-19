@@ -123,6 +123,47 @@ a.vl:hover{opacity:.7;}
 .game-card-beach{background:rgba(245,236,215,.04);border-color:rgba(61,107,71,.25);}
 .game-card-beach .gc-rules li::before{background:var(--palm);}
 
+/* GAME VISUAL POSTER HEADERS */
+.gc-visual{
+  position:relative;
+  padding:2rem 1.25rem 1.6rem;
+  text-align:center;
+  border-bottom:1px solid rgba(245,236,215,.08);
+  overflow:hidden;
+}
+.gc-visual::before,.gc-visual::after{
+  content:'✦';
+  position:absolute;
+  top:.65rem;
+  font-size:.75rem;
+  color:rgba(245,236,215,.12);
+  pointer-events:none;
+}
+.gc-visual::before{left:.9rem;}
+.gc-visual::after{right:.9rem;}
+.gv-inner{position:relative;z-index:1;}
+.gv-emoji{font-size:3.8rem;line-height:1;display:block;margin-bottom:.7rem;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5));}
+.gv-name{font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:900;color:rgba(245,236,215,.9);letter-spacing:.02em;line-height:1.2;margin-bottom:.3rem;}
+.gv-tag{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,236,215,.3);}
+/* decorative stripe at bottom of visual */
+.gc-visual .gv-stripe{height:3px;position:absolute;bottom:0;left:0;right:0;}
+
+/* per-game color schemes */
+.gv-stick{background:linear-gradient(160deg,#2D1A08 0%,#4A2C12 55%,#3A2010 100%);}
+.gv-stick .gv-stripe{background:linear-gradient(90deg,#C4622D,#D4A843,#C4622D);}
+.gv-mine{background:linear-gradient(160deg,#0A1A0A 0%,#182E18 55%,#0D1E0D 100%);}
+.gv-mine .gv-stripe{background:linear-gradient(90deg,#3D6B47,#C4622D,#3D6B47);}
+.gv-duck{background:linear-gradient(160deg,#081828 0%,#0C2E48 55%,#0A2030 100%);}
+.gv-duck .gv-stripe{background:linear-gradient(90deg,#2E6B8A,#D4A843,#2E6B8A);}
+.gv-malaco{background:linear-gradient(160deg,#2D0E0E 0%,#4A1A0C 55%,#3A1008 100%);}
+.gv-malaco .gv-stripe{background:linear-gradient(90deg,#C4622D,#D4A843,#C4622D);}
+.gv-relay{background:linear-gradient(160deg,#081A12 0%,#0D2E1E 55%,#0A201A 100%);}
+.gv-relay .gv-stripe{background:linear-gradient(90deg,#3D6B47,#2E6B8A,#3D6B47);}
+.gv-pong{background:linear-gradient(160deg,#080A1E 0%,#101428 55%,#0A0E20 100%);}
+.gv-pong .gv-stripe{background:linear-gradient(90deg,#2E6B8A,#3D6B47,#2E6B8A);}
+.gv-survivor{background:linear-gradient(160deg,#1A1408 0%,#2E2210 55%,#201A08 100%);}
+.gv-survivor .gv-stripe{background:linear-gradient(90deg,#D4A843,#C4622D,#D4A843);}
+
 /* ROUND BADGES (duck race) */
 .rounds{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
 .round{display:flex;align-items:center;gap:.75rem;padding:.5rem .75rem;background:rgba(245,236,215,.04);border-radius:8px;border:1px solid rgba(245,236,215,.07);}
@@ -277,6 +318,14 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
         <!-- GAME 1: Stick It -->
         <div class="game-card">
+          <div class="gc-visual gv-stick">
+            <div class="gv-inner">
+              <span class="gv-emoji">🕯️🔥</span>
+              <div class="gv-name">The Ultimate Matchstick Duel</div>
+              <div class="gv-tag">Villa Event 1 &middot; Head-to-Head &middot; Best of 3</div>
+            </div>
+            <div class="gv-stripe"></div>
+          </div>
           <div class="gc-head">
             <div class="gc-num">Villa Event 1</div>
             <div class="gc-title">Stick It &#129388;</div>
@@ -296,6 +345,14 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
         <!-- GAME 2: Minefield -->
         <div class="game-card">
+          <div class="gc-visual gv-mine">
+            <div class="gv-inner">
+              <span class="gv-emoji">💥🔴</span>
+              <div class="gv-name">Navigate the Minefield</div>
+              <div class="gv-tag">Villa Event 2 &middot; Team Race &middot; Villa Lawn</div>
+            </div>
+            <div class="gv-stripe"></div>
+          </div>
           <div class="gc-head">
             <div class="gc-num">Villa Event 2</div>
             <div class="gc-title">Minefield &#128165;</div>
@@ -316,6 +373,14 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
         <!-- GAME 3: Duck Race -->
         <div class="game-card">
+          <div class="gc-visual gv-duck">
+            <div class="gv-inner">
+              <span class="gv-emoji">🦆💦</span>
+              <div class="gv-name">Pool Rubber Duck Race</div>
+              <div class="gv-tag">Villa Event 3 &middot; 4 Rounds &middot; No Hands</div>
+            </div>
+            <div class="gv-stripe"></div>
+          </div>
           <div class="gc-head">
             <div class="gc-num">Villa Event 3</div>
             <div class="gc-title">Pool Rubber Duck Race &#128060;</div>
@@ -339,6 +404,14 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
         <!-- GAME 4: Malaco Race -->
         <div class="game-card">
+          <div class="gc-visual gv-malaco">
+            <div class="gv-inner">
+              <span class="gv-emoji">🍬🍡</span>
+              <div class="gv-name">Malaco Caramel Race</div>
+              <div class="gv-tag">Villa Event 4 &middot; No Hands &middot; Full String</div>
+            </div>
+            <div class="gv-stripe"></div>
+          </div>
           <div class="gc-head">
             <div class="gc-num">Villa Event 4</div>
             <div class="gc-title">Malaco Caramel Race &#127852;</div>
@@ -371,6 +444,14 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
         <!-- BEACH EVENT 1: Relay -->
         <div class="game-card game-card-beach" style="grid-column:1 / -1;">
+          <div class="gc-visual gv-relay">
+            <div class="gv-inner">
+              <span class="gv-emoji">🏃‍♂️🌊🏃‍♂️</span>
+              <div class="gv-name">Canggu Relay Challenge</div>
+              <div class="gv-tag">Beach Event 1 &middot; 5 Stations &middot; Fill the 8L Bottle</div>
+            </div>
+            <div class="gv-stripe"></div>
+          </div>
           <div class="gc-head">
             <div class="gc-num">Beach Event 1 &mdash; Main Event</div>
             <div class="gc-title">Canggu Relay Challenge &#127937;</div>
@@ -401,6 +482,14 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
         <!-- BEACH EVENT 2: Beer Pong -->
         <div class="game-card game-card-beach">
+          <div class="gc-visual gv-pong">
+            <div class="gv-inner">
+              <span class="gv-emoji">⛳🍺</span>
+              <div class="gv-name">Giant Beach Beer Pong</div>
+              <div class="gv-tag">Beach Event 2 &middot; Giant Bins &middot; Two Footballs</div>
+            </div>
+            <div class="gv-stripe"></div>
+          </div>
           <div class="gc-head">
             <div class="gc-num">Beach Event 2</div>
             <div class="gc-title">Giant Beach Beer Pong &#9968;&#65039;</div>
@@ -420,6 +509,14 @@ footer{background:var(--deep);color:rgba(245,236,215,.4);text-align:center;paddi
 
         <!-- BEACH FINAL: Survivor -->
         <div class="game-card game-card-beach gc-final">
+          <div class="gc-visual gv-survivor">
+            <div class="gv-inner">
+              <span class="gv-emoji">🏆🍺</span>
+              <div class="gv-name">Survivor Beer Bottle Balance</div>
+              <div class="gv-tag">Beach Final &middot; Last Man Standing &middot; All Compete</div>
+            </div>
+            <div class="gv-stripe"></div>
+          </div>
           <div class="gc-head">
             <div class="gc-num">&#127881; Beach Final Event</div>
             <div class="gc-title">Survivor Beer Bottle Balance &#127867;</div>
